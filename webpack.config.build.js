@@ -1,10 +1,6 @@
-var path = require('path');
-var webpack = require('webpack');
-var HTMLWebpackPlugin = require('html-webpack-plugin');
-
-var host = require("./host.config");
-var hostLocalAccess = "http://" + host.hostName + ":" + host.hostPort;
-var hostNetworkAccess = "http://" + host.hostLanIP + ":" + host.hostPort;
+const path = require('path');
+const webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 process.env.NODE_ENV = 'production';
 
@@ -74,7 +70,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
-    publicPath: hostNetworkAccess + '/',
+    publicPath: '/',
     filename: '[name].js'
   }
 
