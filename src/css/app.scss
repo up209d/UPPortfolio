@@ -12,31 +12,18 @@ html, body {
   width: 100%;
 }
 
-ul, li {
-  list-style: none;
-}
-
 body {
   font-family: "Open Sans", Helvetica, 'Arial', sans-serif;
-  background-color: #EFEFEF;
+  //background-color: #EFEFEF;
   font-weight: 300;
   letter-spacing: 0.5px;
 }
 
-h1, h2 {
-  font-weight: 100;
-  text-align: center;
-  padding: 30px 0px;
+
+ul, li {
+  list-style: none;
 }
 
-nav {
-  color: white;
-  position: absolute;
-  ul li {
-    display: inline-block;
-    padding: 20px 20px;
-  }
-}
 
 .clearfix:after {
   clear: both;

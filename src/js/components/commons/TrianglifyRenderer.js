@@ -55,9 +55,6 @@ class TrianglifyRenderer extends React.Component {
         TrianglifyDOM.src = this.pattern.png();
         break;
       }
-      case "svg": {
-        break;
-      }
       default: {
         this.pattern.canvas(TrianglifyDOM);
       }
@@ -135,32 +132,6 @@ class TrianglifyRenderer extends React.Component {
       case "img": {
         return <img className={this.props.className ? 'app-trianglify ' + this.props.className : 'app-trianglify'}
                     ref={Trianglify => this.Trianglify = Trianglify}/>
-      }
-      case "svg": {
-        return (
-          <svg width={this.state.width} height={this.state.height}
-               className={this.props.className ? 'app-trianglify ' + this.props.className : 'app-trianglify'}
-               ref={Trianglify => this.Trianglify = Trianglify}>
-            <g>
-              {this.pattern.polys.map((poly,index)=>{
-                return (
-                  <polygon
-                    ref={eachPolygon => this.polys.push(eachPolygon)}
-                    key={index}
-                    style={{
-                      fill: poly[0],
-                      stroke: poly[0]
-                    }}
-                    points={`${poly[1].join(' ')}`}
-                  />
-                )
-              })}
-            </g>
-            {/*<g>*/}
-              {/*<polygon ref={poly => this.polys.push(poly)} points={this.pattern.polys[119][1].join(' ')} style={{fill: "#00FF00"}} />*/}
-            {/*</g>*/}
-          </svg>
-        )
       }
       default: {
         return <canvas className={this.props.className ? 'app-trianglify ' + this.props.className : 'app-trianglify'}
