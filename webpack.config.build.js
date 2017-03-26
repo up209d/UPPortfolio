@@ -70,7 +70,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
-    publicPath: '/',
+    publicPath: '',
     filename: '[name].js'
   }
 
