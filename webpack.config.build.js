@@ -5,8 +5,6 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 process.env.NODE_ENV = 'production';
 
 module.exports = {
-  performance: {hints: false},
-  devtool: 'source-map',
   externals: {},
   entry: {
     appBundle: [
@@ -73,5 +71,4 @@ module.exports = {
     publicPath: '',
     filename: '[name].js'
   }
-
 };
