@@ -1,22 +1,27 @@
 import React from 'react';
+import utils from '../../utils';
 
 class SpringDrop extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       width: window.innerWidth,
-      height: 720,
-      particle_count: 750,
-      colors: ["#FFFDAE", "#ff6e47", "#E90029",'#184DF4', '#F49A03', '#E01730', '#00A415'],
-      scanning: 1, // Number of pixel skipping each text analyzing
+      height: window.innerHeight,
+      particle_count: 1000,
+      colors: ["#000", "#F00"], //['#4ECDC4','#F45800','#FF6B6B']
+      scanning: 3, // Number of pixel skipping each text analyzing
       areaRadius: 200,
-      dropRadius: 5,
+      dropRadius: 2, // Size of each particel
       springConstant: 0.01,
       damperConstant: 0.08,
-      textRender: 'ULTIMATE PEACE',
+      textRender: "ULTIMATE PEACE",
       textSize: 120,
-      textFont: 'Arial',
-      relocate: false, // Relocate particle after its own lifecycle (Slow Performance)
+      textFont: "Calibri",
+      relocate: true, // Relocate particle after its own lifecycle (Slow Performance)
+      rotateSpeed: 0.0001,
+      shape: ["triangle","square","circle"],
+      randomOffset: 0,
+      lifespan: 90, // 1 - 500
       ...this.props.options
     };
   }
@@ -24,20 +29,21 @@ class SpringDrop extends React.Component {
   init() {
     this.canvas.style.pointerEvents = 'none';
     this.ctx = this.canvas.getContext('2d');
+    this.frameCount = 0;
     this.update();
   }
 
   update() {
     this.textArray = this.renderText(this.state.textRender);
     if (this.particleArray) {
-      this.particleArray.splice(0,this.particleArray.length)
+      this.particleArray.splice(0, this.particleArray.length)
     }
     else {
       this.particleArray = [];
     }
 
     if (this.textArray.length) {
-      for (let i=0;i<=this.state.particle_count;i++) {
+      for (let i = 0; i <= this.state.particle_count; i++) {
         this.particleArray.push(
           new Particle({
             ctx: this.ctx,
@@ -46,24 +52,36 @@ class SpringDrop extends React.Component {
             springConstant: this.state.springConstant,
             damperConstant: this.state.damperConstant,
             colors: this.state.colors,
-            relocate: this.state.relocate
+            relocate: this.state.relocate,
+            rotateSpeed: this.state.rotateSpeed,
+            randomOffset: this.state.randomOffset,
+            lifespan: this.state.lifespan,
+            shape: this.state.shape[~~(Math.random()*this.state.shape.length)]
           })
         );
       }
     }
   }
 
+  updateOnResize() {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      ...this.props.options
+    });
+  }
+
   renderText(text) {
-    this.ctx.clearRect(0,0,this.state.width,this.state.height);
+    this.ctx.clearRect(0, 0, this.state.width, this.state.height);
     this.ctx.textBaseline = "top";
     this.ctx.textAlign = "center";
     this.ctx.font = `${this.state.textSize}px ${this.state.textFont}`;
-    this.ctx.fillText(text,this.state.width/2,this.state.height/2-this.state.textSize);
+    this.ctx.fillText(text, this.state.width / 2, this.state.height / 2 - this.state.textSize);
 
     let textArray = [];
-    let data = this.ctx.getImageData(0,0,this.state.width,this.state.height).data;
-    for (let i=0;i<=this.state.height;i+=this.state.scanning) {
-      for (let j=0;j<=this.state.width;j+=this.state.scanning) {
+    let data = this.ctx.getImageData(0, 0, this.state.width, this.state.height).data;
+    for (let i = 0; i <= this.state.height; i += this.state.scanning) {
+      for (let j = 0; j <= this.state.width; j += this.state.scanning) {
         // data[0]  = red channel of first pixel on first row
         // data[1]  = green channel of first pixel on first row
         // data[2]  = blue channel of first pixel on first row
@@ -78,41 +96,47 @@ class SpringDrop extends React.Component {
         // data[9]  = green channel of third pixel on first row
         // data[10] = blue channel of third pixel on first row
         // data[11] = alpha channel of third pixel on first row
-        let eachPixelAlpha = ((i*this.state.width+j) * 4)+3;
+        let eachPixelAlpha = ((i * this.state.width + j) * 4) + 3;
         // 0 4 8 12 ... ( Red Channel of each Pixel )
         // Our target is 3 7 11 15 19 which is +3
         if (data[eachPixelAlpha]) {
-          textArray.push({x:j,y:i});
+          textArray.push({x: j, y: i});
         }
       }
     }
+    this.ctx.clearRect(0, 0, this.state.width, this.state.height);
     return textArray;
   }
 
   animationComp() {
-    this.ctx.clearRect(0,0,this.state.width,this.state.height);
+    this.ctx.clearRect(0, 0, this.state.width, this.state.height);
     // Draw a frame of all particle inside by save and restore
-    this.particleArray.map((particle)=>{
+    this.particleArray.map((particle) => {
       particle.ctxDraw();
     });
+    this.ctx.globalCompositeOperation = "source-over";
     // Then update all particle position again for next frame
-    this.particleArray.map((particle)=>{
+    this.particleArray.map((particle) => {
       particle.ctxUpdate();
-    })
+    });
   }
 
   ticker() {
     this.animationComp();
+    this.frameCount += 1;
+    if (this.frameCount > 60) {
+      this.frameCount = 1;
+    }
     requestAnimationFrame(this.ticker.bind(this));
   }
 
   onMouseMove(e) {
     let mPosX = e.offsetX || e.clientX || e.screenX || e.pageX;
     let mPosY = e.offsetY || e.clientY || e.screenY || e.pageY;
-    this.particleArray.map((particle)=>{
+    this.particleArray.map((particle) => {
       let offsetX = particle.state.currentX - mPosX;
       let offsetY = particle.state.currentY - mPosY;
-      let offsetXY = Math.sqrt(Math.pow(offsetX,2)+Math.pow(offsetY,2));
+      let offsetXY = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2));
       if (offsetXY <= this.state.areaRadius) {
         particle.state.speedX += offsetX * 0.1;
         particle.state.speedY += offsetY * 0.1;
@@ -120,7 +144,7 @@ class SpringDrop extends React.Component {
     });
   }
 
-  changeText(text={
+  changeText(text = {
     textRender: 'ULTIMATE PEACE',
     textSize: 200,
     textFont: 'Arial'
@@ -134,22 +158,12 @@ class SpringDrop extends React.Component {
     // it will slow down animation performance very badly
     this.ticker();
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
-    //
-    // setTimeout(this.changeText.bind(this,{textRender: "X"}),1000);
-    // setTimeout(this.changeText.bind(this,{textRender: "Y"}),2000);
-    // setTimeout(this.changeText.bind(this,{textRender: "Z"}),3000);
-    // setTimeout(this.changeText.bind(this,{textRender: "G"}),4000);
-    // setTimeout(this.changeText.bind(this,{textRender: "H"}),5000);
-    // setTimeout(this.changeText.bind(this,{textRender: "E"}),6000);
-    // setTimeout(this.changeText.bind(this,{textRender: "A"}),7000);
-    // setTimeout(this.changeText.bind(this,{textRender: "M"}),8000);
-    // setTimeout(this.changeText.bind(this,{textRender: "L"}),9000);
-    // setTimeout(this.changeText.bind(this,{textRender: "O"}),10000);
-
+    window.addEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.onMouseMove.bind(this));
+    window.removeEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
   }
 
   componentDidUpdate() {
@@ -159,27 +173,28 @@ class SpringDrop extends React.Component {
 
   render() {
     return (
-      <canvas ref={canvas => this.canvas = canvas} width={this.state.width} height={this.state.height} />
+      <canvas ref={canvas => this.canvas = canvas} width={this.state.width} height={this.state.height}/>
     )
   }
 }
 
-class Particle{
-  constructor(e){
+class Particle {
+  constructor(e) {
     if (e) {
       this.state = {
         currentX: 0,
         currentY: 0,
         originX: 0,
         originY: 0,
-        speedX: 5-Math.random()*10,
-        speedY: 5-Math.random()*10,
+        speedX: 25 - Math.random() * 50,
+        speedY: 25 - Math.random() * 50,
         color: "#fff",
         alpha: 1,
-        scaleX:1,
-        scaleY:1,
-        accX:0,
-        accY:0,
+        scaleX: 1,
+        scaleY: 1,
+        accX: 0,
+        accY: 0,
+        rotation: 0,
         ...e
       };
       this.reState();
@@ -187,28 +202,50 @@ class Particle{
     }
   }
 
-  ctxDraw(shape="circle") {
+  ctxDraw() {
     this.state.ctx.save();
     this.state.ctx.translate(
-      this.state.currentX+this.state.dropRadius,
-      this.state.currentY+this.state.dropRadius
+      this.state.currentX + this.state.dropRadius,
+      this.state.currentY + this.state.dropRadius
     );
+
+    if (this.state.rotateSpeed != 0) {
+      this.state.ctx.rotate(this.state.rotation * Math.PI / 180);
+    }
+
     this.state.ctx.scale(
       this.state.scaleX,
       this.state.scaleY
     );
+
     this.state.ctx.globalAlpha = this.state.alpha;
     this.state.ctx.fillStyle = this.state.color;
     this.state.ctx.beginPath();
-    switch (shape) {
+    switch (this.state.shape) {
       case "circle":
-        this.state.ctx.arc(0,0,this.state.dropRadius,0,2*Math.PI,true);
+        this.state.ctx.arc(0, 0, this.state.dropRadius, 0, 2 * Math.PI, true);
         break;
-      case "hexagon":
-        this.state.ctx.moveTo
+      case "square":
+        this.state.ctx.moveTo(-this.state.dropRadius, -this.state.dropRadius);
+        this.state.ctx.lineTo(-this.state.dropRadius, this.state.dropRadius);
+        this.state.ctx.lineTo(this.state.dropRadius, this.state.dropRadius);
+        this.state.ctx.lineTo(this.state.dropRadius, -this.state.dropRadius);
+        break;
+      case "triangle":
+        this.state.ctx.moveTo(0, -this.state.dropRadius);
+        this.state.ctx.lineTo(-0.866*this.state.dropRadius, 0.5*this.state.dropRadius);
+        this.state.ctx.lineTo(0.866*this.state.dropRadius, 0.5*this.state.dropRadius);
+        break;
+      case "leaf":
+        this.state.ctx.moveTo(0, -this.state.dropRadius);
+        this.state.ctx.lineTo(this.state.dropRadius / 15, this.state.dropRadius / 2);
+        this.state.ctx.lineTo(this.state.dropRadius / 15, this.state.dropRadius * 1.5);
+        this.state.ctx.lineTo(this.state.dropRadius, this.state.dropRadius * 2);
+        this.state.ctx.lineTo(this.state.dropRadius * 1.93, this.state.dropRadius * 1.5);
+        this.state.ctx.lineTo(this.state.dropRadius * 1.93, this.state.dropRadius / 2);
         break;
       default:
-        this.state.ctx.arc(0,0,this.state.dropRadius,0,2*Math.PI,true);
+        this.state.ctx.arc(0, 0, this.state.dropRadius, 0, 2 * Math.PI, true);
     }
     this.state.ctx.closePath();
     this.state.ctx.fill();
@@ -222,26 +259,33 @@ class Particle{
     // Vx: the current velocity of X
     // m*a = -k*x -b*Vx, m = 1 - cuz we dont care about weight
     // so ax = -k*dx - b+Vx, ax is accleration of X
-    this.accX = -this.state.springConstant * (this.state.currentX - this.state.originX) - this.state.damperConstant*this.state.speedX;
-      this.accY = -this.state.springConstant * (this.state.currentY - this.state.originY) - this.state.damperConstant*this.state.speedY;
+    this.accX = -this.state.springConstant * (this.state.currentX - this.state.originX) - this.state.damperConstant * this.state.speedX;
+    this.accY = -this.state.springConstant * (this.state.currentY - this.state.originY) - this.state.damperConstant * this.state.speedY;
     this.state.speedX += this.accX;
     this.state.speedY += this.accY;
-    this.state.alpha -= 0.02;
-    this.state.scaleX += 0.05;
-    this.state.scaleY += 0.05;
+    this.state.alpha -= 1/this.state.lifespan;
+    this.state.scaleX = this.state.scaleY += 0.05;
     this.state.currentX += this.state.speedX;
     this.state.currentY += this.state.speedY;
 
-    if (this.state.alpha<=0) {
+    if (this.state.rotateSpeed != 0) {
+      this.state.rotation += this.state.rotateSpeed;
+    }
+
+    if (this.state.alpha <= 0) {
       this.reState(this.state.relocate);
     }
 
   }
 
-  reState(relocate=false) {
-    this.state.color = this.state.colors[~~(Math.random()*this.state.colors.length)];
+  reState(relocate = false) {
+    this.state.color = this.state.colors[~~(Math.random() * this.state.colors.length)];
     this.state.scaleX = this.state.scaleY = 0;
     this.state.alpha = Math.random();
+
+    if (this.state.rotateSpeed != 0) {
+      this.state.rotation = Math.random() * 360;
+    }
 
     if (relocate) {
       this.reLocation();
@@ -249,9 +293,9 @@ class Particle{
   }
 
   reLocation() {
-    let coordinate = this.state.textArray[~~(Math.random()*this.state.textArray.length)];
-    this.state.originX = this.state.currentX = coordinate.x + ~~(2-Math.random()*4);
-    this.state.originY = this.state.currentY = coordinate.y + ~~(2-Math.random()*4);
+    let coordinate = this.state.textArray[~~(Math.random() * this.state.textArray.length)];
+    this.state.originX = this.state.currentX = coordinate.x + ~~(this.state.randomOffset / 2 - Math.random() * this.state.randomOffset);
+    this.state.originY = this.state.currentY = coordinate.y + ~~(this.state.randomOffset / 2 - Math.random() * this.state.randomOffset);
   }
 
 }

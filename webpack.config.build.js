@@ -2,8 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
-process.env.NODE_ENV = 'production';
-
 module.exports = {
   externals: {},
   entry: {
@@ -23,6 +21,11 @@ module.exports = {
     new HTMLWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       test: /\.jsx?$/,
@@ -48,7 +51,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        loaders: ['style-loader', 'css-loader?sourceMap', "sass-loader?sourceMap"],
+        loaders: ['style-loader', 'css-loader', "sass-loader"],
         exclude: [/node_modules/]
       },
       {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader', exclude: [/node_modules/]},

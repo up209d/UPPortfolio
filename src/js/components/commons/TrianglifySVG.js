@@ -25,51 +25,56 @@ class TrianglifySVG extends React.Component {
     };
     this.pattern = Trianglify(this.state);
     this.polys = [];
+    this.vertexSets = [];
   }
 
   defaultProps() {
     return Trianglify.defaults;
   }
 
+  vertexCollect() {
+    let vertexs = [];
+    // For Chrome SVG Point is avaiable, but for IE SVG Point have to get by getItem(index) method
+    // So vertexs.push(poly.points[0]); will not work for IE instead of poly.points.getItem(0)
+    this.polys.map((poly) => {
+      // Avoid null Poly, idk why there s null Poly here
+      if (poly) {
+        vertexs.push(poly.points.getItem(0));
+        vertexs.push(poly.points.getItem(1));
+        vertexs.push(poly.points.getItem(2));
+      }
+    });
+    // console.log(this.polys[10].points);
+    let vertexSets = [];
+    vertexs.forEach((vertex) => {
+      let vertexSet = vertexs.filter((matchVertex)=>{
+        return vertex.x == matchVertex.x && vertex.y == matchVertex.y
+      });
+
+      if(!vertexSets.some((matchVertexSet)=>{
+          return matchVertexSet[0].x == vertexSet[0].x && matchVertexSet[0].y == vertexSet[0].y
+        })) {
+        vertexSets.push(vertexSet);
+      }
+    });
+    this.vertexSets = vertexSets;
+  }
+
   animateSVG() {
     // console.log(this.polys);
     // No Animation in phone
     if (!this.props.UI.handheld) {
-      let vertexs = [];
-      // For Chrome SVG Point is avaiable, but for IE SVG Point have to get by getItem(index) method
-      // So vertexs.push(poly.points[0]); will not work for IE instead of poly.points.getItem(0)
-      this.polys.map((poly) => {
-        // Avoid null Poly, idk why there s null Poly here
-        if (poly) {
-          vertexs.push(poly.points.getItem(0));
-          vertexs.push(poly.points.getItem(1));
-          vertexs.push(poly.points.getItem(2));
-        }
-      });
-      // console.log(this.polys[10].points);
-      let vertexSets = [];
-      vertexs.forEach((vertex, index) => {
-        let vertexSet = vertexs.filter((matchVertex)=>{
-          return vertex.x == matchVertex.x && vertex.y == matchVertex.y
-        });
-
-        if(!vertexSets.some((matchVertexSet)=>{
-            return matchVertexSet[0].x == vertexSet[0].x && matchVertexSet[0].y == vertexSet[0].y
-          })) {
-          vertexSets.push(vertexSet);
-        }
-      });
       // console.log(vertexSets);
-      vertexSets.forEach((vertexSet,index)=>{
+      this.vertexSets.forEach((vertexSet,index)=>{
         let duration = Math.random()*4+4;
-        let offsetX = Math.random()*400-200;
-        let offsetY = Math.random()*400-200;
+        let offsetX = Math.random()*100-50;
+        let offsetY = Math.random()*100-50;
         vertexSet.map((eachVertex)=>{
           TweenMax.killTweensOf(eachVertex);
-          TweenMax.from(eachVertex,duration,{
+          TweenMax.to(eachVertex,duration,{
             x: "+="+offsetX,
             y: "+="+offsetY,
-            easing: Power3.easeInOut,
+            ease: Power1.easeInOut,
             repeat:-1,
             yoyo: true,
             immediateRender: true
@@ -77,6 +82,22 @@ class TrianglifySVG extends React.Component {
         });
       });
     }
+  }
+
+  killAllVertexTween() {
+    this.vertexSets.forEach((vertexSet)=>{
+      vertexSet.map((eachVertex)=>{
+        TweenMax.killTweensOf(eachVertex);
+      });
+    });
+  }
+
+  loopAnimate() {
+    // this.vertexSets[~~(Math.random()*this.vertexSets.length)].map((vertex)=>{
+    //   vertex.x += 100;
+    //   vertex.y += 100;
+    // });
+    requestAnimationFrame(this.loopAnimate.bind(this));
   }
 
   updateOnResize() {
@@ -99,7 +120,9 @@ class TrianglifySVG extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.onWindowResize());
+    this.vertexCollect();
     this.animateSVG();
+    this.loopAnimate();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -107,6 +130,7 @@ class TrianglifySVG extends React.Component {
   }
 
   componentWillUnmount() {
+    this.killAllVertexTween();
     window.removeEventListener('resize', this.onWindowResize());
   }
 
@@ -115,12 +139,12 @@ class TrianglifySVG extends React.Component {
   }
 
   componentDidUpdate() {
-    // console.log(this.polys);
+    this.vertexCollect();
     this.animateSVG();
   }
 
   polygonOnHover(e,type) {
-    let colorArray = ["#ffffcc","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"];
+    let colorArray = ["#000", "#F00"] // ["#ffffcc","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"];
     let randomColor = colorArray[Math.abs(parseInt(Math.sin((new Date()).getTime()*0.001)*colorArray.length))];
     switch (type) {
       case 'enter': {
@@ -130,8 +154,32 @@ class TrianglifySVG extends React.Component {
           stroke: randomColor,
           fillOpacity: 0.5,
           strokeOpacity: 0.9,
-          easing: Power3.easeOut
+          ease: Power3.easeOut
         });
+        // let polygonVertexSets = [];
+        // for (let i=0;i<e.target.points.numberOfItems;i++) {
+        //   polygonVertexSets.push(this.vertexSets.find((vertexSet)=>{
+        //     if (vertexSet) {
+        //       return vertexSet[0].x == e.target.points.getItem(0).x && vertexSet[0].y == e.target.points.getItem(0).y
+        //     }
+        //   }));
+        // }
+        // if (polygonVertexSets.length !=0) {
+        //   polygonVertexSets.forEach((vertexSet)=>{
+        //     let duration = Math.random()*4+4;
+        //     let offsetX = Math.random()*200-100;
+        //     let offsetY = Math.random()*200-100;
+        //     vertexSet.map((eachVertex)=>{
+        //       TweenMax.to(eachVertex,duration,{
+        //         x: "+="+offsetX,
+        //         y: "+="+offsetY,
+        //         ease: Power1.easeInOut,
+        //         repeat:-1,
+        //         yoyo: true
+        //       })
+        //     });
+        //   });
+        // }
         break;
       }
       case 'leave': {
@@ -141,7 +189,7 @@ class TrianglifySVG extends React.Component {
           stroke: JSON.parse(e.target.getAttribute('data-style')).stroke,
           fillOpacity: 0.05,
           strokeOpacity: 0.1,
-          easing: Power3.easeIn
+          ease: Power3.easeOut
         });
         break;
       }

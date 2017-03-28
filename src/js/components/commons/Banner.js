@@ -34,7 +34,7 @@ export default class Banner extends React.Component {
       <div ref="banner" className="app-banner">
         <TrianglifySVG {...this.props} ref="bannerTrianglify"
                        className="app-avatar-bg" options={{height: 720}}/>
-        <SpringDrop/>
+        <SpringDrop options={{textRender: "NICE TO MEET YOU", height: 720}}/>
         <Navigation/>
       </div>
     )

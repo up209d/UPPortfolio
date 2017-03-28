@@ -10,6 +10,12 @@ import storeHistory from './store';
 
 import App from './components/app'
 
+window.requestAnimationFrame = window.requestAnimationFrame
+  || window.mozRequestAnimationFrame
+  || window.webkitRequestAnimationFrame
+  || window.msRequestAnimationFrame
+  || function(f){return setTimeout(f, 1000/30)};
+
 const DOMRenderer = () => {
   ReactDOM.render(
     <Provider store={store}>
@@ -17,6 +23,6 @@ const DOMRenderer = () => {
     </Provider>,
     document.getElementById('root')
   );
-}
+};
 
 DOMRenderer();
