@@ -1,0 +1,82 @@
+.app-banner {
+
+  ul,li {
+    padding:0;
+    margin:0;
+  }
+
+  canvas {
+    position: absolute;
+    z-index:-1;
+  }
+
+  .app-avatar-bg {
+    position: absolute;
+    z-index:-1;
+    cursor: pointer;
+  }
+
+  .app-drops {
+    pointer-events: none;
+  }
+
+  svg {
+    transform: translateZ(0);
+    border-bottom: 3px solid black;
+    polygon {
+      transform: translateZ(0);
+    }
+
+    polygon:hover {
+
+    }
+  }
+
+  .app-banner-line {
+    margin-top: 720px;
+  }
+
+  .app-banner-name {
+    color: white;
+  }
+
+  .app-banner-content {
+    h1 {
+      text-transform: uppercase;
+      font-size: 28px;
+      letter-spacing: 5px;
+    }
+    .content-greeting {
+      margin-top:80px;
+      font-size:28px;
+    }
+    .content-design {
+      font-size:36px;
+      font-weight:100;
+      margin-top: 220px;
+    }
+    .content-linebreak {
+      border-top:0.5px solid black;
+      //border-bottom:0.5px solid black;
+      display:inline-block;
+      min-width:300px;
+    }
+    .content-develop {
+      margin-top:20px;
+      font-size: 44px;
+      font-weight: bold;
+    }
+    .content-frontend {
+      position:absolute;
+      width:100%;
+      color: #E50000;
+      font-weight: 900;
+      font-size: 60px;
+      top: 260px;
+      left:0;
+      z-index:-1;
+    }
+
+  }
+
+}

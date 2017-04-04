@@ -32,6 +32,16 @@ module.exports = {
       template: './src/index.html'
     })
   ],
+  resolve: {
+    modules: [
+      path.resolve(__dirname + '/bower_components'),
+      path.resolve(__dirname + '/node_modules'),
+      path.resolve(__dirname + '/src/js/vendor')
+    ],
+    alias: {
+      Images: path.resolve(__dirname+'/src/assets/images/')
+    }
+  },
   module: {
     loaders: [
       // Fix SnapSVG Import Issue
@@ -47,7 +57,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        loaders: ['style-loader', 'css-loader?sourceMap', "sass-loader?sourceMap"],
+        loaders: ['style-loader', 'css-loader?sourceMap&importLoaders=1','postcss-loader', "sass-loader?sourceMap"],
         exclude: [/node_modules/]
       },
       {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader', exclude: [/node_modules/]},

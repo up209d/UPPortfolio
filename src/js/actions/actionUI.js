@@ -11,3 +11,17 @@ export function bannerUntouchAvatar() {
     type: types.BANNER_UNTOUCH_AVATAR
   }
 }
+
+export function Nothing() {
+  return {
+    type: 'Nothing'
+  }
+}
+
+export function onResizeWindow() {
+  return {
+    width: window.innerWidth,
+    height: window.innerHeight,
+    type: types.ON_RESIZE_WINDOW
+  }
+};

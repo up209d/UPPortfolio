@@ -1,5 +1,6 @@
 import React from 'react';
 import Trianglify from 'trianglify';
+import isEqual from 'lodash.isequal';
 import { TweenMax } from 'gsap';
 
 // For Debounce Function
@@ -81,6 +82,21 @@ class TrianglifySVG extends React.Component {
           })
         });
       });
+    } else {
+      this.vertexSets.forEach((vertexSet,index)=>{
+        let duration = Math.random()*3+1;
+        let offsetX = Math.random()*100-50;
+        let offsetY = Math.random()*100-50;
+        vertexSet.map((eachVertex)=>{
+          TweenMax.killTweensOf(eachVertex);
+          TweenMax.to(eachVertex,duration,{
+            x: "+="+offsetX,
+            y: "+="+offsetY,
+            ease: Power1.easeInOut,
+            immediateRender: true
+          })
+        });
+      });
     }
   }
 
@@ -118,15 +134,16 @@ class TrianglifySVG extends React.Component {
     return utils.fDebounce(this.updateOnResize.bind(this), 250);
   }
 
+  shouldComponentUpdate(nextProps,nextState) {
+    // Props is handle to affect state in componentWillReceiveProps so here we just need to care about the state only
+    return !isEqual(this.state,nextState) || !isEqual(this.props,nextProps);
+  }
+
   componentDidMount() {
     window.addEventListener('resize', this.onWindowResize());
     this.vertexCollect();
     this.animateSVG();
     this.loopAnimate();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return JSON.stringify(nextState) != JSON.stringify(this.state);
   }
 
   componentWillUnmount() {
@@ -139,12 +156,13 @@ class TrianglifySVG extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log('Trianglify Updated');
     this.vertexCollect();
     this.animateSVG();
   }
 
   polygonOnHover(e,type) {
-    let colorArray = ["#000", "#F00"] // ["#ffffcc","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"];
+    let colorArray = ["#000"]; // ["#ffffcc","#ffeda0","#fed976","#feb24c","#fd8d3c","#fc4e2a","#e31a1c","#bd0026","#800026"];
     let randomColor = colorArray[Math.abs(parseInt(Math.sin((new Date()).getTime()*0.001)*colorArray.length))];
     switch (type) {
       case 'enter': {
@@ -152,34 +170,10 @@ class TrianglifySVG extends React.Component {
         TweenMax.to(e.target.style,0.1,{
           fill: randomColor,
           stroke: randomColor,
-          fillOpacity: 0.5,
+          fillOpacity: 0.9,
           strokeOpacity: 0.9,
           ease: Power3.easeOut
         });
-        // let polygonVertexSets = [];
-        // for (let i=0;i<e.target.points.numberOfItems;i++) {
-        //   polygonVertexSets.push(this.vertexSets.find((vertexSet)=>{
-        //     if (vertexSet) {
-        //       return vertexSet[0].x == e.target.points.getItem(0).x && vertexSet[0].y == e.target.points.getItem(0).y
-        //     }
-        //   }));
-        // }
-        // if (polygonVertexSets.length !=0) {
-        //   polygonVertexSets.forEach((vertexSet)=>{
-        //     let duration = Math.random()*4+4;
-        //     let offsetX = Math.random()*200-100;
-        //     let offsetY = Math.random()*200-100;
-        //     vertexSet.map((eachVertex)=>{
-        //       TweenMax.to(eachVertex,duration,{
-        //         x: "+="+offsetX,
-        //         y: "+="+offsetY,
-        //         ease: Power1.easeInOut,
-        //         repeat:-1,
-        //         yoyo: true
-        //       })
-        //     });
-        //   });
-        // }
         break;
       }
       case 'leave': {
@@ -205,7 +199,7 @@ class TrianglifySVG extends React.Component {
         width={this.state.width} height={this.state.height}
         className={this.props.className ? 'app-trianglify ' + this.props.className : 'app-trianglify'}
         ref={Trianglify => this.Trianglify = Trianglify}>
-        <g style={{clipPath: "url(#hexagonal-mask)"}}>
+        <g>
           {this.pattern.polys.map((poly, index) => {
             let originColor = `rgba(${utils.hexToRgb(poly[0]).r},${utils.hexToRgb(poly[0]).g},${utils.hexToRgb(poly[0]).b},1)`;
             let originStrokeColor = `rgba(${utils.hexToRgb(poly[0]).r},${utils.hexToRgb(poly[0]).g},${utils.hexToRgb(poly[0]).b},1)`;

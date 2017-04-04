@@ -17,7 +17,6 @@ class Utilities {
         return false;
       }
     }
-
   }
   fDebounce(func, wait, immediate) {
     var timeout;

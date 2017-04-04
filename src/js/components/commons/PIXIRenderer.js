@@ -28,7 +28,6 @@ class PIXIRenderer extends React.Component {
 
   initRenderer() {
     let canvas = ReactDOM.findDOMNode(this.canvas);
-
     if (this.Application) {
       this.Application.stop();
       delete this.Application;

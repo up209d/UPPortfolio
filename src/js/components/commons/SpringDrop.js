@@ -1,4 +1,6 @@
 import React from 'react';
+
+import isEqual from 'lodash.isequal';
 import utils from '../../utils';
 
 class SpringDrop extends React.Component {
@@ -7,21 +9,21 @@ class SpringDrop extends React.Component {
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      particle_count: 1000,
-      colors: ["#000", "#F00"], //['#4ECDC4','#F45800','#FF6B6B']
+      particle_count: 1500,
+      colors: ["#000"], //['#4ECDC4','#F45800','#FF6B6B']
       scanning: 3, // Number of pixel skipping each text analyzing
-      areaRadius: 200,
-      dropRadius: 2, // Size of each particel
+      areaRadius: 100, // The distance between mouse and dots moving
+      dropRadius: 1.8, // Size of each particel
       springConstant: 0.01,
       damperConstant: 0.08,
       textRender: "ULTIMATE PEACE",
-      textSize: 120,
-      textFont: "Calibri",
+      textSize: 150,
+      textFont: "Roboto",
       relocate: true, // Relocate particle after its own lifecycle (Slow Performance)
-      rotateSpeed: 0.0001,
-      shape: ["triangle","square","circle"],
+      rotateSpeed: 0.00001,
+      shape: ["leaf"],
       randomOffset: 0,
-      lifespan: 90, // 1 - 500
+      lifespan: 100, // 1 - 500
       ...this.props.options
     };
   }
@@ -61,14 +63,6 @@ class SpringDrop extends React.Component {
         );
       }
     }
-  }
-
-  updateOnResize() {
-    this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight,
-      ...this.props.options
-    });
   }
 
   renderText(text) {
@@ -131,13 +125,13 @@ class SpringDrop extends React.Component {
   }
 
   onMouseMove(e) {
-    let mPosX = e.offsetX || e.clientX || e.screenX || e.pageX;
-    let mPosY = e.offsetY || e.clientY || e.screenY || e.pageY;
+    let mPosX = e.clientX || e.screenX || e.pageX;
+    let mPosY = e.clientY || e.screenY || e.pageY;
     this.particleArray.map((particle) => {
       let offsetX = particle.state.currentX - mPosX;
       let offsetY = particle.state.currentY - mPosY;
-      let offsetXY = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2));
-      if (offsetXY <= this.state.areaRadius) {
+      let distance = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2));
+      if (distance <= this.state.areaRadius) {
         particle.state.speedX += offsetX * 0.1;
         particle.state.speedY += offsetY * 0.1;
       }
@@ -152,18 +146,36 @@ class SpringDrop extends React.Component {
     this.setState({...text});
   }
 
+  updateOnResize(props) {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      ...props.options
+    });
+  }
+
+  shouldComponentUpdate(nextProps,nextState) {
+    // Props is handle to affect state in componentWillReceiveProps so here we just need to care about the state only
+    return !isEqual(this.state,nextState);
+  }
+
   componentDidMount() {
     this.init();
     // Ticker can only be call "1 TIME", if calling is loop somewhere
     // it will slow down animation performance very badly
     this.ticker();
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
-    window.addEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
+    // window.addEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.onMouseMove.bind(this));
-    window.removeEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
+    // window.removeEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
+  }
+
+  // componentWillReceiveProps is call before new props assign to component, so we can have do something before that event, exp: if your state base on props, you definitely to setState before the component update, so the new props can affect the state and then component update base on its state
+  componentWillReceiveProps(props) {
+    this.updateOnResize(props);
   }
 
   componentDidUpdate() {
@@ -173,7 +185,7 @@ class SpringDrop extends React.Component {
 
   render() {
     return (
-      <canvas ref={canvas => this.canvas = canvas} width={this.state.width} height={this.state.height}/>
+      <canvas ref={canvas => this.canvas = canvas} width={this.state.width} height={this.state.height} />
     )
   }
 }
