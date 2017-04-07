@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+var fs  = require('fs');
 
 var host = require("./host.config");
 var hostLocalAccess = "http://" + host.hostName + ":" + host.hostPort;
@@ -14,8 +15,8 @@ module.exports = {
   externals: {},
   entry: {
     appBundle: [
-      './src/js/index.js',
-      'webpack-hot-middleware/client?reload=true'
+      'webpack-hot-middleware/client?reload=true',
+      './src/js/index.js'
     ],
     vendorBundler: [
       'trianglify',
@@ -25,16 +26,16 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.BROWSER': true
+    }),
     new HTMLWebpackPlugin({
       filename: 'index.html',
+      favicon: './src/assets/images/favicon.ico',
       template: './src/index.html'
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        BROWSER: JSON.stringify(true)
-      }
     })
   ],
   resolve: {
@@ -83,7 +84,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'), // Note: Physical files are only output by the production build task `npm run build`.
     publicPath: hostNetworkAccess + '/',
-    filename: '[name].js'
+    filename: '[name][hash].js'
   }
 
 };
