@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6aa143d4-a920-4b7e-9968-a6c0b527151a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/favicon.ico" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev-server.js" afterPath="$PROJECT_DIR$/dev-server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/appBundle.js" afterPath="$PROJECT_DIR$/dist/appBundle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/vendorBundler.js" afterPath="$PROJECT_DIR$/dist/vendorBundler.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/store.js" afterPath="$PROJECT_DIR$/src/js/store.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.build.js" afterPath="$PROJECT_DIR$/webpack.config.build.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.dev.js" afterPath="$PROJECT_DIR$/webpack.config.dev.js" />
     </list>
@@ -43,18 +37,18 @@
           <file leaf-file-name="webpack.config.build.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/webpack.config.build.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="49" />
+                <state relative-caret-position="646">
+                  <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="webpack.config.dev.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="webpack.config.dev.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/webpack.config.dev.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-340">
-                  <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                <state relative-caret-position="714">
+                  <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
                   <folding />
                 </state>
               </provider>
@@ -70,7 +64,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="dev-server.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="dev-server.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dev-server.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="658">
@@ -301,11 +295,11 @@
         <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/js/components/commons/TrianglifySVG.js" />
         <option value="$PROJECT_DIR$/src/js/reducers/UI.js" />
-        <option value="$PROJECT_DIR$/webpack.config.build.js" />
         <option value="$PROJECT_DIR$/src/js/index.js" />
         <option value="$PROJECT_DIR$/src/js/store.js" />
-        <option value="$PROJECT_DIR$/webpack.config.dev.js" />
         <option value="$PROJECT_DIR$/dev-server.js" />
+        <option value="$PROJECT_DIR$/webpack.config.build.js" />
+        <option value="$PROJECT_DIR$/webpack.config.dev.js" />
       </list>
     </option>
   </component>
@@ -321,8 +315,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="782" />
-    <option name="y" value="677" />
+    <option name="x" value="647" />
+    <option name="y" value="610" />
     <option name="width" value="2311" />
     <option name="height" value="1355" />
   </component>
@@ -564,7 +558,7 @@
       <workItem from="1491357704186" duration="23048000" />
       <workItem from="1491454074806" duration="34319000" />
       <workItem from="1491552807713" duration="5248000" />
-      <workItem from="1491558535043" duration="10385000" />
+      <workItem from="1491558535043" duration="11127000" />
     </task>
     <task id="LOCAL-00001" summary="Add DropCircle Text Spring Motion">
       <created>1490487902793</created>
@@ -594,11 +588,18 @@
       <option name="project" value="LOCAL" />
       <updated>1490490732338</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Fixed problem - Find out about isomorphic render later">
+      <created>1491570461477</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1491570461477</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="344665000" />
+    <option name="totallyTimeSpent" value="345407000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -610,7 +611,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="782" y="677" width="2311" height="1355" extended-state="0" />
+    <frame x="647" y="610" width="2311" height="1355" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11702596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -659,7 +660,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add DropCircle Text Spring Motion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add DropCircle Text Spring Motion" />
+    <MESSAGE value="Fixed problem - Find out about isomorphic render later" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed problem - Find out about isomorphic render later" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1040,19 +1042,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.build.js">
+    <entry file="file://$PROJECT_DIR$/src/js/components/commons/Banner.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.dev.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="357">
+          <caret line="31" column="12" lean-forward="false" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1066,13 +1062,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/commons/Banner.js">
+    <entry file="file://$PROJECT_DIR$/webpack.config.build.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="31" column="12" lean-forward="false" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="646">
+          <caret line="38" column="23" lean-forward="true" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.dev.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>

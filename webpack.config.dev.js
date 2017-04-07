@@ -30,7 +30,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.BROWSER': true
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+        BROWSER: JSON.stringify(true)
+      }
     }),
     new HTMLWebpackPlugin({
       filename: 'index.html',
