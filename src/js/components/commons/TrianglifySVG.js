@@ -16,7 +16,7 @@ class TrianglifySVG extends React.Component {
       width: window.innerWidth,
       height: window.innerHeight,
       seed: 'u.p',
-      cell_size: Math.sqrt(window.innerWidth)*2.5, // parseInt(window.innerWidth/30)
+      cell_size: Math.sqrt(window.innerWidth)*Math.PI, // parseInt(window.innerWidth/30)
       color_space: 'lab',
       variance: "0.5",
       x_colors: ["#000","#000","#FFF","#000","#000"],
@@ -67,24 +67,26 @@ class TrianglifySVG extends React.Component {
     if (!this.props.UI.handheld) {
       // console.log(vertexSets);
       this.vertexSets.forEach((vertexSet,index)=>{
-        let duration = Math.random()*4+4;
-        let offsetX = Math.random()*100-50;
-        let offsetY = Math.random()*100-50;
-        vertexSet.map((eachVertex)=>{
-          TweenMax.killTweensOf(eachVertex);
-          TweenMax.to(eachVertex,duration,{
-            x: "+="+offsetX,
-            y: "+="+offsetY,
-            ease: Power1.easeInOut,
-            repeat:-1,
-            yoyo: true,
-            immediateRender: true
-          })
-        });
+        if (Math.random()>0.75) {
+          let duration = Math.random()*6+6;
+          let offsetX = Math.random()*300-150;
+          let offsetY = Math.random()*300-150;
+          vertexSet.map((eachVertex)=>{
+            TweenMax.killTweensOf(eachVertex);
+            TweenMax.to(eachVertex,duration,{
+              x: "+="+offsetX,
+              y: "+="+offsetY,
+              ease: Power1.easeInOut,
+              repeat:-1,
+              yoyo: true,
+              immediateRender: true
+            });
+          });
+        }
       });
     } else {
       this.vertexSets.forEach((vertexSet,index)=>{
-        let duration = Math.random()*3+1;
+        let duration = Math.random()*5+3;
         let offsetX = Math.random()*100-50;
         let offsetY = Math.random()*100-50;
         vertexSet.map((eachVertex)=>{
@@ -106,14 +108,6 @@ class TrianglifySVG extends React.Component {
         TweenMax.killTweensOf(eachVertex);
       });
     });
-  }
-
-  loopAnimate() {
-    // this.vertexSets[~~(Math.random()*this.vertexSets.length)].map((vertex)=>{
-    //   vertex.x += 100;
-    //   vertex.y += 100;
-    // });
-    requestAnimationFrame(this.loopAnimate.bind(this));
   }
 
   updateOnResize() {
@@ -143,7 +137,6 @@ class TrianglifySVG extends React.Component {
     window.addEventListener('resize', this.onWindowResize());
     this.vertexCollect();
     this.animateSVG();
-    this.loopAnimate();
   }
 
   componentWillUnmount() {
@@ -152,6 +145,7 @@ class TrianglifySVG extends React.Component {
   }
 
   componentWillUpdate() {
+    this.killAllVertexTween();
     this.polys = [];
   }
 
@@ -208,8 +202,6 @@ class TrianglifySVG extends React.Component {
                 key={index}
                 data-style={`{"fill": "${originColor}","stroke": "${originStrokeColor}"}`}
                 style={{fill: originColor,fillOpacity: 0.05,stroke: originStrokeColor,strokeOpacity: 0.1}}
-                onMouseEnter={ (e)=>{this.polygonOnHover(e,'enter')} }
-                onMouseLeave={ (e)=>{this.polygonOnHover(e,'leave')} }
                 points={`${poly[1].join(' ')}`}
                 ref={eachPolygon => {this.polys[index] = eachPolygon}}
               />

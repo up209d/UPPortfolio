@@ -2,21 +2,27 @@ import MobileDetect from 'mobile-detect';
 
 class Utilities {
   constructor() {
-
     // Browser Detection
-    this.browserDetection = new MobileDetect(window.navigator.userAgent);
-    this.browserDetection.OSName="Unknown OS";
-    if (navigator.appVersion.indexOf("Win")!=-1) this.browserDetection.OSName="Windows";
-    if (navigator.appVersion.indexOf("Mac")!=-1) this.browserDetection.OSName="MacOS";
-    if (navigator.appVersion.indexOf("X11")!=-1) this.browserDetection.OSName="UNIX";
-    if (navigator.appVersion.indexOf("Linux")!=-1) this.browserDetection.OSName="Linux";
-    this.browserDetection.isHandHeld = () => {
-      if (this.browserDetection.mobile() || this.browserDetection.phone()) {
-        return true;
-      } else {
-        return false;
+    if (process.env.BROWSER) {
+      this.browserDetection = new MobileDetect(window.navigator.userAgent);
+      this.browserDetection.OSName="Unknown OS";
+      if (window.navigator.appVersion.indexOf("Win")!=-1) this.browserDetection.OSName="Windows";
+      if (window.navigator.appVersion.indexOf("Mac")!=-1) this.browserDetection.OSName="MacOS";
+      if (window.navigator.appVersion.indexOf("X11")!=-1) this.browserDetection.OSName="UNIX";
+      if (window.navigator.appVersion.indexOf("Linux")!=-1) this.browserDetection.OSName="Linux";
+      this.browserDetection.isHandHeld = () => {
+        if (this.browserDetection.mobile() || this.browserDetection.phone()) {
+          return true;
+        } else {
+          return false;
+        }
       }
+    } else {
+      this.browserDetection = {
+        isHandHeld: () => {return false}
+      };
     }
+
   }
   fDebounce(func, wait, immediate) {
     var timeout;

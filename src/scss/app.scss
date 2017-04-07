@@ -11,6 +11,10 @@
 //xlarge: 1200px
 //xxlarge: 1440px
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 html, body {
   padding: 0;
   margin: 0;
@@ -49,11 +53,9 @@ h3,h4,h5,h6,p,span {
 
 body {
   font-family: "Roboto", Helvetica, 'Arial', sans-serif;
-  //background-color: #EFEFEF;
   font-size:14px;
   font-weight: 300;
   letter-spacing: 0.5px;
-  overflow: hidden;
 }
 
 

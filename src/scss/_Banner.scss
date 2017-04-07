@@ -1,4 +1,8 @@
 .app-banner {
+  position: relative;
+  height:720px;
+  overflow:hidden;
+  border-bottom:3px solid black;
 
   ul,li {
     padding:0;
@@ -40,11 +44,33 @@
     color: white;
   }
 
+  .app-skew {
+    &::after {
+      content: '';
+      display:block;
+      width:100%;
+      height:0;
+    }
+  }
+
   .app-banner-content {
     h1 {
       text-transform: uppercase;
       font-size: 28px;
       letter-spacing: 5px;
+
+      span {
+        font-weight:100;
+        transition: all 0.3s ease-out;
+        cursor: pointer;
+
+        &:hover {
+          background-color: black;
+          color:white;
+        }
+
+
+      }
     }
     .content-greeting {
       margin-top:80px;
@@ -64,7 +90,22 @@
     .content-develop {
       margin-top:20px;
       font-size: 44px;
-      font-weight: bold;
+      text-align: center;
+      span {
+        font-weight: bold;
+        letter-spacing: 5px;
+        padding: 0px 5px;
+        text-transform: uppercase;
+        display: inline-block;
+        background-color: #E50000;
+        color: white;
+        transition: all 0.3s ease-out;
+
+        &:hover {
+          background-color: #000;
+        }
+
+      }
     }
     .content-frontend {
       position:absolute;
@@ -72,7 +113,7 @@
       color: #E50000;
       font-weight: 900;
       font-size: 60px;
-      top: 260px;
+      top: 180px;
       left:0;
       z-index:-1;
     }

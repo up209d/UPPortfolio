@@ -30,6 +30,11 @@ module.exports = {
     new HTMLWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html'
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        BROWSER: JSON.stringify(true)
+      }
     })
   ],
   resolve: {

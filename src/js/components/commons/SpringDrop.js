@@ -3,29 +3,34 @@ import React from 'react';
 import isEqual from 'lodash.isequal';
 import utils from '../../utils';
 
-class SpringDrop extends React.Component {
+class SpringDrop extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      particle_count: 1500,
+      particle_count: 1150,
       colors: ["#000"], //['#4ECDC4','#F45800','#FF6B6B']
       scanning: 3, // Number of pixel skipping each text analyzing
       areaRadius: 100, // The distance between mouse and dots moving
-      dropRadius: 1.8, // Size of each particel
+      dropRadius: 1.5, // Size of each particle
       springConstant: 0.01,
       damperConstant: 0.08,
-      textRender: "ULTIMATE PEACE",
-      textSize: 150,
+      textRender: this.props.options.textWords[0] ? this.props.options.textWords[0] : "ULTIMATE PEACE",
+      textWords: ["ULTIMATE PEACE"],
+      timeOut: 5000,
+      textSize: 135,
       textFont: "Roboto",
       relocate: true, // Relocate particle after its own lifecycle (Slow Performance)
       rotateSpeed: 0.00001,
       shape: ["leaf"],
       randomOffset: 0,
-      lifespan: 100, // 1 - 500
+      lifespan: 120, // 1 - 500
       ...this.props.options
     };
+
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.ticker = this.ticker.bind(this);
   }
 
   init() {
@@ -49,7 +54,7 @@ class SpringDrop extends React.Component {
         this.particleArray.push(
           new Particle({
             ctx: this.ctx,
-            textArray: this.textArray,
+            getTextArray: ()=>{return this.textArray},
             dropRadius: this.state.dropRadius,
             springConstant: this.state.springConstant,
             damperConstant: this.state.damperConstant,
@@ -121,29 +126,43 @@ class SpringDrop extends React.Component {
     if (this.frameCount > 60) {
       this.frameCount = 1;
     }
-    requestAnimationFrame(this.ticker.bind(this));
+    this.tickerID = requestAnimationFrame(this.ticker);
+  }
+
+  initTicker() {
+    if (!this.tickerID) {
+      this.ticker();
+    }
+  }
+
+  destroyTicker() {
+    cancelAnimationFrame(this.tickerID);
   }
 
   onMouseMove(e) {
     let mPosX = e.clientX || e.screenX || e.pageX;
     let mPosY = e.clientY || e.screenY || e.pageY;
+    let mSpeedX = e.movementX || 0;
+    let mSpeedY = e.movementY || 0;
+
     this.particleArray.map((particle) => {
       let offsetX = particle.state.currentX - mPosX;
       let offsetY = particle.state.currentY - mPosY;
       let distance = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2));
       if (distance <= this.state.areaRadius) {
-        particle.state.speedX += offsetX * 0.1;
-        particle.state.speedY += offsetY * 0.1;
+        particle.state.speedX += offsetX * 0.05 + mSpeedX * 0.15;
+        particle.state.speedY += offsetY * 0.05 + mSpeedY * 0.30;
       }
     });
   }
 
   changeText(text = {
-    textRender: 'ULTIMATE PEACE',
-    textSize: 200,
-    textFont: 'Arial'
+    textRender: 'ULTIMATE'
   }) {
-    this.setState({...text});
+    this.setState({
+      ...text,
+      particle_count: ~~((text.textRender.length/9)*1200)
+    });
   }
 
   updateOnResize(props) {
@@ -156,20 +175,34 @@ class SpringDrop extends React.Component {
 
   shouldComponentUpdate(nextProps,nextState) {
     // Props is handle to affect state in componentWillReceiveProps so here we just need to care about the state only
-    return !isEqual(this.state,nextState);
+    return !isEqual(this.state,nextState) || !isEqual(this.props,nextProps);
   }
 
   componentDidMount() {
     this.init();
     // Ticker can only be call "1 TIME", if calling is loop somewhere
     // it will slow down animation performance very badly
-    this.ticker();
-    window.addEventListener('mousemove', this.onMouseMove.bind(this));
+    this.initTicker();
+    window.addEventListener('mousemove', this.onMouseMove);
     // window.addEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
+
+    let currentIndex = 0;
+    this.interval = setInterval(()=>{
+      currentIndex++;
+      if (currentIndex == this.state.textWords.length) {
+        currentIndex = 0;
+      }
+
+      // this.changeText({textRender: this.state.textArray[currentIndex]});
+      this.textArray = this.renderText(this.state.textWords[currentIndex]);
+
+    },this.state.timeOut);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('mousemove', this.onMouseMove.bind(this));
+    window.removeEventListener('mousemove', this.onMouseMove);
+    this.destroyTicker();
+    clearInterval(this.interval);
     // window.removeEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
   }
 
@@ -207,10 +240,11 @@ class Particle {
         accX: 0,
         accY: 0,
         rotation: 0,
+        weight: 1,
         ...e
       };
-      this.reState();
       this.reLocation();
+      this.reState();
     }
   }
 
@@ -273,10 +307,11 @@ class Particle {
     // so ax = -k*dx - b+Vx, ax is accleration of X
     this.accX = -this.state.springConstant * (this.state.currentX - this.state.originX) - this.state.damperConstant * this.state.speedX;
     this.accY = -this.state.springConstant * (this.state.currentY - this.state.originY) - this.state.damperConstant * this.state.speedY;
-    this.state.speedX += this.accX;
-    this.state.speedY += this.accY;
+    this.state.speedX += this.accX/this.state.weight;
+    this.state.speedY += this.accY/this.state.weight;
     this.state.alpha -= 1/this.state.lifespan;
     this.state.scaleX = this.state.scaleY += 0.05;
+    this.state.weight += 0.005; // Weight is bigger so acceleration will be smaller, cuz it s big so harder to change momentum
     this.state.currentX += this.state.speedX;
     this.state.currentY += this.state.speedY;
 
@@ -294,6 +329,7 @@ class Particle {
     this.state.color = this.state.colors[~~(Math.random() * this.state.colors.length)];
     this.state.scaleX = this.state.scaleY = 0;
     this.state.alpha = Math.random();
+    this.state.weight = 1;
 
     if (this.state.rotateSpeed != 0) {
       this.state.rotation = Math.random() * 360;
@@ -305,7 +341,8 @@ class Particle {
   }
 
   reLocation() {
-    let coordinate = this.state.textArray[~~(Math.random() * this.state.textArray.length)];
+    let textArray = this.state.getTextArray();
+    let coordinate = textArray[~~(Math.random() * textArray.length)];
     this.state.originX = this.state.currentX = coordinate.x + ~~(this.state.randomOffset / 2 - Math.random() * this.state.randomOffset);
     this.state.originY = this.state.currentY = coordinate.y + ~~(this.state.randomOffset / 2 - Math.random() * this.state.randomOffset);
   }

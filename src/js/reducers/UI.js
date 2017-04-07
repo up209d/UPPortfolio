@@ -1,5 +1,5 @@
 import * as types from '../actions/actionTypes';
-import utils from '../utils'
+import utils from '../utils';
 
 // Normally the switch need break in each case, but because we just use return
 // return will escape switch and function immediately so that why we dont need break
@@ -7,8 +7,8 @@ import utils from '../utils'
 const prefix = 'Redux UI Reducer: '
 
 const UI = (state = {
-  width: window.innerWidth,
-  height: window.innerHeight,
+  width: window.innerWidth || 0,
+  height: window.innerHeight || 0,
   handheld: utils.browserDetection.isHandHeld() || (window.innerWidth<=640),
   mouseX: 0,
   mouseY: 0,

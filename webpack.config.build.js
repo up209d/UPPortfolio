@@ -20,6 +20,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HTMLWebpackPlugin({
       filename: 'index.html',
+      favicon: './src/assets/images/favicon.ico',
       template: './src/index.html'
     }),
     new webpack.DefinePlugin({
@@ -76,7 +77,7 @@ module.exports = {
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
         exclude: [/node_modules/]
       },
-      {test: /\.png$|\.jpe?g$|\.gif$/, loader: 'file-loader', exclude: [/node_modules/]},
+      {test: /\.png$|\.jpe?g$|\.gif$|\.ico$/, loader: 'file-loader', exclude: [/node_modules/]},
     ]
   },
   output: {

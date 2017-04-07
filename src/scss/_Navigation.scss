@@ -1,5 +1,7 @@
 .app-navigation {
   font-size: 12px;
+  position:relative;
+  z-index: 999;
 
   ul.app-navigation-menu {
     padding: 0;
