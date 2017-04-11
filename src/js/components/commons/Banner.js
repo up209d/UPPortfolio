@@ -31,7 +31,7 @@ export default class Banner extends React.Component {
 
   render() {
     return (
-      <div ref="banner" className="app-banner">
+      <div ref="banner" className="app-block app-banner">
         <DistortContentByMouse options={{zoom: 1.1,reverseDirection: true,duration:1}}>
           <TrianglifySVG {...this.props} ref="bannerTrianglify"
                          className="app-avatar-bg" options={{height: 720}}/>

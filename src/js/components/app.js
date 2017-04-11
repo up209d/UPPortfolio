@@ -17,8 +17,20 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        {/*<Banner/>*/}
-        <BarChartSVG/>
+        <Banner/>
+        <div className="app-block app-resume">
+          <h1>RESUME</h1>
+        </div>
+        <div className="app-block app-skills">
+          <h1>MY SKILLS</h1>
+          <BarChartSVG/>
+        </div>
+        <div className="app-block app-works">
+          <h1>MY WORKS</h1>
+        </div>
+        <div className="app-block app-contact">
+          <h1>CONTACT ME</h1>
+        </div>
       </div>
     )
   }
