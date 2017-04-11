@@ -75,6 +75,10 @@ class Utilities {
       b: parseInt(result[3], 16)
     } : null;
   }
+  reMapRange(value,from,to,newFrom,newTo) {
+    if (to == from) { return value }
+    return (((value-from)/(to-from))*(newTo-newFrom))+newFrom;
+  }
 
 }
 

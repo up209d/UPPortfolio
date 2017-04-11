@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Banner from './commons/Banner';
+import BarChartSVG from './commons/BarChartSVG';
 
 class App extends React.Component {
   constructor(props, context) {
@@ -17,6 +18,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Banner/>
+        <BarChartSVG/>
       </div>
     )
   }

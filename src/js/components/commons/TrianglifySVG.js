@@ -71,16 +71,15 @@ class TrianglifySVG extends React.Component {
           let duration = Math.random()*6+6;
           let offsetX = Math.random()*300-150;
           let offsetY = Math.random()*300-150;
-          vertexSet.map((eachVertex)=>{
-            TweenMax.killTweensOf(eachVertex);
-            TweenMax.to(eachVertex,duration,{
-              x: "+="+offsetX,
-              y: "+="+offsetY,
-              ease: Power1.easeInOut,
-              repeat:-1,
-              yoyo: true,
-              immediateRender: true
-            });
+          //Tween an array
+          TweenMax.killTweensOf(vertexSet);
+          TweenMax.to(vertexSet,duration,{
+            x: "+="+offsetX,
+            y: "+="+offsetY,
+            ease: Power1.easeInOut,
+            repeat:-1,
+            yoyo: true,
+            immediateRender: true
           });
         }
       });
@@ -89,14 +88,12 @@ class TrianglifySVG extends React.Component {
         let duration = Math.random()*5+3;
         let offsetX = Math.random()*100-50;
         let offsetY = Math.random()*100-50;
-        vertexSet.map((eachVertex)=>{
-          TweenMax.killTweensOf(eachVertex);
-          TweenMax.to(eachVertex,duration,{
-            x: "+="+offsetX,
-            y: "+="+offsetY,
-            ease: Power1.easeInOut,
-            immediateRender: true
-          })
+        TweenMax.killTweensOf(vertexSet);
+        TweenMax.to(vertexSet,duration,{
+          x: "+="+offsetX,
+          y: "+="+offsetY,
+          ease: Power1.easeInOut,
+          immediateRender: true
         });
       });
     }
