@@ -6,7 +6,12 @@ import { Provider } from 'react-redux';
 
 if (process.env.NODE_ENV !== 'production') {
   const {whyDidYouUpdate} = require('why-did-you-update');
-  whyDidYouUpdate(React);
+  whyDidYouUpdate(
+    React,
+    {
+      include: /^pure/,
+      exclude: /^Measure/
+    });
 }
 
 import store from './store';

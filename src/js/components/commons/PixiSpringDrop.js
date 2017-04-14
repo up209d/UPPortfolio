@@ -1,16 +1,16 @@
 import React from 'react';
-
+import * as PIXI from 'pixi.js';
 import isEqual from 'lodash.isequal';
 import utils from '../../utils';
 
-class SpringDrop extends React.PureComponent {
+class PixiSpringDrop extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      particle_count: 999,
-      colors: ['#000','#000','#000','#000','#000','#000','#E50000'], //['#4ECDC4','#F45800','#FF6B6B']
+      particle_count: 1500,
+      colors: ['#000', '#000', '#000', '#000', '#000', '#000', '#E50000'], //['#4ECDC4','#F45800','#FF6B6B']
       scanning: 3, // Number of pixel skipping each text analyzing
       areaRadius: 100, // The distance between mouse and dots moving
       dropRadius: 1.5, // Size of each particle
@@ -28,14 +28,20 @@ class SpringDrop extends React.PureComponent {
       lifespan: 120, // 1 - 500
       ...this.props.options
     };
-
     this.onMouseMove = this.onMouseMove.bind(this);
-    this.ticker = this.ticker.bind(this);
+    this.animationComp = this.animationComp.bind(this);
   }
 
   init() {
-    this.canvas.style.pointerEvents = 'none';
-    this.ctx = this.canvas.getContext('2d');
+    this.App = new PIXI.Application(this.state.width, this.state.height, {
+      view: this.canvas,
+      backgroundColor : 0xffe500,
+      resolution: window.devicePixelRatio
+    });
+    this.offCanvas = document.createElement('canvas');
+    this.offCanvas.width = this.state.width;
+    this.offCanvas.height = this.state.height;
+    this.ctx = this.offCanvas.getContext('2d');
     this.frameCount = 0;
     this.update();
   }
@@ -48,12 +54,11 @@ class SpringDrop extends React.PureComponent {
     else {
       this.particleArray = [];
     }
-
     if (this.textArray.length) {
       for (let i = 0; i <= this.state.particle_count; i++) {
         this.particleArray.push(
           new Particle({
-            ctx: this.ctx,
+            stage: this.App.stage,
             getTextArray: ()=>{return this.textArray},
             dropRadius: this.state.dropRadius,
             springConstant: this.state.springConstant,
@@ -68,6 +73,12 @@ class SpringDrop extends React.PureComponent {
         );
       }
     }
+  }
+
+  animationComp() {
+    this.particleArray.map((particle) => {
+      particle.ctxUpdate();
+    });
   }
 
   renderText(text) {
@@ -107,37 +118,6 @@ class SpringDrop extends React.PureComponent {
     return textArray;
   }
 
-  animationComp() {
-    this.ctx.clearRect(0, 0, this.state.width, this.state.height);
-    // Draw a frame of all particle inside by save and restore
-    this.particleArray.map((particle) => {
-      particle.ctxDraw();
-    });
-    this.ctx.globalCompositeOperation = "source-over";
-    // Then update all particle position again for next frame
-    this.particleArray.map((particle) => {
-      particle.ctxUpdate();
-    });
-  }
-
-  ticker() {
-    this.animationComp();
-    this.frameCount += 1;
-    if (this.frameCount > 60) {
-      this.frameCount = 1;
-    }
-    this.tickerID = requestAnimationFrame(this.ticker);
-  }
-
-  initTicker() {
-    if (!this.tickerID) {
-      this.ticker();
-    }
-  }
-
-  destroyTicker() {
-    cancelAnimationFrame(this.tickerID);
-  }
 
   onMouseMove(e) {
     let mPosX = e.clientX || e.screenX || e.pageX;
@@ -156,71 +136,22 @@ class SpringDrop extends React.PureComponent {
     });
   }
 
-  changeText(text = {
-    textRender: 'ULTIMATE'
-  }) {
-    this.setState({
-      ...text,
-      particle_count: ~~((text.textRender.length/9)*1200)
-    });
-  }
-
-  updateOnResize(props) {
-    this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight,
-      ...props.options
-    });
-  }
-
-  shouldComponentUpdate(nextProps,nextState) {
-    // Props is handle to affect state in componentWillReceiveProps so here we just need to care about the state only
-    return !isEqual(this.state,nextState) || !isEqual(this.props,nextProps);
-  }
-
-  componentDidMount() {
+  componentDidMount(){
     this.init();
-    // Ticker can only be call "1 TIME", if calling is loop somewhere
-    // it will slow down animation performance very badly
-    this.initTicker();
+    this.App.ticker.add(this.animationComp);
     window.addEventListener('mousemove', this.onMouseMove);
-    // window.addEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
-
-    let currentIndex = 0;
-    this.interval = setInterval(()=>{
-      currentIndex++;
-      if (currentIndex == this.state.textWords.length) {
-        currentIndex = 0;
-      }
-
-      // this.changeText({textRender: this.state.textArray[currentIndex]});
-      this.textArray = this.renderText(this.state.textWords[currentIndex]);
-
-    },this.state.timeOut);
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.onMouseMove);
-    this.destroyTicker();
-    clearInterval(this.interval);
-    // window.removeEventListener('resize', utils.fDebounce(this.updateOnResize.bind(this),250));
   }
-
-  // componentWillReceiveProps is call before new props assign to component, so we can have do something before that event, exp: if your state base on props, you definitely to setState before the component update, so the new props can affect the state and then component update base on its state
-  componentWillReceiveProps(props) {
-    this.updateOnResize(props);
-  }
-
-  componentDidUpdate() {
-    this.update();
-  }
-
 
   render() {
     return (
-      <canvas ref={canvas => this.canvas = canvas} width={this.state.width} height={this.state.height} />
+      <canvas ref={canvas => this.canvas = canvas} style={{width:this.state.width,height:this.state.height}}/>
     )
   }
+
 }
 
 class Particle {
@@ -245,57 +176,13 @@ class Particle {
       };
       this.reLocation();
       this.reState();
+      this.Sprite = new PIXI.Sprite.fromImage(require('Images/particle.png'));
+      this.Sprite.anchor.set(0.5);
+      this.Sprite.position.set(this.state.currentX,this.state.currentY);
+      this.Sprite.alpha = this.state.alpha;
+      this.Sprite.scale.set(this.state.scaleX,this.state.scaleY);
+      this.state.stage.addChild(this.Sprite);
     }
-  }
-
-  ctxDraw() {
-    this.state.ctx.save();
-    this.state.ctx.translate(
-      this.state.currentX + this.state.dropRadius,
-      this.state.currentY + this.state.dropRadius
-    );
-
-    if (this.state.rotateSpeed != 0) {
-      this.state.ctx.rotate(this.state.rotation * Math.PI / 180);
-    }
-
-    this.state.ctx.scale(
-      this.state.scaleX,
-      this.state.scaleY
-    );
-
-    this.state.ctx.globalAlpha = this.state.alpha;
-    this.state.ctx.fillStyle = this.state.color;
-    this.state.ctx.beginPath();
-    switch (this.state.shape) {
-      case "circle":
-        this.state.ctx.arc(0, 0, this.state.dropRadius, 0, 2 * Math.PI, true);
-        break;
-      case "square":
-        this.state.ctx.moveTo(-this.state.dropRadius, -this.state.dropRadius);
-        this.state.ctx.lineTo(-this.state.dropRadius, this.state.dropRadius);
-        this.state.ctx.lineTo(this.state.dropRadius, this.state.dropRadius);
-        this.state.ctx.lineTo(this.state.dropRadius, -this.state.dropRadius);
-        break;
-      case "triangle":
-        this.state.ctx.moveTo(0, -this.state.dropRadius);
-        this.state.ctx.lineTo(-0.866*this.state.dropRadius, 0.5*this.state.dropRadius);
-        this.state.ctx.lineTo(0.866*this.state.dropRadius, 0.5*this.state.dropRadius);
-        break;
-      case "leaf":
-        this.state.ctx.moveTo(0, -this.state.dropRadius);
-        this.state.ctx.lineTo(this.state.dropRadius / 15, this.state.dropRadius / 2);
-        this.state.ctx.lineTo(this.state.dropRadius / 15, this.state.dropRadius * 1.5);
-        this.state.ctx.lineTo(this.state.dropRadius, this.state.dropRadius * 2);
-        this.state.ctx.lineTo(this.state.dropRadius * 1.93, this.state.dropRadius * 1.5);
-        this.state.ctx.lineTo(this.state.dropRadius * 1.93, this.state.dropRadius / 2);
-        break;
-      default:
-        this.state.ctx.arc(0, 0, this.state.dropRadius, 0, 2 * Math.PI, true);
-    }
-    this.state.ctx.closePath();
-    this.state.ctx.fill();
-    this.state.ctx.restore();
   }
 
   ctxUpdate() {
@@ -310,10 +197,15 @@ class Particle {
     this.state.speedX += this.accX/this.state.weight;
     this.state.speedY += this.accY/this.state.weight;
     this.state.alpha -= 1/this.state.lifespan;
-    this.state.scaleX = this.state.scaleY += 0.05;
+    this.state.scaleX = this.state.scaleY += 0.005;
     this.state.weight += 0.005; // Weight is bigger so acceleration will be smaller, cuz it s big so harder to change momentum
     this.state.currentX += this.state.speedX;
     this.state.currentY += this.state.speedY;
+
+    this.Sprite.position.set(this.state.currentX,this.state.currentY);
+    this.Sprite.alpha = this.state.alpha;
+    this.Sprite.rotation = this.state.rotation;
+    this.Sprite.scale.set(this.state.scaleX,this.state.scaleY);
 
     if (this.state.rotateSpeed != 0) {
       this.state.rotation += this.state.rotateSpeed;
@@ -349,4 +241,4 @@ class Particle {
 
 }
 
-export default SpringDrop;
+export default PixiSpringDrop;

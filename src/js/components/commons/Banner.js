@@ -4,6 +4,7 @@ import { Row, Column } from 'react-foundation';
 
 import TrianglifySVG from './TrianglifySVG';
 import SpringDrop from './SpringDrop';
+import PixiSpringDrop from './PixiSpringDrop';
 import Navigation from './Navigation';
 
 import { bindActionCreators } from 'redux';
@@ -13,11 +14,6 @@ import * as actionUI from '../../actions/actionUI';
 // For Debounce Function
 import utils from '../../utils';
 
-@connect(state => {
-  return {UI: state.UI}
-}, dispatch => {
-  return {actionUI: bindActionCreators(actionUI, dispatch)}
-})
 export default class Banner extends React.Component {
   constructor(props, context) {
     super(props);
@@ -30,14 +26,14 @@ export default class Banner extends React.Component {
   }
 
   render() {
+    console.log('Rendering');
     return (
       <div ref="banner" className="app-block app-banner">
-        <DistortContentByMouse options={{zoom: 1.1,reverseDirection: true,duration:1}}>
-          <TrianglifySVG {...this.props} ref="bannerTrianglify"
-                         className="app-avatar-bg" options={{height: 720}}/>
+        <DistortContentByMouse options={{zoom: 1.2,reverseDirection: true,duration:1}}>
+
         </DistortContentByMouse>
-        {!this.props.UI.handheld && (
-        <SpringDrop className="app-drops" options={{
+
+        <PixiSpringDrop className="app-drops" options={{
           textWords: [
             "FRONT-END",
             "WEB-APP",
@@ -47,7 +43,11 @@ export default class Banner extends React.Component {
           width: this.props.UI.width,
           height: 720
         }}/>
-      )}
+
+
+
+        <TrianglifySVG {...this.props} ref="bannerTrianglify"
+                       className="app-avatar-bg" options={{height: 720}}/>
         <Navigation/>
         <BannerContent {...this.props}/>
       </div>
@@ -64,13 +64,13 @@ class DistortContentByMouse extends React.PureComponent {
       transform: 'scale3d(1.5,1.5,1.5)',
       zoom: 1,
       reverseDirection: false,
-      duration: 0.5,
+      duration: 0.15,
       limitAngleX: 3,
       limitAngleY: 3,
       excludeAreaRadius: 300,
         ...this.props.options
     };
-    this.onMouseMove = this.onMouseMove.bind(this);
+    this.onMouseMove = utils.fThrottle(this.onMouseMove.bind(this),100);
   }
   onMouseMove(e) {
     let posData = this.skew.getBoundingClientRect();
@@ -89,6 +89,7 @@ class DistortContentByMouse extends React.PureComponent {
   }
   componentDidMount() {
     window.addEventListener('mousemove',this.onMouseMove);
+    this.setState({transform: 'scale3d(1,1,1)'});
   }
   componentWillUnmount() {
     window.removeEventListener('mousemove',this.onMouseMove);
@@ -103,8 +104,8 @@ class DistortContentByMouse extends React.PureComponent {
         width:'100%',
         height:'100%',
         transform: this.state.transform,
-        transition: `transform ${this.state.duration}s ease-out`
-        }}>
+        transition: `transform ${this.state.duration}s linear`
+      }}>
         {this.props.children}
       </div>
     )

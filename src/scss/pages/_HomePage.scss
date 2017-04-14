@@ -1,0 +1,39 @@
+@include breakpoint(small) {
+  .app-resume {
+    &__content li {
+      margin-bottom:30px;
+      &:not(:last-child) {
+        &::after {
+          display: block;
+          content: '';
+          width:100%;
+          height:1px;
+          background: linear-gradient(to right,#DDD,#FFF,#DDD);
+          margin-top:30px;
+        }
+      }
+    }
+
+    h2 {
+      font-weight: 300;
+    }
+    p {
+      padding: 0;
+      margin:0;
+    }
+  }
+
+
+}
+
+@include breakpoint(medium) {
+  .app-resume {
+    &__content li {
+      &:not(:last-child) {
+        &::after {
+          background: linear-gradient(to right, #DDD, #FFF, #FFF);
+        }
+      }
+    }
+  }
+}

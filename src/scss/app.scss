@@ -1,9 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,900");
 
+// VENDORS
+@import "./vendors/normalize";
+//@import "./vendors/animate";
+
+// FRAMEWORK ( FOUNDATION )
 @import "../../node_modules/foundation-sites/scss/foundation";
 @include foundation-flex-grid;
 @include foundation-flex-classes;
 @include foundation-everything;
+
+// Hot fix FlexGrid breaking in Safari
+.row::before, .row::after { content: none; }
 
 //small: 0
 //medium: 640px
@@ -11,85 +19,24 @@
 //xlarge: 1200px
 //xxlarge: 1440px
 
-::-webkit-scrollbar {
-  display: none;
-}
+// BASE FOR VARIABLE AND RESET CSS
+@import "./base/reset";
+//@import "./base/typography";
+//@import "./base/color";
 
-html, body {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
+// UTILITIES
+@import "./utils/utils";
 
-}
+// LAYOUT
+//@import "./layout/grid";
+//@import "./layout/header";
+//@import "./layout/sidebar";
+@import "./layout/content";
 
-h1,h2 {
-  font-family: "Roboto", Helvetica, 'Arial', sans-serif;
-  font-weight: 100;
-  &::selection {
-    color: #fff;
-    background: #000; /* WebKit/Blink Browsers */
-  }
-  &::-moz-selection {
-    color: #fff;
-    background: #000; /* Gecko Browsers */
-  }
-}
+// PAGES
+@import "./pages/HomePage";
+@import "./pages/NotFound";
 
-h3,h4,h5,h6,p,span {
-  font-family: "Roboto", Helvetica, 'Arial', sans-serif;
-  font-weight: 300;
-
-  &::selection {
-    color: #fff;
-    background: #000; /* WebKit/Blink Browsers */
-  }
-
-  &::-moz-selection {
-    color: #fff;
-    background: #000; /* Gecko Browsers */
-  }
-}
-
-body {
-  font-family: "Roboto", Helvetica, 'Arial', sans-serif;
-  font-size:14px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-}
-
-
-ul, li {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-  color: #000;
-
-  &:hover {
-    color: #333;
-  }
-}
-
-.clearfix:after {
-  clear: both;
-  content: ".";
-  display: block;
-  height: 0;
-  line-height: 0;
-  visibility: hidden;
-}
-
-.app-block {
-  position: relative;
-
-  &>h1 {
-    text-align: center;
-    padding:80px 0px;
-  }
-
-}
-
-@import "Banner";
-@import "Navigation";
+// COMPONENTS
+@import "components/Banner";
+@import "components/Navigation";

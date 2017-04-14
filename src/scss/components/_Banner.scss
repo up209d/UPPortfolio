@@ -56,7 +56,7 @@
   .app-banner-content {
     h1 {
       text-transform: uppercase;
-      font-size: 28px;
+      font-size: rem-calc(28px);
       letter-spacing: 5px;
 
       span {
@@ -74,10 +74,10 @@
     }
     .content-greeting {
       margin-top:80px;
-      font-size:28px;
+      font-size:rem-calc(28px);
     }
     .content-design {
-      font-size:36px;
+      font-size:rem-calc(36px);
       font-weight:100;
       margin-top: 220px;
     }
@@ -89,7 +89,7 @@
     }
     .content-develop {
       margin-top:20px;
-      font-size: 40px;
+      font-size: rem-calc(40px);
       text-align: center;
       span {
         font-weight: bold;
@@ -112,7 +112,7 @@
       width:100%;
       color: #E50000;
       font-weight: 900;
-      font-size: 60px;
+      font-size: rem-calc(60px);
       top: 180px;
       left:0;
       z-index:-1;
@@ -121,3 +121,4 @@
   }
 
 }
+

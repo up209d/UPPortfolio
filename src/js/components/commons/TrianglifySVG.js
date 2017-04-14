@@ -16,7 +16,7 @@ class TrianglifySVG extends React.Component {
       width: window.innerWidth,
       height: window.innerHeight,
       seed: 'u.p',
-      cell_size: Math.sqrt(window.innerWidth)*Math.PI, // parseInt(window.innerWidth/30)
+      cell_size: Math.sqrt(window.innerWidth)*3.75, // parseInt(window.innerWidth/30)
       color_space: 'lab',
       variance: "0.5",
       x_colors: ["#000","#000","#FFF","#000","#000"],
@@ -69,8 +69,8 @@ class TrianglifySVG extends React.Component {
       this.vertexSets.forEach((vertexSet,index)=>{
         if (Math.random()>0.75) {
           let duration = Math.random()*6+6;
-          let offsetX = Math.random()*300-150;
-          let offsetY = Math.random()*300-150;
+          let offsetX = Math.random()*400-200;
+          let offsetY = Math.random()*400-200;
           //Tween an array
           TweenMax.killTweensOf(vertexSet);
           TweenMax.to(vertexSet,duration,{

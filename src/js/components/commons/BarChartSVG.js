@@ -133,31 +133,63 @@ class DelayRender extends React.Component {
 class BarGroup extends React.Component {
   constructor(props, context) {
     super(props);
-    this.style = {
-      percentage: spring(this.props.percentage, {
-        stiffness: this.props.percentage,
-        damping: this.props.percentage / 10
-      }),
-      alpha: spring(utils.reMapRange(this.props.percentage,0,100,1,0.05)),
-      textOpacity: spring(1),
-      fontWeight: 500
+    this.state = {
+      defaultStyle: {
+        percentage: 0,
+        alpha: 0,
+        textOpacity: 0,
+        colorR: 0,
+        colorG: 0,
+        colorB: 0
+      },
+      style: {
+        percentage: spring(this.props.percentage, {
+          stiffness: this.props.percentage,
+          damping: this.props.percentage / 10
+        }),
+        colorR: spring(0),
+        colorG: spring(0),
+        colorB: spring(0),
+        alpha: spring(utils.reMapRange(this.props.percentage,0,100,1,0.05)),
+        textOpacity: spring(1),
+        fontWeight: 500
+      }
     };
-    this.defaultStyle = {percentage: 0, alpha: 0,textOpacity: 0};
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
   componentDidUpdate() {
 
   }
 
+  onMouseEnter(e) {
+    this.previousStyle = this.state.style;
+    this.setState({
+      style: {
+        ...this.state.style,
+        colorR: spring(255)
+      }
+    });
+  }
+
+  onMouseLeave(e) {
+    this.setState({
+      style: {
+        ...this.previousStyle
+      }
+    });
+  }
+
   render() {
     return (
       <DelayRender wait={this.props.delay}>
-        <svg x={this.props.offset} style={{overflow: "visible"}}>
-          <Motion defaultStyle={this.defaultStyle} style={this.style}>
+        <svg ref={svg => this.svg = svg} x={this.props.offset} style={{overflow: "visible"}}>
+          <Motion defaultStyle={this.state.defaultStyle} style={this.state.style}>
             {item => {
-              let color = `rgba(${~~(Math.random() * 0)},${~~(Math.random() * 0)},${~~(Math.random() * 0)},${item.alpha})`;
+              let color = `rgba(${~~item.colorR},${~~item.colorG},${~~item.colorB},${item.alpha})`;
               return (
-                <g>
+                <g onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
                   <text style={{fontWeight: item.fontWeight}} fill={`rgba(0,0,0,${item.textOpacity})`} x={0} y={this.props.height+20}>{this.props.name}</text>
                   <rect width={this.props.width} height={this.props.height} fill={color}/>
                   <path d={`M${

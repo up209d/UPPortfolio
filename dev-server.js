@@ -1,11 +1,4 @@
 import path from 'path';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
-import { Provider } from 'react-redux';
-import store from './src/js/store';
-import storeHistory from './src/js/store';
-import App from './src/js/components/app';
-
 import express from 'express';
 import webpack from 'webpack';
 import config from './webpack.config.dev';
