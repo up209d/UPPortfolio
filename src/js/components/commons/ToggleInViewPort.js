@@ -9,11 +9,12 @@ class ToggleInViewPort extends React.Component{
     super(props);
     this.state = {
       isIn: false,
-      height: this.props.height ? this.props.height : 100,
+      style: {
+        minHeight: this.props.height ? this.props.height : 100
+      },
       timeout: 0
     };
     this.firingHandler = utils.fThrottle(this.firingHandler.bind(this),50);
-    console.log();
   }
 
   init() {
@@ -24,31 +25,35 @@ class ToggleInViewPort extends React.Component{
 
   assumeHeight() {
     let data = this.DOM.getBoundingClientRect();
-    if ((data.height > this.state.height)) {
-      console.log('SetNow');
+    let oldHeight = this.state.style.height ? this.state.style.height : 0;
+    // console.log(data);
+    if ((data.height > oldHeight)) {
+      // console.log('SetNow');
       this.setState({
-        height:data.height
+        style: {
+          ...this.state.style,
+          minHeight:data.height
+        }
       });
     }
+    // console.log(this.state);
   }
 
 
   firingHandler() {
     // console.log("Scrolled",this.DOM.getBoundingClientRect());
     let data = this.DOM.getBoundingClientRect();
-    console.log(data.bottom);
     if ((data.top-window.innerHeight < 0) && (data.bottom > 0)) {
-        if (this.state.isIn != true) {
-          this.setState({
-            isIn:true
-          });
+      if (this.state.isIn != true) {
+        this.setState({
+          isIn:true
+        });
       }
     } else {
-        if (this.state.isIn != false) {
-          this.setState({isIn:false});
+      if (this.state.isIn != false) {
+        this.setState({isIn:false});
       }
     }
-
   }
 
   componentDidMount() {
@@ -63,6 +68,7 @@ class ToggleInViewPort extends React.Component{
   }
 
   componentDidUpdate() {
+    // console.log('Did Update');
     this.init();
   }
 
@@ -71,7 +77,12 @@ class ToggleInViewPort extends React.Component{
   }
 
   render() {
-    return this.state.isIn ? this.props.children : <div style={{height:this.state.height}}></div>;
+    // console.log('ReReRender');
+    return this.state.isIn ?
+      <div className="app-toggle-viewport" style={this.state.style}>
+        {this.props.children}
+      </div> :
+      <div className="app-toggle-viewport" style={this.state.style}/>;
   }
 }
 

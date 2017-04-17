@@ -69,6 +69,7 @@
     "trianglify": "^1.0.1",
     "url-loader": "^0.5.7",
     "waypoints": "^4.0.1",
+    "webfontloader": "^1.6.27",
     "webpack": "^2.2.0-rc.4",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.18.0",

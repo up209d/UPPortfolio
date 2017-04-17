@@ -67,7 +67,7 @@ class TrianglifySVG extends React.Component {
     if (!this.props.UI.handheld) {
       // console.log(vertexSets);
       this.vertexSets.forEach((vertexSet,index)=>{
-        if (Math.random()>0.75) {
+        if (Math.random()>0.5) {
           let duration = Math.random()*6+6;
           let offsetX = Math.random()*400-200;
           let offsetY = Math.random()*400-200;

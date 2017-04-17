@@ -13,7 +13,7 @@ class Navigation extends React.PureComponent {
         <Row className="show-for-medium">
           <Column small={12} medium={10} large={8} centerOnSmall>
             <ul className="app-navigation-menu">
-              <li><a href="#">Resume</a></li>
+              <li><a href="#">About</a></li>
               <li><a href="#">My Skills</a></li>
               <li className="app-logo">
                 <a href="#">

@@ -20,9 +20,6 @@ export default class Banner extends React.Component {
     this.state = {
       preloaded: false
     };
-    // setTimeout(()=>{
-    //   this.props.actionUI.bannerTouchAvatar();
-    // },5000);
   }
 
   render() {
@@ -44,9 +41,7 @@ export default class Banner extends React.Component {
           height: 720
         }}/>
 
-
-
-        <TrianglifySVG {...this.props} ref="bannerTrianglify"
+        <TrianglifySVG UI={{handheld: this.props.UI.handheld}} ref="bannerTrianglify"
                        className="app-avatar-bg" options={{height: 720}}/>
         <Navigation/>
         <BannerContent {...this.props}/>

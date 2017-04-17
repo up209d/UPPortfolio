@@ -9,84 +9,184 @@ class PixiSpringDrop extends React.PureComponent {
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      particle_count: 1500,
-      colors: ['#000', '#000', '#000', '#000', '#000', '#000', '#E50000'], //['#4ECDC4','#F45800','#FF6B6B']
+      particleCount: 2000, // Auto or Number
+      colors: ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000', '#E50000'], //['#4ECDC4','#F45800','#FF6B6B']
       scanning: 3, // Number of pixel skipping each text analyzing
       areaRadius: 100, // The distance between mouse and dots moving
       dropRadius: 1.5, // Size of each particle
       springConstant: 0.01,
-      damperConstant: 0.08,
-      textRender: this.props.options.textWords[0] ? this.props.options.textWords[0] : "ULTIMATE PEACE",
-      textWords: ["ULTIMATE PEACE"],
+      damperConstant: 0.05,
+      textWords: [
+        "FRONT-END",
+        "WEB-APP",
+        "UI/UX"
+      ],
       timeOut: 5000,
-      textSize: 135,
+      textSize: "auto", // 135 // Can be a number or 'auto' (90% of canvas width)
+      maxTextSizeWidth: 960, // maxTextSizeWidth when textSize is auto
       textFont: "Roboto",
       relocate: true, // Relocate particle after its own lifecycle (Slow Performance)
-      rotateSpeed: 0.00001,
+      rotateSpeed: 0.01,
       shape: ["leaf"],
       randomOffset: 0,
-      lifespan: 120, // 1 - 500
+      lifespan: 99, // 1 - 500
       ...this.props.options
     };
+
+    this.onScrolling = this.onScrolling.bind(this);
     this.onMouseMove = this.onMouseMove.bind(this);
     this.animationComp = this.animationComp.bind(this);
   }
 
   init() {
-    this.App = new PIXI.Application(this.state.width, this.state.height, {
-      view: this.canvas,
-      backgroundColor : 0xffe500,
-      resolution: window.devicePixelRatio
-    });
-    this.offCanvas = document.createElement('canvas');
-    this.offCanvas.width = this.state.width;
-    this.offCanvas.height = this.state.height;
-    this.ctx = this.offCanvas.getContext('2d');
-    this.frameCount = 0;
+    if (this.App) {
+      this.App.renderer.resize(this.state.width, this.state.height);
+    } else {
+      this.activeCanvas = this.canvas;
+      this.App = new PIXI.Application(this.state.width, this.state.height, {
+        view: this.canvas,
+        backgroundColor: 0xffffff, //0xffe500
+        resolution: window.devicePixelRatio
+      });
+
+      // Avoid Flash of Black Screen by render stage immediately
+      this.App.renderer.render(this.App.stage);
+
+      this.paticleTexture = new PIXI.Texture.fromImage(require('Images/particle.png'));
+      this.offCanvas = document.createElement('canvas');
+      this.offCanvas.width = this.state.width;
+      this.offCanvas.height = this.state.height;
+      this.ctx = this.offCanvas.getContext('2d');
+      this.frameCount = 0;
+    }
     this.update();
   }
 
+  changeView(view) {
+    if (view) {
+      console.log('Change Canvas View');
+      this.activeCanvas = view;
+      this.App.ticker.destroy();
+      this.App.stage.destroy({
+        children: true,
+        texture: false,
+        baseTexture: false
+      });
+      delete this.App;
+      // Beware that when re-create new PIXI Application, mean the Ticker is new
+      // Thus, the old ticker still work and we dont have any ref to the old ticker
+      // so we can remove the animation update function in the old ticker
+      // Calling destroy the old ticker before set new PIXI Application is wise
+      // Re-add the animation to new ticker
+      this.App = new PIXI.Application(this.state.width, this.state.height, {
+        view: view,
+        backgroundColor: 0xffffff, //0xffe500
+        resolution: window.devicePixelRatio
+      });
+
+      view.style.width = this.state.width;
+      view.style.height = this.state.height;
+      view.style.width = this.state.width;
+      view.style.height = this.state.height;
+
+      // Avoid Flash of Black Screen by render stage immediately
+      this.App.renderer.render(this.App.stage);
+
+      this.update();
+      this.App.ticker.add(this.animationComp);
+
+    } else {
+      return false;
+    }
+  }
+
+
   update() {
-    this.textArray = this.renderText(this.state.textRender);
+
+    this.App.stage.removeChildren(0, this.App.stage.children.length);
+
+    this.textArray = this.renderText(this.state.textWords[0]);
+
     if (this.particleArray) {
+      this.particleArray.map((particle) => {
+        particle.destroy();
+      });
       this.particleArray.splice(0, this.particleArray.length)
     }
     else {
       this.particleArray = [];
     }
+
     if (this.textArray.length) {
-      for (let i = 0; i <= this.state.particle_count; i++) {
+      for (let i = 0; i < this.state.particleCount; i++) {
         this.particleArray.push(
           new Particle({
-            stage: this.App.stage,
-            getTextArray: ()=>{return this.textArray},
+            container: this.App.stage,
+            texture: this.paticleTexture,
+            getTextArray: () => {
+              return this.textArray
+            },
             dropRadius: this.state.dropRadius,
             springConstant: this.state.springConstant,
             damperConstant: this.state.damperConstant,
             colors: this.state.colors,
             relocate: this.state.relocate,
-            rotateSpeed: this.state.rotateSpeed,
+            rotateSpeed: Math.random() * this.state.rotateSpeed - this.state.rotateSpeed / 2,
             randomOffset: this.state.randomOffset,
             lifespan: this.state.lifespan,
-            shape: this.state.shape[~~(Math.random()*this.state.shape.length)]
+            shape: this.state.shape[~~(Math.random() * this.state.shape.length)]
           })
         );
       }
     }
   }
 
+  updateOnResize(props) {
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      ...props.options
+    });
+  }
+
   animationComp() {
+    // console.log("Animating");
     this.particleArray.map((particle) => {
       particle.ctxUpdate();
     });
   }
 
   renderText(text) {
+
+    let textSize = this.state.textSize == 'auto' ?
+      this.state.width > this.state.maxTextSizeWidth ?
+        1.5 * this.state.maxTextSizeWidth / text.length :
+        1.5 * this.state.width / text.length : this.state.textSize;
+
+    textSize = textSize > 140 ? 140 : textSize;
+
     this.ctx.clearRect(0, 0, this.state.width, this.state.height);
     this.ctx.textBaseline = "top";
     this.ctx.textAlign = "center";
-    this.ctx.font = `${this.state.textSize}px ${this.state.textFont}`;
-    this.ctx.fillText(text, this.state.width / 2, this.state.height / 2 - this.state.textSize);
+    this.ctx.font = `${textSize}px ${this.state.textFont}`;
+    this.ctx.fillText(text, this.state.width / 2, this.state.height / 2 - textSize);
+
+    // Get Max Value in Array
+    // let maxLength = this.state.textWords.reduce((a, b) => {
+    //   return a.length > b.length ? a.length : b.length;
+    // });
+
+    // Test Draw Picture
+    // let picture = new Image();
+    // picture.src = require('Images/cat.svg');
+    // this.ctx.clearRect(0, 0, this.state.width, this.state.height);
+    // this.ctx.drawImage(
+    //   picture,
+    //   this.state.width/2 - Math.min(this.state.width ,this.state.height)/2,
+    //   this.state.height/2 - Math.min(this.state.width ,this.state.height)/2
+    // );
+
+    // console.log(this.activeCanvas.toDataURL());
 
     let textArray = [];
     let data = this.ctx.getImageData(0, 0, this.state.width, this.state.height).data;
@@ -120,35 +220,103 @@ class PixiSpringDrop extends React.PureComponent {
 
 
   onMouseMove(e) {
-    let mPosX = e.clientX || e.screenX || e.pageX;
-    let mPosY = e.clientY || e.screenY || e.pageY;
-    let mSpeedX = e.movementX || 0;
-    let mSpeedY = e.movementY || 0;
+    let mOffsetX = window.scrollX || window.pageXOffset;
+    let mOffsetY = window.scrollY || window.pageYOffset;
+
+    let mPosX = (e.clientX || e.screenX || e.pageX) + mOffsetX;
+    let mPosY = (e.clientY || e.screenY || e.pageY) + mOffsetY;
+
+    // movementX and Y might not stable when mouse move out of viewport
+    // make some weird animation, so better to set the maxSpeed of acceptation
+    let mSpeedX = Math.abs(e.movementX) < 50 ? e.movementX : 50 || 0;
+    let mSpeedY = Math.abs(e.movementY) < 50 ? e.movementY : 50 || 0;
+
+    let canvas = (this.activeCanvas || this.canvas).getBoundingClientRect();
+    let body = document.body.getBoundingClientRect();
+
+
+    let canvasOffsetX = canvas.left - body.left;
+    let canvasOffsetY = canvas.top - body.top;
 
     this.particleArray.map((particle) => {
-      let offsetX = particle.state.currentX - mPosX;
-      let offsetY = particle.state.currentY - mPosY;
+      let offsetX = canvasOffsetX + particle.state.currentX - mPosX;
+      let offsetY = canvasOffsetY + particle.state.currentY - mPosY;
       let distance = Math.sqrt(Math.pow(offsetX, 2) + Math.pow(offsetY, 2));
       if (distance <= this.state.areaRadius) {
-        particle.state.speedX += offsetX * 0.05 + mSpeedX * 0.15;
-        particle.state.speedY += offsetY * 0.05 + mSpeedY * 0.30;
+        particle.state.speedX += offsetX * 0.05 + mSpeedX * 0.3;
+        particle.state.speedY += offsetY * 0.05 + mSpeedY * 0.6;
       }
     });
   }
 
-  componentDidMount(){
+  onScrolling() {
+    let data = this.canvas.getBoundingClientRect();
+    if (data.bottom < 0) {
+      if (!this.isDownCanvas) {
+        this.isDownCanvas = true;
+        this.changeView(document.getElementById('FooterCanvas'));
+      }
+    } else {
+      if (this.isDownCanvas) {
+        this.isDownCanvas = false;
+        this.changeView(this.canvas);
+      }
+    }
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // Props is handle to affect state in componentWillReceiveProps so here we just need to care about the state only
+    // console.log(this.props,nextProps);
+    return !isEqual(this.state, nextState) || !isEqual(this.props, nextProps);
+  }
+
+  // componentWillReceiveProps is call before new props assign to component, so we can have do something before that event, exp: if your state base on props, you definitely to setState before the component update, so the new props can affect the state and then component update base on its state
+  componentWillReceiveProps(props) {
+    this.updateOnResize(props);
+  }
+
+  componentDidMount() {
     this.init();
     this.App.ticker.add(this.animationComp);
     window.addEventListener('mousemove', this.onMouseMove);
+    window.addEventListener('scroll', this.onScrolling);
+
+    let currentIndex = 0;
+    this.interval = setInterval(() => {
+      currentIndex++;
+      if (currentIndex == this.state.textWords.length) {
+        currentIndex = 0;
+      }
+      // this.changeText({textRender: this.state.textArray[currentIndex]});
+      // console.log(this.state.textWords[currentIndex]);
+      this.textArray = this.renderText(this.state.textWords[currentIndex]);
+    }, this.state.timeOut);
+
+    // setTimeout(()=>{
+    //   console.log('Stop');
+    //   this.App.ticker.stop();
+    // },5000);
+    // setTimeout(()=>{
+    //   console.log('Start');
+    //   this.App.ticker.start();
+    // },7000);
+
   }
 
   componentWillUnmount() {
     window.removeEventListener('mousemove', this.onMouseMove);
+    window.removeEventListener('scroll', this.onScrolling);
+    this.App.ticker.remove(this.animationComp);
+    clearInterval(this.interval);
+  }
+
+  componentDidUpdate() {
+    this.init();
   }
 
   render() {
     return (
-      <canvas ref={canvas => this.canvas = canvas} style={{width:this.state.width,height:this.state.height}}/>
+      <canvas ref={canvas => this.canvas = canvas} style={{width: this.state.width, height: this.state.height}}/>
     )
   }
 
@@ -158,13 +326,14 @@ class Particle {
   constructor(e) {
     if (e) {
       this.state = {
+        willDestroy: false,
         currentX: 0,
         currentY: 0,
         originX: 0,
         originY: 0,
         speedX: 25 - Math.random() * 50,
         speedY: 25 - Math.random() * 50,
-        color: "#fff",
+        color: "#ffffff",
         alpha: 1,
         scaleX: 1,
         scaleY: 1,
@@ -176,12 +345,13 @@ class Particle {
       };
       this.reLocation();
       this.reState();
-      this.Sprite = new PIXI.Sprite.fromImage(require('Images/particle.png'));
+      this.Sprite = new PIXI.Sprite(this.state.texture);
       this.Sprite.anchor.set(0.5);
-      this.Sprite.position.set(this.state.currentX,this.state.currentY);
+      this.Sprite.position.set(this.state.currentX, this.state.currentY);
       this.Sprite.alpha = this.state.alpha;
-      this.Sprite.scale.set(this.state.scaleX,this.state.scaleY);
-      this.state.stage.addChild(this.Sprite);
+      this.Sprite.scale.set(this.state.scaleX, this.state.scaleY);
+      this.Sprite.tint = "0x" + this.state.color.substring(1, this.state.color.length);
+      this.state.container.addChild(this.Sprite);
     }
   }
 
@@ -194,25 +364,30 @@ class Particle {
     // so ax = -k*dx - b+Vx, ax is accleration of X
     this.accX = -this.state.springConstant * (this.state.currentX - this.state.originX) - this.state.damperConstant * this.state.speedX;
     this.accY = -this.state.springConstant * (this.state.currentY - this.state.originY) - this.state.damperConstant * this.state.speedY;
-    this.state.speedX += this.accX/this.state.weight;
-    this.state.speedY += this.accY/this.state.weight;
-    this.state.alpha -= 1/this.state.lifespan;
+    this.state.speedX += this.accX / this.state.weight;
+    this.state.speedY += this.accY / this.state.weight;
+    this.state.alpha -= 1 / this.state.lifespan;
     this.state.scaleX = this.state.scaleY += 0.005;
     this.state.weight += 0.005; // Weight is bigger so acceleration will be smaller, cuz it s big so harder to change momentum
     this.state.currentX += this.state.speedX;
     this.state.currentY += this.state.speedY;
 
-    this.Sprite.position.set(this.state.currentX,this.state.currentY);
+    // Apply State to Composition
+    this.Sprite.position.set(this.state.currentX, this.state.currentY);
     this.Sprite.alpha = this.state.alpha;
     this.Sprite.rotation = this.state.rotation;
-    this.Sprite.scale.set(this.state.scaleX,this.state.scaleY);
+    this.Sprite.scale.set(this.state.scaleX, this.state.scaleY);
 
     if (this.state.rotateSpeed != 0) {
       this.state.rotation += this.state.rotateSpeed;
     }
 
     if (this.state.alpha <= 0) {
-      this.reState(this.state.relocate);
+      if (!this.state.willDestroy) {
+        this.reState(this.state.relocate);
+      } else {
+        this.destroy();
+      }
     }
 
   }
@@ -237,6 +412,20 @@ class Particle {
     let coordinate = textArray[~~(Math.random() * textArray.length)];
     this.state.originX = this.state.currentX = coordinate.x + ~~(this.state.randomOffset / 2 - Math.random() * this.state.randomOffset);
     this.state.originY = this.state.currentY = coordinate.y + ~~(this.state.randomOffset / 2 - Math.random() * this.state.randomOffset);
+  }
+
+  _destroy() {
+    this.state.willDestroy = true;
+  }
+
+  // Self Destroy, un-reference it
+  // If you store it anywhere like in an Array,
+  // there's still null object left in array,
+  // just free or Pop that Array
+  // So all data will go to gabage-allocation
+  destroy() {
+    this.Sprite.destroy();
+    delete this;
   }
 
 }

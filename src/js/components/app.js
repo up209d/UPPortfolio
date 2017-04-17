@@ -106,6 +106,9 @@ export default class App extends React.PureComponent {
         <div className="app-block app-contact">
           <h1>CONTACT ME</h1>
         </div>
+        <div className="app-block app-footer">
+          <canvas id="FooterCanvas" />
+        </div>
       </div>
     )
   }
