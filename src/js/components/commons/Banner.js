@@ -26,9 +26,7 @@ export default class Banner extends React.Component {
     console.log('Rendering');
     return (
       <div ref="banner" className="app-block app-banner">
-        <DistortContentByMouse options={{zoom: 1.2,reverseDirection: true,duration:1}}>
-
-        </DistortContentByMouse>
+        {/*<DistortContentByMouse options={{zoom: 1.2,reverseDirection: true,duration:1}}/>*/}
 
         <PixiSpringDrop className="app-drops" options={{
           textWords: [

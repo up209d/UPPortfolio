@@ -76,7 +76,7 @@ class Utilities {
     } : null;
   }
   reMapRange(value,from,to,newFrom,newTo) {
-    if (to == from) { return value }
+    if (to == from) { return to }
     return (((value-from)/(to-from))*(newTo-newFrom))+newFrom;
   }
 

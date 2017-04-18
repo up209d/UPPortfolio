@@ -40,8 +40,14 @@ class PixiSpringDrop extends React.PureComponent {
 
   init() {
     if (this.App) {
+
       this.App.renderer.resize(this.state.width, this.state.height);
+      //Update off canvas width and height to the Real Canvas
+      this.offCanvas.width = this.state.width;
+      this.offCanvas.height = this.state.height;
+
     } else {
+
       this.activeCanvas = this.canvas;
       this.App = new PIXI.Application(this.state.width, this.state.height, {
         view: this.canvas,
@@ -58,7 +64,9 @@ class PixiSpringDrop extends React.PureComponent {
       this.offCanvas.height = this.state.height;
       this.ctx = this.offCanvas.getContext('2d');
       this.frameCount = 0;
+
     }
+
     this.update();
   }
 
@@ -84,10 +92,8 @@ class PixiSpringDrop extends React.PureComponent {
         resolution: window.devicePixelRatio
       });
 
-      view.style.width = this.state.width;
-      view.style.height = this.state.height;
-      view.style.width = this.state.width;
-      view.style.height = this.state.height;
+      view.style.width = this.state.width + 'px';
+      view.style.height = this.state.height + 'px';
 
       // Avoid Flash of Black Screen by render stage immediately
       this.App.renderer.render(this.App.stage);
@@ -102,10 +108,10 @@ class PixiSpringDrop extends React.PureComponent {
 
 
   update() {
+    this.activeCanvas.style.width = this.state.width + 'px';
+    this.activeCanvas.style.height = this.state.height + 'px';
 
     this.App.stage.removeChildren(0, this.App.stage.children.length);
-
-    this.textArray = this.renderText(this.state.textWords[0]);
 
     if (this.particleArray) {
       this.particleArray.map((particle) => {
@@ -116,6 +122,8 @@ class PixiSpringDrop extends React.PureComponent {
     else {
       this.particleArray = [];
     }
+
+    this.textArray = this.renderText(this.state.textWords[0]);
 
     if (this.textArray.length) {
       for (let i = 0; i < this.state.particleCount; i++) {
@@ -158,6 +166,9 @@ class PixiSpringDrop extends React.PureComponent {
 
   renderText(text) {
 
+    // Text is being rendered on OffCanvas one, so dont forget to update
+    // the width and height of OffCanvas to match the real Canvas
+
     let textSize = this.state.textSize == 'auto' ?
       this.state.width > this.state.maxTextSizeWidth ?
         1.5 * this.state.maxTextSizeWidth / text.length :
@@ -186,7 +197,6 @@ class PixiSpringDrop extends React.PureComponent {
     //   this.state.height/2 - Math.min(this.state.width ,this.state.height)/2
     // );
 
-    // console.log(this.activeCanvas.toDataURL());
 
     let textArray = [];
     let data = this.ctx.getImageData(0, 0, this.state.width, this.state.height).data;
@@ -230,6 +240,10 @@ class PixiSpringDrop extends React.PureComponent {
     // make some weird animation, so better to set the maxSpeed of acceptation
     let mSpeedX = Math.abs(e.movementX) < 50 ? e.movementX : 50 || 0;
     let mSpeedY = Math.abs(e.movementY) < 50 ? e.movementY : 50 || 0;
+
+    mSpeedX = mSpeedX/(window.devicePixelRatio || 1);
+    mSpeedY = mSpeedY/(window.devicePixelRatio || 1);
+
 
     let canvas = (this.activeCanvas || this.canvas).getBoundingClientRect();
     let body = document.body.getBoundingClientRect();
@@ -281,16 +295,16 @@ class PixiSpringDrop extends React.PureComponent {
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('scroll', this.onScrolling);
 
-    let currentIndex = 0;
-    this.interval = setInterval(() => {
-      currentIndex++;
-      if (currentIndex == this.state.textWords.length) {
-        currentIndex = 0;
-      }
-      // this.changeText({textRender: this.state.textArray[currentIndex]});
-      // console.log(this.state.textWords[currentIndex]);
-      this.textArray = this.renderText(this.state.textWords[currentIndex]);
-    }, this.state.timeOut);
+    // let currentIndex = 0;
+    // this.interval = setInterval(() => {
+    //   currentIndex++;
+    //   if (currentIndex == this.state.textWords.length) {
+    //     currentIndex = 0;
+    //   }
+    //   // this.changeText({textRender: this.state.textArray[currentIndex]});
+    //   // console.log(this.state.textWords[currentIndex]);
+    //   this.textArray = this.renderText(this.state.textWords[currentIndex]);
+    // }, this.state.timeOut);
 
     // setTimeout(()=>{
     //   console.log('Stop');
@@ -308,6 +322,10 @@ class PixiSpringDrop extends React.PureComponent {
     window.removeEventListener('scroll', this.onScrolling);
     this.App.ticker.remove(this.animationComp);
     clearInterval(this.interval);
+  }
+
+  componentWillUpdate() {
+
   }
 
   componentDidUpdate() {
