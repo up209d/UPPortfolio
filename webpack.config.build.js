@@ -80,7 +80,46 @@ module.exports = {
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
         exclude: [/node_modules/]
       },
-      {test: /\.png$|\.jpe?g$|\.gif$|\.ico$/, loader: 'file-loader', exclude: [/node_modules/]},
+      {
+        // Any string contain ToURL
+        // For All File start with ToURL
+        test: /^.*(ToURL).*\.png$|^.*(ToURL).*\.jpe?g$|^.*(ToURL).*\.gif$/,
+        loader: 'url-loader',
+        exclude: [/node_modules/]
+      },
+      {
+        // Any string not contain ToURL
+        // ^((?!xxx).)*$ is Match string that doesnt contain xxx
+        // Explain ^ is begin string
+        // ^()*$ Match character in group ()
+        // ^(.)*$ Match any character
+        // ^((.).)*$ Match any two characters
+        // ^((A).)*$ Match any group 2 characters start with A exp: AB A8 ... is matched
+        // ^((?!A).)*$ Match any group 2 character that not start with A
+        // (?!ABC) mean negative look ahead, mean if any matched ABC with consider no-matched
+        // ^((?!ABC).)* mean any group start with ABC will be no matched
+        // For All File start without ToURL
+        test: /^((?!ToURL).)*\.png$|^((?!ToURL).)*\.jpe?g$|^((?!ToURL).)*\.gif$/,
+        loader: 'url-loader?limit=10000',
+        exclude: [/node_modules/]
+        // In Regex
+        // Multipying + or * is only not for 1 character like . a b c
+        // We can use Multiplying for a group of character like ab abc ab. a.b
+        // (a.b)* is search for any group of 3 character
+        // that has a first and then any character and then b last
+        // so a8b aOb a_b matched but not x_b or a_I
+
+        // Meaning of quantity: '(ta)*' mean nothing or 'ta' or 'tata' or 'tatata' ... 0 - infinite
+        // Meaning of quantity: 'xe+' mean 'xe' or 'xee' or 'xeeeeeeee' ... 1 - infinite
+        // Meaning of quantity:  '(ta)?xe?' mean 'x' or 'tax' or 'xe' or 'taxe' 0 or 1
+        // Meaning of quantity: '(ta){2}xxO{2,3} mean 'tataxxOO' or 'tataxxOOO'
+        // test --> ^((t).)* return infinite because the no end for that match
+        // test --> ^((t).)*$ return 0 match
+        // 1: it found te from the beginning match with (t).
+        // 2: but the quantity is * mean ^(t).(t). ...$ the string should ^tetytbtc$ will be matched
+        // 3: so test doesnt match with ^t.t.$
+        // test --> ^((t).)*st will return 1 match that is 'test'
+      }
     ]
   },
   output: {

@@ -1,7 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
-var fs  = require('fs');
 
 var host = require("./host.config");
 var hostLocalAccess = "http://" + host.hostName + ":" + host.hostPort;

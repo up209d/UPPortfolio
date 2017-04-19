@@ -16,7 +16,7 @@ app.use(webpackDevMiddleware(compiler, {
   contentBase: config.output.path, // "./dist" - see webpack.config.js the output path in dev case
   // Hot Module Reload
   hot: true,
-  historyApiFallback: false,
+  historyApiFallback: true,
   //The target file using in
   publicPath: config.output.publicPath,
   // display no info to console (only warnings and errors)
@@ -31,8 +31,12 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler));
 
+// If we meet the readFileSystem error, that s because of webpack html plugin
+// It failed to cache a index.html file, so we should run webpack build first to test
+// It will trigger Html webpack plugin to cache
 app.use('*', function (req, res, next) {
   var filename = path.join(compiler.outputPath,'index.html');
+  // console.log(compiler.outputFileSystem);
   compiler.outputFileSystem.readFile(filename, function(err, result){
     if (err) {
       return next(err);

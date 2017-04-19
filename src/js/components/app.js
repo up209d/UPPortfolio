@@ -9,7 +9,6 @@ import { createSelector } from 'reselect'
 import Banner from './commons/Banner';
 import BarChartSVG from './commons/BarChartSVG';
 import ToggleInViewPort from './commons/ToggleInViewPort';
-import LazyLoad from 'react-lazyload';
 
 import { Row, Column } from 'react-foundation';
 
