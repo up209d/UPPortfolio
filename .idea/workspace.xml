@@ -2,22 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6aa143d4-a920-4b7e-9968-a6c0b527151a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/avatar.jpg" afterPath="$PROJECT_DIR$/src/assets/images/avatar.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/bunny.png" afterPath="$PROJECT_DIR$/src/assets/images/bunny.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/particle.png" afterPath="$PROJECT_DIR$/src/assets/images/particle.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/564d9ca483c6e1bbc4a4dfb54493786c.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/71ab79337585646e5ec1410ef6a2dc18.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/ToURL-bunny.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/appBundle0bce609dd16883498588.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/vendorBundler0bce609dd16883498588.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/cat.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/github.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/index.html" afterPath="$PROJECT_DIR$/src/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/app.js" afterPath="$PROJECT_DIR$/src/js/components/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/Banner.js" afterPath="$PROJECT_DIR$/src/js/components/commons/Banner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/Navigation.js" afterPath="$PROJECT_DIR$/src/js/components/commons/Navigation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/PixiSpringDrop.js" afterPath="$PROJECT_DIR$/src/js/components/commons/PixiSpringDrop.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js" afterPath="$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/TrianglifySVG.js" afterPath="$PROJECT_DIR$/src/js/components/commons/TrianglifySVG.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/index.js" afterPath="$PROJECT_DIR$/src/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scss/base/_reset.scss" afterPath="$PROJECT_DIR$/src/scss/base/_reset.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.dev.js" afterPath="$PROJECT_DIR$/webpack.config.dev.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -419,8 +411,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -573,6 +563,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -688,7 +680,8 @@
       <workItem from="1492143954224" duration="842000" />
       <workItem from="1492154074724" duration="44990000" />
       <workItem from="1492369579690" duration="1735000" />
-      <workItem from="1492407753775" duration="39000" />
+      <workItem from="1492407753775" duration="56000" />
+      <workItem from="1492591548491" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="Add DropCircle Text Spring Motion">
       <created>1490487902793</created>
@@ -753,11 +746,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492144092647</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="PIXI Renderer Instead of Native Canvas">
+      <created>1492407805387</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1492407805387</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="490314000" />
+    <option name="totallyTimeSpent" value="490343000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -968,7 +968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1008,7 +1007,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
