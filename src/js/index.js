@@ -6,11 +6,12 @@ WebFontLoader.load({
   }
 });
 
-import '../scss/app.scss';
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin({
+  shouldRejectClick: (lastTouchTimeStamp, clickTimeStamp) => {
+    return true;
+  }
+});
 
 if (process.env.NODE_ENV !== 'production') {
   const {whyDidYouUpdate} = require('why-did-you-update');
@@ -21,6 +22,13 @@ if (process.env.NODE_ENV !== 'production') {
       exclude: /^Measure/
     });
 }
+
+import '../scss/app.scss';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+
 
 import store from './store';
 import storeHistory from './store';
