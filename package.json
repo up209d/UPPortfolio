@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "UP Portfolio",
   "scripts": {
-    "dev": "echo 'Running Node Development' && nodemon --exec babel-node dev-server.js"
+    "dev": "echo 'Running Node Development' && nodemon --exec babel-node dev-server.js",
+    "build": "echo 'Running Distribution' && rm -rf dist && webpack --config webpack.config.build.js"
   },
   "author": "UP",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-react": "^6.8.0",
     "express": "^4.15.2",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.9.0",
     "foundation-sites": "^6.3.0",
     "gsap": "^1.19.1",
@@ -58,6 +60,7 @@
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.7",
     "react-tap-event-plugin": "^2.0.1",
+    "react-transition-group": "^1.1.2",
     "recompose": "^0.22.0",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
@@ -67,11 +70,13 @@
     "skrollr": "^0.6.26",
     "snapsvg": "^0.5.1",
     "style-loader": "^0.13.1",
+    "styled-components": "^1.4.5",
     "trianglify": "^1.0.1",
     "url-loader": "^0.5.7",
     "waypoints": "^4.0.1",
     "webfontloader": "^1.6.27",
     "webpack": "^2.2.0-rc.4",
+    "webpack-bundle-analyzer": "^2.4.0",
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.18.0",
     "why-did-you-update": "0.0.8"

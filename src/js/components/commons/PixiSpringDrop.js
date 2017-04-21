@@ -94,6 +94,7 @@ class PixiSpringDrop extends React.PureComponent {
 
       view.style.width = this.state.width + 'px';
       view.style.height = this.state.height + 'px';
+      view.style.pointerEvents = 'none';
 
       // Avoid Flash of Black Screen by render stage immediately
       this.App.renderer.render(this.App.stage);

@@ -48,6 +48,10 @@ class ToggleInViewPort extends React.Component{
         this.setState({
           isIn:true
         });
+        if (!this.props.willReset) {
+          window.removeEventListener("scroll",this.firingHandler);
+          window.removeEventListener("resize",this.firingHandler);
+        }
       }
     } else {
       if (this.state.isIn != false) {
@@ -57,9 +61,9 @@ class ToggleInViewPort extends React.Component{
   }
 
   componentDidMount() {
-    this.init();
     window.addEventListener("scroll",this.firingHandler);
     window.addEventListener("resize",this.firingHandler);
+    this.init();
   }
 
   componentWillUnmount() {
@@ -68,7 +72,7 @@ class ToggleInViewPort extends React.Component{
   }
 
   componentDidUpdate() {
-    // console.log('Did Update');
+    // console.log('Did Update','Will Reset: ', this.props.willReset,'IsIn: ', this.state.isIn);
     this.init();
   }
 
@@ -85,5 +89,9 @@ class ToggleInViewPort extends React.Component{
       <div className="app-toggle-viewport" style={this.state.style}/>;
   }
 }
+
+ToggleInViewPort.defaultProps = {
+  willReset: true
+};
 
 export default ToggleInViewPort;

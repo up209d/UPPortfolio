@@ -1,10 +1,8 @@
-import WebFontLoader from 'webfontloader';
-
-WebFontLoader.load({
-  google: {
-    families: ['Roboto']
-  }
-});
+if (window) {
+  window.onbeforeunload = () => {
+    window.scrollTo(0,0);
+  };
+}
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin({

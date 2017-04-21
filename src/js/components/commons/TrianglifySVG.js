@@ -16,7 +16,7 @@ class TrianglifySVG extends React.Component {
       width: window.innerWidth,
       height: window.innerHeight,
       seed: 'u.p',
-      cell_size: Math.sqrt(window.innerWidth)*3.75, // parseInt(window.innerWidth/30)
+      cell_size: Math.sqrt(window.innerWidth)*5, // parseInt(window.innerWidth/30)
       color_space: 'lab',
       variance: "0.5",
       x_colors: ["#000","#000","#FFF","#000","#000"],
@@ -90,11 +90,12 @@ class TrianglifySVG extends React.Component {
         let offsetY = Math.random()*100-50;
         TweenMax.killTweensOf(vertexSet);
         TweenMax.to(vertexSet,duration,{
+          delay: 5,
           x: "+="+offsetX,
           y: "+="+offsetY,
           ease: Power1.easeInOut,
           immediateRender: true
-        });
+        }); // Delay 1s then start animation
       });
     }
   }
@@ -112,7 +113,7 @@ class TrianglifySVG extends React.Component {
       ...this.state,
       width: window.innerWidth,
       height: window.innerHeight,
-      cell_size: Math.sqrt(window.innerWidth)*2.5,
+      cell_size: Math.sqrt(window.innerWidth)*5,
       ...this.props.options
     };
     this.pattern = Trianglify(options);

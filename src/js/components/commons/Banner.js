@@ -28,7 +28,7 @@ export default class Banner extends React.Component {
       <div ref="banner" className="app-block app-banner">
         {/*<DistortContentByMouse options={{zoom: 1.2,reverseDirection: true,duration:1}}/>*/}
 
-        <PixiSpringDrop className="app-drops" options={{
+        {!this.props.UI.handheld && <PixiSpringDrop className="app-drops" options={{
           textWords: [
             "FRONT-END",
             "WEB-APP",
@@ -37,7 +37,7 @@ export default class Banner extends React.Component {
           timeOut: 5000,
           width: this.props.UI.width,
           height: 720
-        }}/>
+        }}/>}
 
         <TrianglifySVG UI={{handheld: this.props.UI.handheld}} ref="bannerTrianglify"
                        className="app-avatar-bg" options={{height: 720}}/>
@@ -123,7 +123,7 @@ const BannerContent = (props) => (
             )}
           </Motion>
           {props.UI.handheld && (
-            <Motion defaultStyle={{ value: -9000 }} style={{ value: spring(0, presets.wobbly) }}>
+            <Motion defaultStyle={{ value: -5555 }} style={{ value: spring(0) }}>
               {item => (
                 <TitleString className="content-frontend"  style={{transform: `translateY(${item.value}px)`}} title={`Front-end`}/>
               )}

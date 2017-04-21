@@ -1,6 +1,12 @@
-const path = require('path');
-const webpack = require('webpack');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
+var webpack = require('webpack');
+var HTMLWebpackPlugin = require('html-webpack-plugin');
+
+// For Build we need seperate our css file by this plugin
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+//Analyzing Stats
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 process.env.NODE_ENV = 'production';
 
@@ -11,10 +17,10 @@ module.exports = {
       './src/js/index.js'
     ],
     vendorBundler: [
-      'trianglify',
-      'pixi.js',
-      'gsap',
-      'snapsvg'
+      'react','react-dom','react-motion','react-foundation',
+      'redux','react-router','react-router-redux','history',
+      'webfontloader','mobile-detect',
+      'trianglify','pixi.js','gsap'
     ]
   },
   plugins: [
@@ -24,6 +30,13 @@ module.exports = {
       filename: 'index.html',
       favicon: './src/assets/images/favicon.ico',
       template: './src/index.html'
+    }),
+    // If you re not using that, the vendor will be still kept in appBundle
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendorBundler',
+    }),
+    new ExtractTextPlugin({
+      filename: 'style[contenthash:16].css'
     }),
     new webpack.DefinePlugin({
       'process.env': {
@@ -39,6 +52,14 @@ module.exports = {
       sourceMap: false,
       // exclude: [/node_modules/,/bower_components/]
     }),
+    // Stat size is actual size before minified
+    // Parse size is after be minified
+    // gzip size is compression state size
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: 'report.html',
+      openAnalyzer: true
+    })
   ],
   resolve: {
     modules: [
@@ -51,40 +72,51 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
+    rules: [
       // Fix SnapSVG Import Issue
       {
         test: require.resolve('snapsvg'),
-        loader: 'imports-loader?this=>window,fix=>module.exports=0'
+        use: 'imports-loader?this=>window,fix=>module.exports=0'
       },
       {
         test: /\.jsx?$/,
+        use: ['react-hot-loader', 'babel-loader'],
         include: path.join(__dirname, 'src'),
-        loaders: ['react-hot-loader', 'babel-loader'],
         exclude: [/node_modules/]
       },
       {
         test: /\.(css|scss)$/,
-        loaders: ['style-loader', 'css-loader?sourceMap&importLoaders=1','postcss-loader', "sass-loader?sourceMap"],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader?sourceMap&importLoaders=1','postcss-loader', "sass-loader?sourceMap"]
+        }),
         exclude: [/node_modules/]
       },
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader', exclude: [/node_modules/]},
-      {test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000', exclude: [/node_modules/]},
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use: 'file-loader',
+        exclude: [/node_modules/]
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        use: 'url-loader?prefix=font/&limit=5000',
+        exclude: [/node_modules/]
+      },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+        use: 'url-loader?limit=10000&mimetype=application/octet-stream',
         exclude: [/node_modules/]
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+        use: 'url-loader?limit=10000&mimetype=image/svg+xml',
         exclude: [/node_modules/]
       },
       {
         // Any string contain ToURL
         // For All File start with ToURL
         test: /^.*(ToURL).*\.png$|^.*(ToURL).*\.jpe?g$|^.*(ToURL).*\.gif$/,
-        loader: 'url-loader',
+        use: 'url-loader',
         exclude: [/node_modules/]
       },
       {
@@ -100,7 +132,7 @@ module.exports = {
         // ^((?!ABC).)* mean any group start with ABC will be no matched
         // For All File start without ToURL
         test: /^((?!ToURL).)*\.png$|^((?!ToURL).)*\.jpe?g$|^((?!ToURL).)*\.gif$/,
-        loader: 'url-loader?limit=10000',
+        use: 'url-loader?limit=10000',
         exclude: [/node_modules/]
         // In Regex
         // Multipying + or * is only not for 1 character like . a b c

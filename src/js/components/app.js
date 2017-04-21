@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import * as actionUI from '../actions/actionUI';
 import { createSelector } from 'reselect'
 
+import WebFontLoader from 'webfontloader';
+
 import Banner from './commons/Banner';
 import BarChartSVG from './commons/BarChartSVG';
 import ToggleInViewPort from './commons/ToggleInViewPort';
@@ -21,28 +23,32 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 @connect(mapStateToProps,mapDispatchToProps)
-export default class App extends React.PureComponent {
+export default class App extends React.Component {
   constructor(props, context) {
     super(props);
+    this.state = {
+      isFontLoaded: false
+    };
+    WebFontLoader.load({
+      google: {
+        families: ['Roboto']
+      },
+      active: ()=>{
+        this.setState({isFontLoaded: true});
+      }
+    });
   }
 
   componentDidMount() {
     let actionUI = this.props.actionUI;
-
     setTimeout(()=>{
       actionUI.toggleBanner(true);
     },5000);
-    //
-    // for (let i=0;i<100;i++) {
-    //   setTimeout(()=>{
-    //     actionUI.toggleBanner(true);
-    //   },i*250);
-    // }
   }
 
   render() {
     return (
-      <div className="app">
+      <div className="app" style={this.state.isFontLoaded ? {opacity:1} : {opacity:0}}>
         <Banner {...this.props}/>
         <div className="app-block app-resume">
           <h1 className="medium-pb-20">ABOUT ME</h1>
@@ -93,10 +99,10 @@ export default class App extends React.PureComponent {
             </Column>
           </Row>
         </div>
-        <ToggleInViewPort>
+        <ToggleInViewPort willReset={false}>
           <div className="app-block app-skills">
             <h1>MY SKILLS</h1>
-            <BarChartSVG/>
+            <BarChartSVG isVertical={(this.props.UI.width < this.props.UI.height)}/>
           </div>
         </ToggleInViewPort>
         <div className="app-block app-works">

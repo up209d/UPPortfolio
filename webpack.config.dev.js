@@ -1,6 +1,8 @@
 var path = require('path');
+
 var webpack = require('webpack');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+// var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 var host = require("./host.config");
 var hostLocalAccess = "http://" + host.hostName + ":" + host.hostPort;
@@ -18,27 +20,63 @@ module.exports = {
       './src/js/index.js'
     ],
     vendorBundler: [
-      'trianglify',
-      'pixi.js',
-      'gsap',
-      'snapsvg'
+      'react','react-dom','react-motion','react-foundation',
+      'redux','react-router','react-router-redux','history',
+      'webfontloader','mobile-detect',
+      'trianglify','pixi.js','gsap'
     ]
   },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new HTMLWebpackPlugin({
+      filename: 'index.html',
+      favicon: './src/assets/images/favicon.ico',
+      template: './src/index.html'
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
         BROWSER: JSON.stringify(true)
       }
     }),
-    new HTMLWebpackPlugin({
-      filename: 'index.html',
-      favicon: './src/assets/images/favicon.ico',
-      template: './src/index.html'
-    })
+    // // If you re not using that, the vendor will be still kept in appBundle
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'vendorBundler',
+    // }),
+    // new HTMLWebpackPlugin({
+    //   filename: 'index.html',
+    //   favicon: './src/assets/images/favicon.ico',
+    //   template: './src/index.html'
+    // }),
+    // new BundleAnalyzerPlugin({
+    //   // Can be `server`, `static` or `disabled`.
+    //   // In `server` mode analyzer will start HTTP server to show bundle report.
+    //   // In `static` mode single HTML file with bundle report will be generated.
+    //   // In `disabled` mode you can use this plugin to just generate Webpack Stats JSON file by setting `generateStatsFile` to `true`.
+    //   analyzerMode: 'server',
+    //   // Host that will be used in `server` mode to start HTTP server.
+    //   analyzerHost: host.hostLanIP,
+    //   // Port that will be used in `server` mode to start HTTP server.
+    //   analyzerPort: 8888,
+    //   // Path to bundle report file that will be generated in `static` mode.
+    //   // Relative to bundles output directory.
+    //   reportFilename: 'report.html',
+    //   // Automatically open report in default browser
+    //   openAnalyzer: false,
+    //   // If `true`, Webpack Stats JSON file will be generated in bundles output directory
+    //   generateStatsFile: false,
+    //   // Name of Webpack Stats JSON file that will be generated if `generateStatsFile` is `true`.
+    //   // Relative to bundles output directory.
+    //   statsFilename: 'stats.json',
+    //   // Options for `stats.toJson()` method.
+    //   // For example you can exclude sources of your modules from stats file with `source: false` option.
+    //   // See more options here: https://github.com/webpack/webpack/blob/webpack-1/lib/Stats.js#L21
+    //   statsOptions: null,
+    //   // Log level. Can be 'info', 'warn', 'error' or 'silent'.
+    //   logLevel: 'info'
+    // })
   ],
   resolve: {
     modules: [
@@ -51,40 +89,51 @@ module.exports = {
     }
   },
   module: {
-    loaders: [
+    rules: [
       // Fix SnapSVG Import Issue
       {
         test: require.resolve('snapsvg'),
-        loader: 'imports-loader?this=>window,fix=>module.exports=0'
+        use: 'imports-loader?this=>window,fix=>module.exports=0'
       },
       {
         test: /\.jsx?$/,
         include: path.join(__dirname, 'src'),
-        loaders: ['react-hot-loader', 'babel-loader'],
+        use: ['react-hot-loader', 'babel-loader'],
         exclude: [/node_modules/]
       },
       {
+        // We dont need extract text plugin here since
+        // it wont work well with hot loader module
+        // otherwise it only has meaning when using extractTextPlugin in production
         test: /\.(css|scss)$/,
-        loaders: ['style-loader', 'css-loader?sourceMap&importLoaders=1','postcss-loader', "sass-loader?sourceMap"],
+        use: ['style-loader', 'css-loader?sourceMap&importLoaders=1','postcss-loader', "sass-loader?sourceMap"],
         exclude: [/node_modules/]
       },
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader', exclude: [/node_modules/]},
-      {test: /\.(woff|woff2)$/, loader: 'url-loader?prefix=font/&limit=5000', exclude: [/node_modules/]},
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        use: 'file-loader',
+        exclude: [/node_modules/]
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        use: 'url-loader?prefix=font/&limit=5000',
+        exclude: [/node_modules/]
+      },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+        use: 'url-loader?limit=10000&mimetype=application/octet-stream',
         exclude: [/node_modules/]
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
+        use: 'url-loader?limit=10000&mimetype=image/svg+xml',
         exclude: [/node_modules/]
       },
       {
         // Any string contain ToURL
         // For All File start with ToURL
         test: /^.*(ToURL).*\.png$|^.*(ToURL).*\.jpe?g$|^.*(ToURL).*\.gif$/,
-        loader: 'url-loader',
+        use: 'url-loader',
         exclude: [/node_modules/]
       },
       {
@@ -100,7 +149,7 @@ module.exports = {
         // ^((?!ABC).)* mean any group start with ABC will be no matched
         // For All File start without ToURL
         test: /^((?!ToURL).)*\.png$|^((?!ToURL).)*\.jpe?g$|^((?!ToURL).)*\.gif$/,
-        loader: 'url-loader?limit=10000',
+        use: 'url-loader?limit=10000',
         exclude: [/node_modules/]
         // In Regex
         // Multipying + or * is only not for 1 character like . a b c

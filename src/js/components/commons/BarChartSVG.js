@@ -4,10 +4,11 @@ import utils from '../../utils';
 import { Motion, spring } from 'react-motion';
 import Measure from 'react-measure';
 import { Row, Column } from 'react-foundation';
+import DelayRender from './DelayRender';
 
 class BarChartSVG extends React.Component {
   constructor(props, context) {
-    super();
+    super(props);
     this.state = {
       width: 80,
       height: 400,
@@ -61,7 +62,7 @@ class BarChartSVG extends React.Component {
           percentage: 55
         }
       ],
-      isShow: false
+      isShow: false,
     };
   }
 
@@ -70,7 +71,7 @@ class BarChartSVG extends React.Component {
   }
 
   componentDidUpdate() {
-
+    console.log('BarChartSVG updated',this.props.isVertical);
   }
 
   render() {
@@ -78,55 +79,46 @@ class BarChartSVG extends React.Component {
         <Row>
           <Column small={12} centerOnSmall>
             <Measure>
-              {dimensions => (
-                // Measure works best with blank div auto bound not with svg and flex float div
-                <div>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="app-barchart" width={dimensions.width}
-                       height={this.state.height}
-                       style={{overflow: 'visible'}}>
-                    {this.state.data.map((value, index) => (
-                      <BarGroup
-                        name={value.name}
-                        key={index} width={this.state.width}
-                        height={this.state.height}
-                        offset={((dimensions.width - this.state.width) / (this.state.data.length - 1)) * index}
-                        delay={250 * index}
-                        percentage={value.percentage}/>
-                    ))}
-                  </svg>
-                </div>
-              )}
+              {dimensions => {
+                return !this.props.isVertical ?
+                  <div style={{height: this.state.height}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="app-barchart" width={dimensions.width}
+                         height={this.state.height}
+                         style={{overflow: 'visible'}}>
+                      {this.state.data.map((value, index) => (
+                        <BarGroup
+                          name={value.name}
+                          key={index} width={this.state.width}
+                          height={this.state.height}
+                          offset={((dimensions.width - this.state.width) / (this.state.data.length - 1)) * index}
+                          delay={250 * index}
+                          isVertical={this.props.isVertical}
+                          percentage={value.percentage}/>
+                      ))}
+                    </svg>
+                  </div>
+                  :
+                  <div style={{height: 1.5 * this.state.width * this.state.data.length}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="app-barchart" width={dimensions.width}
+                         height={dimensions.width}
+                         style={{overflow: 'visible',transform:'rotateZ(90deg)'}}>
+                      {this.state.data.map((value, index) => (
+                        <BarGroup
+                          name={value.name}
+                          key={index} width={this.state.width}
+                          height={dimensions.width}
+                          offset={1.5 * this.state.width * index}
+                          delay={250 * index}
+                          isVertical={this.props.isVertical}
+                          percentage={value.percentage}/>
+                      ))}
+                    </svg>
+                  </div>
+              }}
             </Measure>
           </Column>
         </Row>
       )
-  }
-}
-
-class DelayRender extends React.Component {
-  constructor(props, context) {
-    super(props);
-    this.state = {
-      isShow: false
-    }
-  }
-
-  componentDidMount() {
-    this.timeOut = setTimeout(() => {
-      this.setState({isShow: true});
-    }, this.props.wait);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeOut);
-  }
-
-  componentDidUpdate() {
-
-  }
-
-  render() {
-    return this.state.isShow && this.props.children
   }
 }
 
@@ -190,7 +182,7 @@ class BarGroup extends React.Component {
               let color = `rgba(${~~item.colorR},${~~item.colorG},${~~item.colorB},${item.alpha})`;
               return (
                 <g onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-                  <text style={{fontWeight: item.fontWeight}} fill={`rgba(0,0,0,${item.textOpacity})`} x={0} y={this.props.height+20}>{this.props.name}</text>
+                  <text style={{fontWeight: item.fontWeight}} fill={`rgba(0,0,0,${item.textOpacity})`} x={0} y={this.props.height+20} transform={this.props.isVertical ? `rotate(-90,10,${this.props.height-15})` : `rotate(0,0,0)`}>{this.props.name}</text>
                   <rect width={this.props.width} height={this.props.height} fill={color}/>
                   <path d={`M${
                     // Move to first point X Pos
