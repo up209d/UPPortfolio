@@ -14,34 +14,42 @@ class ToggleInViewPort extends React.Component{
       },
       timeout: 0
     };
-    this.firingHandler = utils.fThrottle(this.firingHandler.bind(this),50);
+    this.firingHandler = utils.fThrottle(this.firingHandler.bind(this),30);
   }
 
   init() {
     this.DOM = ReactDOM.findDOMNode(this);
+    // let data = this.DOM.getBoundingClientRect();
+    // let testDiv = document.createElement('div');
+    // testDiv.style.width = data.width + 'px';
+    // testDiv.style.height = data.height + 'px';
+    // testDiv.style.top = data.top + 'px';
+    // testDiv.style.left = data.left + 'px';
+    // testDiv.style.zIndex = 999999;
+    // testDiv.style.background = '#EF5000';
+    // testDiv.style.position = 'absolute';
+    // document.body.appendChild(testDiv);
+    // console.log(data,testDiv);
     this.firingHandler();
-    this.assumeHeight();
+    // this.assumeHeight();
   }
 
-  assumeHeight() {
-    let data = this.DOM.getBoundingClientRect();
-    let oldHeight = this.state.style.height ? this.state.style.height : 0;
-    // console.log(data);
-    if ((data.height > oldHeight)) {
-      // console.log('SetNow');
-      this.setState({
-        style: {
-          ...this.state.style,
-          minHeight:data.height
-        }
-      });
-    }
-    // console.log(this.state);
-  }
+  // assumeHeight() {
+  //   let data = this.DOM.getBoundingClientRect();
+  //   let oldHeight = this.state.style.height ? this.state.style.height : 0;
+  //   console.log(data.height);
+  //   if ((data.height > oldHeight)) {
+  //     this.setState({
+  //       style: {
+  //         ...this.state.style,
+  //         minHeight:data.height
+  //       }
+  //     });
+  //   }
+  // }
 
 
   firingHandler() {
-    // console.log("Scrolled",this.DOM.getBoundingClientRect());
     let data = this.DOM.getBoundingClientRect();
     if ((data.top-window.innerHeight < 0) && (data.bottom > 0)) {
       if (this.state.isIn != true) {
@@ -72,7 +80,6 @@ class ToggleInViewPort extends React.Component{
   }
 
   componentDidUpdate() {
-    // console.log('Did Update','Will Reset: ', this.props.willReset,'IsIn: ', this.state.isIn);
     this.init();
   }
 
@@ -81,7 +88,6 @@ class ToggleInViewPort extends React.Component{
   }
 
   render() {
-    // console.log('ReReRender');
     return this.state.isIn ?
       <div className="app-toggle-viewport" style={this.state.style}>
         {this.props.children}
@@ -91,7 +97,7 @@ class ToggleInViewPort extends React.Component{
 }
 
 ToggleInViewPort.defaultProps = {
-  willReset: true
+  willReset: false
 };
 
 export default ToggleInViewPort;

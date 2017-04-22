@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "ignore": ["src/*"]
+  "ignore": ["src/*","dist/*"]
 }

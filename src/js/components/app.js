@@ -50,6 +50,7 @@ export default class App extends React.Component {
     return (
       <div className="app" style={this.state.isFontLoaded ? {opacity:1} : {opacity:0}}>
         <Banner {...this.props}/>
+        <ToggleInViewPort height={1162} willReset={false}>
         <div className="app-block app-resume">
           <h1 className="medium-pb-20">ABOUT ME</h1>
           <Row>
@@ -99,7 +100,8 @@ export default class App extends React.Component {
             </Column>
           </Row>
         </div>
-        <ToggleInViewPort willReset={false}>
+        </ToggleInViewPort>
+        <ToggleInViewPort height={715} willReset={true}>
           <div className="app-block app-skills">
             <h1>MY SKILLS</h1>
             <BarChartSVG isVertical={(this.props.UI.width < this.props.UI.height)}/>

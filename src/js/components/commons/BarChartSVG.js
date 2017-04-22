@@ -4,6 +4,7 @@ import utils from '../../utils';
 import { Motion, spring } from 'react-motion';
 import Measure from 'react-measure';
 import { Row, Column } from 'react-foundation';
+import isEqual from 'lodash.isequal';
 import DelayRender from './DelayRender';
 
 class BarChartSVG extends React.Component {
@@ -62,16 +63,20 @@ class BarChartSVG extends React.Component {
           percentage: 55
         }
       ],
-      isShow: false,
+      isShow: true,
     };
   }
 
   componentDidMount() {
-    this.setState({isShow: true});
+
   }
 
   componentDidUpdate() {
-    console.log('BarChartSVG updated',this.props.isVertical);
+    console.log('BarChartSVG updated, Vertical Direction: ',this.props.isVertical);
+  }
+
+  shouldComponentUpdate(props,state) {
+    return !isEqual(props,this.props) || !isEqual(state,this.state);
   }
 
   render() {

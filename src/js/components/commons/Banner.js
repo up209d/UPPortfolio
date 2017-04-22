@@ -17,9 +17,6 @@ import utils from '../../utils';
 export default class Banner extends React.Component {
   constructor(props, context) {
     super(props);
-    this.state = {
-      preloaded: false
-    };
   }
 
   render() {

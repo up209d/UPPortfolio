@@ -237,10 +237,13 @@ class PixiSpringDrop extends React.PureComponent {
     let mPosX = (e.clientX || e.screenX || e.pageX) + mOffsetX;
     let mPosY = (e.clientY || e.screenY || e.pageY) + mOffsetY;
 
+    let movementX = e.movementX || 0;
+    let movementY = e.movementY || 0;
+
     // movementX and Y might not stable when mouse move out of viewport
     // make some weird animation, so better to set the maxSpeed of acceptation
-    let mSpeedX = Math.abs(e.movementX) < 50 ? e.movementX : 50 || 0;
-    let mSpeedY = Math.abs(e.movementY) < 50 ? e.movementY : 50 || 0;
+    let mSpeedX = Math.abs(movementX) < 50 ? movementX : 50 || 0;
+    let mSpeedY = Math.abs(movementY) < 50 ? movementY : 50 || 0;
 
     mSpeedX = mSpeedX/(window.devicePixelRatio || 1);
     mSpeedY = mSpeedY/(window.devicePixelRatio || 1);
@@ -296,16 +299,16 @@ class PixiSpringDrop extends React.PureComponent {
     window.addEventListener('mousemove', this.onMouseMove);
     window.addEventListener('scroll', this.onScrolling);
 
-    // let currentIndex = 0;
-    // this.interval = setInterval(() => {
-    //   currentIndex++;
-    //   if (currentIndex == this.state.textWords.length) {
-    //     currentIndex = 0;
-    //   }
-    //   // this.changeText({textRender: this.state.textArray[currentIndex]});
-    //   // console.log(this.state.textWords[currentIndex]);
-    //   this.textArray = this.renderText(this.state.textWords[currentIndex]);
-    // }, this.state.timeOut);
+    let currentIndex = 0;
+    this.interval = setInterval(() => {
+      currentIndex++;
+      if (currentIndex == this.state.textWords.length) {
+        currentIndex = 0;
+      }
+      // this.changeText({textRender: this.state.textArray[currentIndex]});
+      // console.log(this.state.textWords[currentIndex]);
+      this.textArray = this.renderText(this.state.textWords[currentIndex]);
+    }, this.state.timeOut);
 
     // setTimeout(()=>{
     //   console.log('Stop');
