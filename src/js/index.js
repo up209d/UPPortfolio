@@ -65,6 +65,8 @@ WebFontLoader.load({
     families: ['Roboto']
   },
   active: ()=>{
+    let preload = document.getElementById('preload');
+    preload.parentNode.removeChild(preload);
     DOMRenderer();
   }
 });

@@ -37,10 +37,6 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <Banner {...this.props}/>
-        <div className="app-block app-skills">
-          <h1>MY SKILLS</h1>
-          <BarChartSVG isVertical={this.props.UI.width < 1024}/>
-        </div>
         <div className="app-block app-resume">
           <h1 className="medium-pb-20">ABOUT ME</h1>
           <Row>
@@ -88,6 +84,10 @@ export default class App extends React.Component {
               </Row>
             </Column>
           </Row>
+        </div>
+        <div className="app-block app-skills">
+          <h1>MY SKILLS</h1>
+          <BarChartSVG isVertical={this.props.UI.width < 1024}/>
         </div>
         <div className="app-block app-works">
           <h1>MY WORKS</h1>

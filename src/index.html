@@ -6,8 +6,29 @@
     <title>U.P</title>
     <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon"/>
+    <style>
+        #preload {
+            width:64px;
+            height:64px;
+            background-color: #fff;
+            display: block;
+            margin-left: -32px;margin-top: -32px;
+            position:fixed;
+            top:50%;left: 50%;
+            border:1px solid #999;
+            border-radius: 10%;
+            z-index: -9999999;
+        }
+        #preload::after {
+            margin-top:25px;
+            display: block;
+            text-align: center;
+            content: '...';
+        }
+    </style>
 </head>
 <body>
 <div id="root"></div>
+<div id="preload"></div>
 </body>
 </html>
