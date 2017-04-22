@@ -21,12 +21,11 @@ if (process.env.NODE_ENV !== 'production') {
     });
 }
 
-import '../scss/app.scss';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
+import '../scss/app.scss';
 
 import store from './store';
 import storeHistory from './store';
@@ -65,11 +64,18 @@ WebFontLoader.load({
     families: ['Roboto']
   },
   active: ()=>{
-    let preload = document.getElementById('preload');
-    preload.parentNode.removeChild(preload);
-    DOMRenderer();
+    // Prevent "the flash unstyle state" of the site in beginning,
+    // it will make every position size detection wrong,
+    // also causes the scroll terrible behavior
+    setTimeout(()=>{
+      let preload = document.getElementById('preload');
+      preload.parentNode.removeChild(preload);
+      DOMRenderer();
+    },100);
   }
 });
+
+
 
 // If you want to make an preloading you can make it here,
 // otherwise inside the app.js components

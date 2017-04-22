@@ -85,10 +85,12 @@ export default class App extends React.Component {
             </Column>
           </Row>
         </div>
-        <div className="app-block app-skills">
-          <h1>MY SKILLS</h1>
-          <BarChartSVG isVertical={this.props.UI.width < 1024}/>
-        </div>
+        <ToggleInViewPort height={715} willReset={false}>
+          <div className="app-block app-skills">
+            <h1>MY SKILLS</h1>
+            <BarChartSVG isVertical={this.props.UI.width < 1024}/>
+          </div>
+        </ToggleInViewPort>
         <div className="app-block app-works">
           <h1>MY WORKS</h1>
         </div>

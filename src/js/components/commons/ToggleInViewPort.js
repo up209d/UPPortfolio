@@ -15,7 +15,7 @@ class ToggleInViewPort extends React.Component{
       timeout: 0
     };
     // Scrolling have to be throttling otherwise it will fire quickly and flood,crash the render stream
-    // this.firingHandler = utils.fThrottle(this.firingHandler.bind(this),30);
+    this.firingHandler = utils.fThrottle(this.firingHandler.bind(this),30);
   }
 
   init() {
@@ -57,8 +57,8 @@ class ToggleInViewPort extends React.Component{
     if ((data.top-window.innerHeight < 0) && (data.bottom > 0)) {
       if (this.state.isIn != true) {
         if (!this.props.willReset) {
-          // window.removeEventListener("scroll",this.firingHandler);
-          // window.removeEventListener("resize",this.firingHandler);
+          window.removeEventListener("scroll",this.firingHandler);
+          window.removeEventListener("resize",this.firingHandler);
         }
         this.setState({
           isIn:true
@@ -72,14 +72,14 @@ class ToggleInViewPort extends React.Component{
   }
 
   componentDidMount() {
-    // window.addEventListener("scroll",this.firingHandler);
-    // window.addEventListener("resize",this.firingHandler);
+    window.addEventListener("scroll",this.firingHandler);
+    window.addEventListener("resize",this.firingHandler);
     this.init();
   }
 
   componentWillUnmount() {
-    // window.removeEventListener("scroll",this.firingHandler);
-    // window.removeEventListener("resize",this.firingHandler);
+    window.removeEventListener("scroll",this.firingHandler);
+    window.removeEventListener("resize",this.firingHandler);
   }
 
   componentDidUpdate() {

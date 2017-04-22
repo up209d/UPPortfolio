@@ -34,7 +34,7 @@ class PixiSpringDrop extends React.PureComponent {
     };
 
     // Scrolling have to be throttling
-    // this.onScrolling = utils.fThrottle(this.onScrolling.bind(this),30);
+    this.onScrolling = utils.fThrottle(this.onScrolling.bind(this),30);
 
     this.onMouseMove = this.onMouseMove.bind(this);
     this.animationComp = this.animationComp.bind(this);
@@ -299,7 +299,7 @@ class PixiSpringDrop extends React.PureComponent {
     this.init();
     this.App.ticker.add(this.animationComp);
     window.addEventListener('mousemove', this.onMouseMove);
-    // window.addEventListener('scroll', this.onScrolling);
+    window.addEventListener('scroll', this.onScrolling);
 
     let currentIndex = 0;
     this.interval = setInterval(() => {
