@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6aa143d4-a920-4b7e-9968-a6c0b527151a" name="Default" comment="PIXI Renderer Instead of Native Canvas">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/appBundle06c6aa37bfac0db34f74.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/vendorBundler06c6aa37bfac0db34f74.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/actions/actionInteractive.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/js/reducers/Interactive.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/appBundle2663d5a9c209908f5488.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/vendorBundler2663d5a9c209908f5488.js" afterPath="" />
+    <list default="true" id="6aa143d4-a920-4b7e-9968-a6c0b527151a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/report.html" afterPath="$PROJECT_DIR$/dist/report.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/actions/actionTypes.js" afterPath="$PROJECT_DIR$/src/js/actions/actionTypes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/actions/actionUI.js" afterPath="$PROJECT_DIR$/src/js/actions/actionUI.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/PixiSpringDrop.js" afterPath="$PROJECT_DIR$/src/js/components/commons/PixiSpringDrop.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/index.js" afterPath="$PROJECT_DIR$/src/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/reducers/UI.js" afterPath="$PROJECT_DIR$/src/js/reducers/UI.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/reducers/index.js" afterPath="$PROJECT_DIR$/src/js/reducers/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/store.js" afterPath="$PROJECT_DIR$/src/js/store.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -732,7 +716,7 @@
       <workItem from="1492418239162" duration="7669000" />
       <workItem from="1492425997189" duration="1935000" />
       <workItem from="1492591602523" duration="11502000" />
-      <workItem from="1492692314526" duration="54324000" />
+      <workItem from="1492692314526" duration="54433000" />
     </task>
     <task id="LOCAL-00001" summary="Add DropCircle Text Spring Motion">
       <created>1490487902793</created>
@@ -825,11 +809,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492870353718</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Fix Chrome MouseWheel strangeness !">
+      <created>1492885416065</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1492885416065</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="566545000" />
+    <option name="totallyTimeSpent" value="566654000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -848,11 +839,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25107297" sideWeight="0.50092083" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18474264" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18474264" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1429342" sideWeight="0.5053435" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39797795" sideWeight="0.4990792" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39797795" sideWeight="0.4990792" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -892,7 +883,8 @@
     <MESSAGE value="Add DropCircle Text Spring Motion" />
     <MESSAGE value="Fixed problem - Find out about isomorphic render later" />
     <MESSAGE value="PIXI Renderer Instead of Native Canvas" />
-    <option name="LAST_COMMIT_MESSAGE" value="PIXI Renderer Instead of Native Canvas" />
+    <MESSAGE value="Fix Chrome MouseWheel strangeness !" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Chrome MouseWheel strangeness !" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
