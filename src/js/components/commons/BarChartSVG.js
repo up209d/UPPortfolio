@@ -16,27 +16,27 @@ class BarChartSVG extends React.Component {
       data: [
         {
           name: "HTML5",
-          percentage: 92
+          percentage: 95
         },
         {
           name: "CSS3",
-          percentage: 79
-        },
-        {
-          name: "JS / ES6",
-          percentage: 81
-        },
-        {
-          name: "Webpack",
           percentage: 85
         },
         {
+          name: "JS / ES6",
+          percentage: 80
+        },
+        {
+          name: "Webpack",
+          percentage: 70
+        },
+        {
           name: "React",
-          percentage: 55
+          percentage: 60
         },
         {
           name: "Redux",
-          percentage: 45
+          percentage: 50
         },
         {
           name: "PHP",
@@ -56,7 +56,7 @@ class BarChartSVG extends React.Component {
         },
         {
           name: "Sketch",
-          percentage: 56
+          percentage: 60
         },
         {
           name: "After Effect",
@@ -103,7 +103,7 @@ class BarChartSVG extends React.Component {
                     </svg>
                   </div>
                   :
-                  <div style={{height: 1.5 * this.state.width * this.state.data.length}}>
+                  <div style={{height: 1.1 * this.state.width * this.state.data.length}}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="app-barchart" width={dimensions.width}
                          height={dimensions.width}
                          style={{overflow: 'visible',transform:'rotateZ(90deg)'}}>
@@ -112,7 +112,7 @@ class BarChartSVG extends React.Component {
                           name={value.name}
                           key={index} width={this.state.width}
                           height={dimensions.width}
-                          offset={1.5 * this.state.width * index}
+                          offset={1.1 * this.state.width * index}
                           delay={250 * index}
                           isVertical={this.props.isVertical}
                           percentage={value.percentage}/>

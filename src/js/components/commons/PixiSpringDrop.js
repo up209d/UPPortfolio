@@ -33,7 +33,9 @@ class PixiSpringDrop extends React.PureComponent {
       ...this.props.options
     };
 
-    this.onScrolling = this.onScrolling.bind(this);
+    // Scrolling have to be throttling
+    // this.onScrolling = utils.fThrottle(this.onScrolling.bind(this),30);
+
     this.onMouseMove = this.onMouseMove.bind(this);
     this.animationComp = this.animationComp.bind(this);
   }
@@ -271,13 +273,13 @@ class PixiSpringDrop extends React.PureComponent {
     let data = this.canvas.getBoundingClientRect();
     if (data.bottom < 0) {
       if (!this.isDownCanvas) {
-        this.isDownCanvas = true;
-        this.changeView(document.getElementById('FooterCanvas'));
+        // this.isDownCanvas = true;
+        // this.changeView(document.getElementById('FooterCanvas'));
       }
     } else {
       if (this.isDownCanvas) {
-        this.isDownCanvas = false;
-        this.changeView(this.canvas);
+        // this.isDownCanvas = false;
+        // this.changeView(this.canvas);
       }
     }
   };
@@ -297,7 +299,7 @@ class PixiSpringDrop extends React.PureComponent {
     this.init();
     this.App.ticker.add(this.animationComp);
     window.addEventListener('mousemove', this.onMouseMove);
-    window.addEventListener('scroll', this.onScrolling);
+    // window.addEventListener('scroll', this.onScrolling);
 
     let currentIndex = 0;
     this.interval = setInterval(() => {

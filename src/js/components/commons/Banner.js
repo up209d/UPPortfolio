@@ -1,6 +1,7 @@
 import React from 'react';
 import { Motion, spring, presets } from 'react-motion';
 import { Row, Column } from 'react-foundation';
+import styled from 'styled-components';
 
 import TrianglifySVG from './TrianglifySVG';
 import SpringDrop from './SpringDrop';
@@ -133,7 +134,7 @@ const BannerContent = (props) => (
           </Motion>
           <Motion defaultStyle={{ value: window.innerWidth }} style={{ value: spring(0, presets.wobbly) }}>
             {item => (
-              <TitleString className="content-develop"  style={{transform: `translateX(${item.value}px)`}} title={`[Developer]`}/>
+              <ResponsiveTitleString className="content-develop"  style={{transform: `translateX(${item.value}px)`}} title={`[Developer]`} UI={props.UI} />
             )}
           </Motion>
         </Column>
@@ -141,6 +142,33 @@ const BannerContent = (props) => (
     </div>
   </DistortContentByMouse>
 );
+//
+// const styledSpan = styled.span`
+//   font-size: 5.5em;
+//   text-align: center;
+//   color: palevioletred;
+// `;
+
+const StyledSpan = styled.span`
+  font-size: ${props => props.size}px;
+`;
+
+
+const ResponsiveTitleString = (props) => {
+  let size = 0.8*props.UI.width/props.title.length;
+  size = size > 40 ? 40 : size;
+  let array = [];
+  for (let i=0;i<props.title.length;i++){
+    array.push(props.title.charAt(i));
+  }
+  return (
+    <h1 className={props.className} style={props.style}>
+      {array.map((value,index)=>{
+        return <StyledSpan size={size} key={index}>{value}</StyledSpan>
+      })}
+    </h1>
+  );
+};
 
 const TitleString = (props) => {
   let array = [];
@@ -155,3 +183,4 @@ const TitleString = (props) => {
     </h1>
   );
 };
+

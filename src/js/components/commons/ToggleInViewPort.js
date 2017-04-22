@@ -14,11 +14,13 @@ class ToggleInViewPort extends React.Component{
       },
       timeout: 0
     };
-    this.firingHandler = utils.fThrottle(this.firingHandler.bind(this),30);
+    // Scrolling have to be throttling otherwise it will fire quickly and flood,crash the render stream
+    // this.firingHandler = utils.fThrottle(this.firingHandler.bind(this),30);
   }
 
   init() {
     this.DOM = ReactDOM.findDOMNode(this);
+
     // let data = this.DOM.getBoundingClientRect();
     // let testDiv = document.createElement('div');
     // testDiv.style.width = data.width + 'px';
@@ -30,6 +32,7 @@ class ToggleInViewPort extends React.Component{
     // testDiv.style.position = 'absolute';
     // document.body.appendChild(testDiv);
     // console.log(data,testDiv);
+
     this.firingHandler();
     // this.assumeHeight();
   }
@@ -53,13 +56,13 @@ class ToggleInViewPort extends React.Component{
     let data = this.DOM.getBoundingClientRect();
     if ((data.top-window.innerHeight < 0) && (data.bottom > 0)) {
       if (this.state.isIn != true) {
+        if (!this.props.willReset) {
+          // window.removeEventListener("scroll",this.firingHandler);
+          // window.removeEventListener("resize",this.firingHandler);
+        }
         this.setState({
           isIn:true
         });
-        if (!this.props.willReset) {
-          window.removeEventListener("scroll",this.firingHandler);
-          window.removeEventListener("resize",this.firingHandler);
-        }
       }
     } else {
       if (this.state.isIn != false) {
@@ -69,14 +72,14 @@ class ToggleInViewPort extends React.Component{
   }
 
   componentDidMount() {
-    window.addEventListener("scroll",this.firingHandler);
-    window.addEventListener("resize",this.firingHandler);
+    // window.addEventListener("scroll",this.firingHandler);
+    // window.addEventListener("resize",this.firingHandler);
     this.init();
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll",this.firingHandler);
-    window.removeEventListener("resize",this.firingHandler);
+    // window.removeEventListener("scroll",this.firingHandler);
+    // window.removeEventListener("resize",this.firingHandler);
   }
 
   componentDidUpdate() {

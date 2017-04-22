@@ -1,4 +1,5 @@
 import React from 'react';
+import isEqual from 'lodash.isequal';
 
 export default class DelayRender extends React.Component {
   constructor(props, context) {
@@ -18,11 +19,7 @@ export default class DelayRender extends React.Component {
     clearTimeout(this.timeOut);
   }
 
-  componentDidUpdate() {
-
-  }
-
   render() {
-    return this.state.isShow && this.props.children
+    return this.state.isShow ? this.props.children : null;
   }
 }

@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import * as actionUI from '../actions/actionUI';
 import { createSelector } from 'reselect'
 
-import WebFontLoader from 'webfontloader';
-
 import Banner from './commons/Banner';
 import BarChartSVG from './commons/BarChartSVG';
 import ToggleInViewPort from './commons/ToggleInViewPort';
@@ -26,36 +24,28 @@ const mapDispatchToProps = (dispatch) => {
 export default class App extends React.Component {
   constructor(props, context) {
     super(props);
-    this.state = {
-      isFontLoaded: false
-    };
-    WebFontLoader.load({
-      google: {
-        families: ['Roboto']
-      },
-      active: ()=>{
-        this.setState({isFontLoaded: true});
-      }
-    });
   }
 
   componentDidMount() {
     let actionUI = this.props.actionUI;
-    setTimeout(()=>{
-      actionUI.toggleBanner(true);
-    },5000);
+    // setTimeout(()=>{
+    //   actionUI.toggleBanner(true);
+    // },5000);
   }
 
   render() {
     return (
-      <div className="app" style={this.state.isFontLoaded ? {opacity:1} : {opacity:0}}>
+      <div className="app">
         <Banner {...this.props}/>
-        <ToggleInViewPort height={1162} willReset={false}>
+        <div className="app-block app-skills">
+          <h1>MY SKILLS</h1>
+          <BarChartSVG isVertical={this.props.UI.width < 1024}/>
+        </div>
         <div className="app-block app-resume">
           <h1 className="medium-pb-20">ABOUT ME</h1>
           <Row>
             <Column className="small-pb-20 medium-pb-60" small={12} medium={8} centerOnMedium>
-              <p className="text-center">I have years experience in web industry. I like working in this area, where i can balance between design and coding. There is nothing more interesting than what you made in static visual images turning into live, by the art of math and logic underneath the coding lines.</p>
+              <p className="text-center">I have years of experience in web industry. I like to work in this area, where i can balance between design and coding. There is nothing more interesting than what you made in static visual images turning into live, by the art of math and logic underneath the coding lines.</p>
             </Column>
           </Row>
           <Row>
@@ -93,20 +83,12 @@ export default class App extends React.Component {
                       <p>Full Time</p>
                       <p><span>CMC Telecom - Infracstructure Online Department</span></p>
                     </li>
-
                   </ul>
                 </Column>
               </Row>
             </Column>
           </Row>
         </div>
-        </ToggleInViewPort>
-        <ToggleInViewPort height={715} willReset={true}>
-          <div className="app-block app-skills">
-            <h1>MY SKILLS</h1>
-            <BarChartSVG isVertical={(this.props.UI.width < this.props.UI.height)}/>
-          </div>
-        </ToggleInViewPort>
         <div className="app-block app-works">
           <h1>MY WORKS</h1>
         </div>

@@ -52,4 +52,24 @@ const DOMRenderer = () => {
   );
 };
 
-DOMRenderer();
+// Font load can cause a flash of unloaded font & css,
+// that will bring uncorrect size and position detecting
+// thus, size and position detect in componentDidMount
+// Wont be accurate and as expected, make sure the font is truly load,
+// before anything kick in
+
+import WebFontLoader from 'webfontloader';
+
+WebFontLoader.load({
+  google: {
+    families: ['Roboto']
+  },
+  active: ()=>{
+    DOMRenderer();
+  }
+});
+
+// If you want to make an preloading you can make it here,
+// otherwise inside the app.js components
+
+
