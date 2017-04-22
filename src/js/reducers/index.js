@@ -6,9 +6,11 @@ if (!process.env.BROWSER) {
 }
 
 import UI from './UI';
+import Interactive from './Interactive';
 
 const appReducers = combineReducers({
   UI,
+  Interactive,
   routing: routerReducer
 });
 

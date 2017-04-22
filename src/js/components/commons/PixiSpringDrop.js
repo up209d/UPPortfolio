@@ -273,13 +273,13 @@ class PixiSpringDrop extends React.PureComponent {
     let data = this.canvas.getBoundingClientRect();
     if (data.bottom < 0) {
       if (!this.isDownCanvas) {
-        // this.isDownCanvas = true;
-        // this.changeView(document.getElementById('FooterCanvas'));
+        this.isDownCanvas = true;
+        this.changeView(document.getElementById('FooterCanvas'));
       }
     } else {
       if (this.isDownCanvas) {
-        // this.isDownCanvas = false;
-        // this.changeView(this.canvas);
+        this.isDownCanvas = false;
+        this.changeView(this.canvas);
       }
     }
   };

@@ -23,5 +23,5 @@ const store = createStore(
 
 export const storeHistory = process.env.BROWSER ? syncHistoryWithStore(browserHistory, store) : null;
 
-// console.log('Store inited: ', store.getState());
+console.log('Store inited: ', store.getState());
 export default store;

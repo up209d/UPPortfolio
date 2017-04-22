@@ -12,33 +12,13 @@ const UI = (state = {
   handheld: utils.browserDetection.isHandHeld() || (window.innerWidth<=640),
   mouseX: 0,
   mouseY: 0,
-  banner: {
-    touch_avatar: false
-  },
   openBanner: false,
   openResume: false,
   openSkills: false,
   openWorks: false,
   openContact: false
-
 }, action = {}) => {
   switch (action.type) {
-    case types.BANNER_TOUCH_AVATAR:
-      console.log(prefix+'Banner Touched');
-      return {
-        ...state,
-        banner: {
-          touch_avatar: true
-        }
-      };
-    case types.BANNER_UNTOUCH_AVATAR:
-      console.log(prefix+'Banner Untouched');
-      return {
-        ...state,
-        banner: {
-          touch_avatar: false
-        }
-      };
     case types.TOGGLE_BANNER:
       console.log('Toggle Banner');
       if (action.value != state.openBanner) {
