@@ -6133,6 +6133,13 @@ a {
   -webkit-transition: opacity 0.5s linear;
   transition: opacity 0.5s linear; }
 
+.app-footer {
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 25px; }
+  .app-footer p {
+    padding-top: 50px; }
+
 .app-resume__content li {
   margin-bottom: 30px; }
   .app-resume__content li:not(:last-child)::after {
