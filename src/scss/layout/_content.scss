@@ -24,3 +24,12 @@
 .app {
   transition: opacity 0.5s linear;
 }
+
+.app-footer {
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 25px;
+  p {
+    padding-top: 50px;
+  }
+}

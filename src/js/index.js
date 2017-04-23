@@ -38,8 +38,8 @@ if (window) {
   const handleWheelWebkit = function(e){
     let y = {value:window.scrollY};
     let amount = e.deltaY;
-    amount = (amount > 0 && amount < 50) ? 50 : amount;
-    amount = (amount < 0 && amount > -50) ? -50 : amount;
+    amount = (amount > 0 && amount < 50) ? 50 : amount+50;
+    amount = (amount < 0 && amount > -50) ? -50 : amount-50;
     TweenMax.to(y,Math.abs(amount)/1000,{
       value: amount == 0 ? "+=0" : amount > 0 ? "+="+Math.abs(e.deltaY) : "-="+Math.abs(e.deltaY),
       ease: Power1.easeOut,

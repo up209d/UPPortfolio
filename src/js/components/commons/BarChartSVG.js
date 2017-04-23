@@ -96,7 +96,7 @@ class BarChartSVG extends React.Component {
                           key={index} width={this.state.width}
                           height={this.state.height}
                           offset={((dimensions.width - this.state.width) / (this.state.data.length - 1)) * index}
-                          delay={250 * index}
+                          delay={100 * index}
                           isVertical={this.props.isVertical}
                           percentage={value.percentage}/>
                       ))}
@@ -113,7 +113,7 @@ class BarChartSVG extends React.Component {
                           key={index} width={this.state.width}
                           height={dimensions.width}
                           offset={1.1 * this.state.width * index}
-                          delay={250 * index}
+                          delay={100 * index}
                           isVertical={this.props.isVertical}
                           percentage={value.percentage}/>
                       ))}

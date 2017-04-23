@@ -48,6 +48,7 @@
     "postcss-smart-import": "^0.6.10",
     "precss": "^1.4.0",
     "quick-local-ip": "^1.0.7",
+    "raw-loader": "^0.5.1",
     "react": "^15.4.1",
     "react-addons-pure-render-mixin": "^15.4.2",
     "react-dom": "^15.4.1",

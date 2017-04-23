@@ -7,6 +7,7 @@ import * as actionUI from '../actions/actionUI';
 import { createSelector } from 'reselect'
 
 import Banner from './commons/Banner';
+import Avatar from './commons/Avatar';
 import BarChartSVG from './commons/BarChartSVG';
 import ToggleInViewPort from './commons/ToggleInViewPort';
 
@@ -37,6 +38,7 @@ export default class App extends React.Component {
     return (
       <div className="app">
         <Banner {...this.props}/>
+        <ToggleInViewPort height={1162} willReset>
         <div className="app-block app-resume">
           <h1 className="medium-pb-20">ABOUT ME</h1>
           <Row>
@@ -49,7 +51,7 @@ export default class App extends React.Component {
               <Row>
                 <Column className="app-resume__image text-center medium-text-right" small={12} medium={4} offsetOnMedium={2}>
                   <div className="medium-mt-10">
-                    <img width="250" src={require('Images/avatarN.jpg')} alt="My Avatar"/>
+                    <Avatar width={250}/>
                   </div>
                 </Column>
                 <Column className="app-resume__content text-center medium-text-left" small={12} medium={6}>
@@ -85,7 +87,8 @@ export default class App extends React.Component {
             </Column>
           </Row>
         </div>
-        <ToggleInViewPort height={715} willReset={false}>
+        </ToggleInViewPort>
+        <ToggleInViewPort height={715} willReset>
           <div className="app-block app-skills">
             <h1>MY SKILLS</h1>
             <BarChartSVG isVertical={this.props.UI.width < 1024}/>
@@ -96,9 +99,10 @@ export default class App extends React.Component {
         </div>
         <div className="app-block app-contact">
           <h1>CONTACT ME</h1>
+          <canvas id="FooterCanvas" />
         </div>
         <div className="app-block app-footer">
-          <canvas id="FooterCanvas" />
+          <p>Copyright U.P 2017. All rights reserved.</p>
         </div>
       </div>
     )

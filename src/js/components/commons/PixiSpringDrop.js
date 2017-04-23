@@ -9,11 +9,11 @@ class PixiSpringDrop extends React.PureComponent {
     this.state = {
       width: window.innerWidth,
       height: window.innerHeight,
-      particleCount: 2000, // Auto or Number
+      particleCount: 2222, // Auto or Number
       colors: ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000', '#E50000'], //['#4ECDC4','#F45800','#FF6B6B']
       scanning: 3, // Number of pixel skipping each text analyzing
       areaRadius: 100, // The distance between mouse and dots moving
-      dropRadius: 1.5, // Size of each particle
+      dropRadius: 0.1, // Size of each particle
       springConstant: 0.01,
       damperConstant: 0.05,
       textWords: [
@@ -29,7 +29,7 @@ class PixiSpringDrop extends React.PureComponent {
       rotateSpeed: 0.01,
       shape: ["leaf"],
       randomOffset: 0,
-      lifespan: 99, // 1 - 500
+      lifespan: 79, // 1 - 500
       ...this.props.options
     };
 
@@ -42,7 +42,6 @@ class PixiSpringDrop extends React.PureComponent {
 
   init() {
     if (this.App) {
-
       this.App.renderer.resize(this.state.width, this.state.height);
       //Update off canvas width and height to the Real Canvas
       this.offCanvas.width = this.state.width;
@@ -275,11 +274,14 @@ class PixiSpringDrop extends React.PureComponent {
       if (!this.isDownCanvas) {
         this.isDownCanvas = true;
         this.changeView(document.getElementById('FooterCanvas'));
+        this.oldTextWords = this.state.textWords;
+        this.setState({textWords: ['NICE TO MEET YOU!']});
       }
     } else {
       if (this.isDownCanvas) {
         this.isDownCanvas = false;
         this.changeView(this.canvas);
+        this.setState({textWords: this.oldTextWords});
       }
     }
   };
@@ -303,13 +305,13 @@ class PixiSpringDrop extends React.PureComponent {
 
     let currentIndex = 0;
     this.interval = setInterval(() => {
-      currentIndex++;
-      if (currentIndex == this.state.textWords.length) {
+      if (currentIndex >= this.state.textWords.length) {
         currentIndex = 0;
       }
+      this.textArray = this.renderText(this.state.textWords[currentIndex]);
+      currentIndex++;
       // this.changeText({textRender: this.state.textArray[currentIndex]});
       // console.log(this.state.textWords[currentIndex]);
-      this.textArray = this.renderText(this.state.textWords[currentIndex]);
     }, this.state.timeOut);
 
     // setTimeout(()=>{
@@ -359,8 +361,8 @@ class Particle {
         speedY: 25 - Math.random() * 50,
         color: "#ffffff",
         alpha: 1,
-        scaleX: 1,
-        scaleY: 1,
+        scaleX: 0,
+        scaleY: 0,
         accX: 0,
         accY: 0,
         rotation: 0,

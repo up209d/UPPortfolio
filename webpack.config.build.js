@@ -33,7 +33,7 @@ module.exports = {
     }),
     // If you re not using that, the vendor will be still kept in appBundle
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendorBundler',
+      name: ['vendorBundler'],
     }),
     new ExtractTextPlugin({
       filename: 'style[contenthash:16].css'

@@ -62,6 +62,7 @@ class DistortContentByMouse extends React.PureComponent {
         ...this.props.options
     };
     this.onMouseMove = utils.fThrottle(this.onMouseMove.bind(this),100);
+    this.onMobileTilt = this.onMobileTilt.bind(this);
   }
   onMouseMove(e) {
     let posData = this.skew.getBoundingClientRect();
@@ -78,8 +79,20 @@ class DistortContentByMouse extends React.PureComponent {
       transform: `skew(${skewX*this.state.limitAngleX}deg,${skewY*this.state.limitAngleY}deg) rotateY(${skewX*this.state.limitAngleX*5}deg) rotateX(${skewY*this.state.limitAngleY*5}deg) scale3d(${scale},${scale},${scale})`
     });
   }
+
+  onMobileTilt(e) {
+    let gamma = e.gamma/10 || 0;
+    let beta = e.beta/10 || 0;
+    let scale = !gamma ? 1 : this.state.zoom;
+    this.setState({
+      transform: `rotateY(${gamma*this.state.limitAngleX}deg) rotateX(${(beta*this.state.limitAngleY)-30}deg) scale3d(${scale},${scale},${scale})`
+    });
+  }
+
   componentDidMount() {
     window.addEventListener('mousemove',this.onMouseMove);
+    window.addEventListener('deviceorientation', this.onMobileTilt);
+
     this.setState({transform: 'scale3d(1,1,1)'});
   }
   componentWillUnmount() {
