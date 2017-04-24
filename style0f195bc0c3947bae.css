@@ -6120,7 +6120,8 @@ a {
 .app-block {
   position: relative;
   border-bottom: 0.5px dotted #DDD;
-  padding-bottom: 80px; }
+  padding-bottom: 80px;
+  background-color: white; }
   .app-block > h1 {
     text-align: center;
     padding: 20px 0px; }
@@ -6131,7 +6132,8 @@ a {
 
 .app {
   -webkit-transition: opacity 0.5s linear;
-  transition: opacity 0.5s linear; }
+  transition: opacity 0.5s linear;
+  padding-top: 720px; }
 
 .app-footer {
   font-size: 14px;
@@ -6164,7 +6166,10 @@ a {
     background: linear-gradient(to right, #DDD, #FFF, #FFF); } }
 
 .app-banner {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   height: 720px;
   overflow: hidden;
   border-bottom: 3px solid black; }
@@ -6196,58 +6201,63 @@ a {
     display: block;
     width: 100%;
     height: 0; }
-  .app-banner .app-banner-content h1 {
-    text-transform: uppercase;
-    font-size: 1.75rem;
-    letter-spacing: 5px; }
-    .app-banner .app-banner-content h1 span {
-      font-weight: 100;
-      -webkit-transition: all 0.3s ease-out;
-      transition: all 0.3s ease-out;
-      cursor: pointer; }
-      .app-banner .app-banner-content h1 span:hover {
-        background-color: black;
-        color: white; }
-  .app-banner .app-banner-content .content-greeting {
-    margin-top: 80px;
-    font-size: 1.75rem; }
-  .app-banner .app-banner-content .content-design {
-    font-size: 2.25rem;
-    font-weight: 100;
-    margin-top: 220px; }
-  .app-banner .app-banner-content .content-linebreak {
-    border-top: 0.5px solid black;
-    display: inline-block;
-    min-width: 300px; }
-  .app-banner .app-banner-content .content-develop {
-    margin-top: 20px;
-    font-size: 2.5rem;
-    text-align: center; }
-    .app-banner .app-banner-content .content-develop span {
-      font-weight: bold;
-      letter-spacing: 5px;
-      padding: 0px 5px;
+  .app-banner .app-banner-content {
+    margin-top: 75px; }
+    .app-banner .app-banner-content h1 {
       text-transform: uppercase;
+      font-size: 1.75rem;
+      letter-spacing: 5px; }
+      .app-banner .app-banner-content h1 span {
+        font-weight: 100;
+        -webkit-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+        cursor: pointer; }
+        .app-banner .app-banner-content h1 span:hover {
+          background-color: black;
+          color: white; }
+    .app-banner .app-banner-content .content-greeting {
+      margin-top: 80px;
+      font-size: 1.75rem; }
+    .app-banner .app-banner-content .content-design {
+      font-size: 2.25rem;
+      font-weight: 100;
+      margin-top: 220px; }
+    .app-banner .app-banner-content .content-linebreak {
+      border-top: 0.5px solid black;
       display: inline-block;
-      background-color: #E50000;
-      color: white;
-      -webkit-transition: all 0.3s ease-out;
-      transition: all 0.3s ease-out; }
-      .app-banner .app-banner-content .content-develop span:hover {
-        background-color: #000; }
-  .app-banner .app-banner-content .content-frontend {
-    position: absolute;
-    width: 100%;
-    color: #E50000;
-    font-weight: 900;
-    font-size: 3.75rem;
-    top: 180px;
-    left: 0;
-    z-index: -1; }
+      min-width: 300px; }
+    .app-banner .app-banner-content .content-develop {
+      margin-top: 20px;
+      font-size: 2.5rem;
+      text-align: center; }
+      .app-banner .app-banner-content .content-develop span {
+        font-weight: bold;
+        letter-spacing: 5px;
+        padding: 0px 5px;
+        text-transform: uppercase;
+        display: inline-block;
+        background-color: #E50000;
+        color: white;
+        -webkit-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out; }
+        .app-banner .app-banner-content .content-develop span:hover {
+          background-color: #000; }
+    .app-banner .app-banner-content .content-frontend {
+      position: absolute;
+      width: 100%;
+      color: #E50000;
+      font-weight: 900;
+      font-size: 3.75rem;
+      top: 180px;
+      left: 0;
+      z-index: -1; }
 
 .app-navigation {
   font-size: 12px;
-  position: relative;
+  position: absolute;
+  width: 100vw;
+  top: 0;
+  left: 0;
   z-index: 999; }
   .app-navigation ul.app-navigation-menu {
     padding: 0;
@@ -6343,3 +6353,73 @@ a {
   100% {
     -webkit-transform: scale(1);
             transform: scale(1); } }
+
+.app-sideNav {
+  position: fixed;
+  top: 10%;
+  right: 0;
+  z-index: 9999; }
+  .app-sideNav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end; }
+    .app-sideNav ul li {
+      width: 50px;
+      height: 50px;
+      background-color: #E50000;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: horizontal;
+      -webkit-box-direction: normal;
+          -ms-flex-flow: row nowrap;
+              flex-flow: row nowrap;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -ms-flex-line-pack: center;
+          align-content: center;
+      -webkit-box-align: baseline;
+          -ms-flex-align: baseline;
+              align-items: baseline;
+      color: white;
+      cursor: pointer;
+      -webkit-transition: all 0.2s ease-out;
+      transition: all 0.2s ease-out; }
+      .app-sideNav ul li h1 {
+        font-size: 2rem; }
+      .app-sideNav ul li span {
+        -webkit-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out;
+        -webkit-transform: translateX(10px);
+                transform: translateX(10px);
+        visibility: hidden;
+        display: block;
+        opacity: 0;
+        width: 0; }
+      .app-sideNav ul li:hover {
+        background-color: black;
+        width: 100px;
+        -webkit-box-pack: start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+        -webkit-box-align: baseline;
+            -ms-flex-align: baseline;
+                align-items: baseline; }
+        .app-sideNav ul li:hover h1 {
+          padding-left: 10px; }
+        .app-sideNav ul li:hover span {
+          width: auto;
+          visibility: visible;
+          padding-left: 5px;
+          -webkit-transform: translateX(0px);
+                  transform: translateX(0px);
+          letter-spacing: 1px;
+          opacity: 1; }
