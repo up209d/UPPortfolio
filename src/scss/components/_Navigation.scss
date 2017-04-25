@@ -1,6 +1,9 @@
 .app-navigation {
   font-size: 12px;
-  position:relative;
+  position:absolute;
+  width:100vw;
+  top:0;
+  left:0;
   z-index: 999;
 
   ul.app-navigation-menu {

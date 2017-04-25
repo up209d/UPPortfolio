@@ -1,5 +1,8 @@
 .app-banner {
-  position: relative;
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100vw;
   height:720px;
   overflow:hidden;
   border-bottom:3px solid black;
@@ -16,6 +19,8 @@
 
   .app-avatar-bg {
     position: absolute;
+    top:0;
+    left:0;
     z-index:-1;
     cursor: pointer;
   }
@@ -54,6 +59,7 @@
   }
 
   .app-banner-content {
+
     h1 {
       text-transform: uppercase;
       font-size: rem-calc(28px);
@@ -79,7 +85,6 @@
     .content-design {
       font-size:rem-calc(36px);
       font-weight:100;
-      margin-top: 220px;
     }
     .content-linebreak {
       border-top:0.5px solid black;
@@ -108,16 +113,26 @@
       }
     }
     .content-frontend {
-      position:absolute;
-      width:100%;
+      margin-top: 40px;
+      text-align: center;
       color: #E50000;
       font-weight: 900;
       font-size: rem-calc(60px);
-      top: 180px;
-      left:0;
-      z-index:-1;
     }
 
   }
 
+}
+
+
+@include breakpoint(small) {
+  .content-design {
+    margin-top: 40px;
+  }
+}
+
+@include breakpoint(medium) {
+  .content-design {
+    margin-top: 220px;
+  }
 }

@@ -22,9 +22,9 @@ injectTapEventPlugin({
 });
 
 if (window) {
-  window.onbeforeunload = () => {
-    window.scrollTo(0,0);
-  };
+  // window.onbeforeunload = () => {
+  //   window.scrollTo(0,0);
+  // };
 
   // Firefox, Opera
   window.addEventListener('DOMMouseScroll',function(e){
@@ -37,10 +37,10 @@ if (window) {
 // we have to overwrite that
   const handleWheelWebkit = function(e){
     let y = {value:window.scrollY};
-    let amount = e.deltaY;
-    amount = (amount > 0 && amount < 50) ? 50 : amount+50;
-    amount = (amount < 0 && amount > -50) ? -50 : amount-50;
-    TweenMax.to(y,Math.abs(amount)/1000,{
+    let amount = -e.wheelDeltaY || e.deltaY || 0;
+    amount = (amount > 0 && amount < 150) ? 150 : amount;
+    amount = (amount < 0 && amount > -150) ? -150 : amount;
+    TweenMax.to(y,Math.abs(amount)/500,{
       value: amount == 0 ? "+=0" : amount > 0 ? "+="+Math.abs(e.deltaY) : "-="+Math.abs(e.deltaY),
       ease: Power1.easeOut,
       onUpdate: function(){

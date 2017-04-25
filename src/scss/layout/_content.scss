@@ -3,6 +3,7 @@
     position: relative;
     border-bottom: 0.5px dotted #DDD;
     padding-bottom:80px;
+    background-color: white;
 
     &>h1 {
       text-align: center;
@@ -23,13 +24,77 @@
 
 .app {
   transition: opacity 0.5s linear;
+  padding-top:720px;
+}
+
+.app-contact {
+
+  overflow: hidden;
+  background: #111;  /* fallback for old browsers */
+  background: -webkit-radial-gradient(#222, #111);  /* Chrome 10-25, Safari 5.1-6 */
+  background: radial-gradient(#222, #111); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  padding-bottom: 300px;
+  border-bottom: none;
+
+  canvas {
+    position: absolute;
+    top:0;
+    left:0;
+  }
+
+  h1 {
+    padding-bottom: 40px;
+    color: white;
+  }
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: space-around;
+    align-items: baseline;
+
+    li {
+      margin: 0px 20px;
+      color: white;
+      //font-style: italic;
+      font-weight:300;
+
+      img {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+
+      a {
+        color: white;
+        &::after {
+          display: block;
+          width:0%;
+          content: ' ';
+          border-bottom: 0.5px dotted #E50000;
+          transition: width 0.3s ease-out;
+        }
+
+        &:hover {
+          color: #E50000;
+          &::after {
+            width:100%
+          }
+
+        }
+
+      }
+
+    }
+
+  }
 }
 
 .app-footer {
   font-size: 14px;
   text-align: center;
-  padding-bottom: 25px;
+  padding-bottom: 0px;
   p {
-    padding-top: 50px;
+    padding-top: 20px;
   }
 }

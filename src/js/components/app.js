@@ -8,6 +8,7 @@ import { createSelector } from 'reselect'
 
 import Banner from './commons/Banner';
 import Avatar from './commons/Avatar';
+import SideNav from './commons/SideNav';
 import BarChartSVG from './commons/BarChartSVG';
 import ToggleInViewPort from './commons/ToggleInViewPort';
 
@@ -25,6 +26,29 @@ const mapDispatchToProps = (dispatch) => {
 export default class App extends React.Component {
   constructor(props, context) {
     super(props);
+    this.onScrolling = this.onScrolling.bind(this);
+  }
+
+  onScrolling(e) {
+    if (window.scrollY <= 750) {
+      document.querySelector('.app-resume').style.backgroundColor = `rgba(255,255,255,${
+        Math.min(1,(window.scrollY+720*0.88)/720)
+        })`;
+      document.querySelector('.app-banner-content').style.transform = `translateY(${
+      -window.scrollY/3
+        }px)`;
+      if (document.querySelector('.app-banner-mid canvas')) {
+        document.querySelector('.app-banner-mid canvas').style.transform = `translateY(${
+        -window.scrollY/4
+          }px)`;
+      }
+      document.querySelector('.app-navigation').style.transform = `translateY(${
+        (window.scrollY > 600 ? -window.scrollY/2 + 300 : 0)
+        }px)`;
+      document.querySelector('.app-banner').style.display = 'block';
+    } else {
+      document.querySelector('.app-banner').style.display = 'none';
+    }
   }
 
   componentDidMount() {
@@ -32,13 +56,18 @@ export default class App extends React.Component {
     // setTimeout(()=>{
     //   actionUI.toggleBanner(true);
     // },5000);
+    window.addEventListener('scroll',this.onScrolling);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll',this.onScrolling);
   }
 
   render() {
     return (
       <div className="app">
+        <SideNav/>
         <Banner {...this.props}/>
-        <ToggleInViewPort height={1162} willReset>
         <div className="app-block app-resume">
           <h1 className="medium-pb-20">ABOUT ME</h1>
           <Row>
@@ -87,8 +116,7 @@ export default class App extends React.Component {
             </Column>
           </Row>
         </div>
-        </ToggleInViewPort>
-        <ToggleInViewPort height={715} willReset>
+        <ToggleInViewPort height={705} willReset={!this.props.UI.handheld}>
           <div className="app-block app-skills">
             <h1>MY SKILLS</h1>
             <BarChartSVG isVertical={this.props.UI.width < 1024}/>
@@ -99,6 +127,13 @@ export default class App extends React.Component {
         </div>
         <div className="app-block app-contact">
           <h1>CONTACT ME</h1>
+          <ul>
+            <li><a href="#">Github</a></li>
+            <li>|</li>
+            <li><a href="#">up209d@gmail.com</a></li>
+            <li>|</li>
+            <li><a href="#">+61 451 87 2009</a></li>
+          </ul>
           <canvas id="FooterCanvas" />
         </div>
         <div className="app-block app-footer">

@@ -18,7 +18,7 @@ class PixiSpringDrop extends React.PureComponent {
       damperConstant: 0.05,
       textWords: [
         "FRONT-END",
-        "WEB-APP",
+        "WEB/APP",
         "UI/UX"
       ],
       timeOut: 5000,
@@ -52,7 +52,8 @@ class PixiSpringDrop extends React.PureComponent {
       this.activeCanvas = this.canvas;
       this.App = new PIXI.Application(this.state.width, this.state.height, {
         view: this.canvas,
-        backgroundColor: 0xffffff, //0xffe500
+        transparent: true,
+        // backgroundColor: 0xffffff, //0xffe500
         resolution: window.devicePixelRatio
       });
 
@@ -89,7 +90,8 @@ class PixiSpringDrop extends React.PureComponent {
       // Re-add the animation to new ticker
       this.App = new PIXI.Application(this.state.width, this.state.height, {
         view: view,
-        backgroundColor: 0xffffff, //0xffe500
+        transparent: true,
+        // backgroundColor: 0xffffff, //0xffe500
         resolution: window.devicePixelRatio
       });
 
@@ -269,19 +271,26 @@ class PixiSpringDrop extends React.PureComponent {
   }
 
   onScrolling() {
-    let data = this.canvas.getBoundingClientRect();
-    if (data.bottom < 0) {
+    // let data = this.canvas.getBoundingClientRect();
+    // if (data.bottom < 0) {
+    if (window.scrollY >= 1800) {
       if (!this.isDownCanvas) {
         this.isDownCanvas = true;
         this.changeView(document.getElementById('FooterCanvas'));
         this.oldTextWords = this.state.textWords;
-        this.setState({textWords: ['NICE TO MEET YOU!']});
+        this.setState({
+          textWords: ['NICE TO MEET YOU!'],
+          colors: ['#FFFFFF']
+        });
       }
     } else {
       if (this.isDownCanvas) {
         this.isDownCanvas = false;
         this.changeView(this.canvas);
-        this.setState({textWords: this.oldTextWords});
+        this.setState({
+          textWords: this.oldTextWords,
+          colors: ['#000000', '#000000', '#000000', '#000000', '#000000', '#000000', '#E50000']
+        });
       }
     }
   };

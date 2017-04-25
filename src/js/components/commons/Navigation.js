@@ -51,7 +51,7 @@ class NavigationHiddenMenu extends React.Component {
   }
 
   toggleMenu() {
-    let showMenu = this.state.showMenu ? false : true;
+    let showMenu = !this.state.showMenu;
     this.setState({ showMenu });
   }
 
@@ -93,7 +93,7 @@ class NavigationHiddenMenu extends React.Component {
                 <Row>
                   <Column small={12} centerOnSmall>
                     <ul>
-                      <li><a href="#">Resume</a></li>
+                      <li><a href="#">About Me</a></li>
                       <li><a href="#">My Skills</a></li>
                       <li><a href="#">My Work</a></li>
                       <li><a href="#">Contact Me</a></li>

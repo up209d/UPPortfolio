@@ -92,10 +92,10 @@ class ToggleInViewPort extends React.Component{
 
   render() {
     return this.state.isIn ?
-      <div className="app-toggle-viewport" style={this.state.style}>
+      <div className={`app-toggle-viewport ${this.props.className || ''}`} style={this.state.style}>
         {this.props.children}
       </div> :
-      <div className="app-toggle-viewport" style={this.state.style}/>;
+      <div className={`app-toggle-viewport ${this.props.className || ''}`} style={this.state.style}/>;
   }
 }
 

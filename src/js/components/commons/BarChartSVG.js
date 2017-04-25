@@ -16,27 +16,27 @@ class BarChartSVG extends React.Component {
       data: [
         {
           name: "HTML5",
-          percentage: 95
-        },
-        {
-          name: "CSS3",
           percentage: 85
         },
         {
-          name: "JS / ES6",
-          percentage: 80
+          name: "CSS3",
+          percentage: 75
         },
         {
-          name: "Webpack",
+          name: "JS / ES6",
           percentage: 70
         },
         {
+          name: "Webpack",
+          percentage: 68
+        },
+        {
           name: "React",
-          percentage: 60
+          percentage: 65
         },
         {
           name: "Redux",
-          percentage: 50
+          percentage: 58
         },
         {
           name: "PHP",
@@ -96,7 +96,7 @@ class BarChartSVG extends React.Component {
                           key={index} width={this.state.width}
                           height={this.state.height}
                           offset={((dimensions.width - this.state.width) / (this.state.data.length - 1)) * index}
-                          delay={100 * index}
+                          delay={250 * index}
                           isVertical={this.props.isVertical}
                           percentage={value.percentage}/>
                       ))}
@@ -113,7 +113,7 @@ class BarChartSVG extends React.Component {
                           key={index} width={this.state.width}
                           height={dimensions.width}
                           offset={1.1 * this.state.width * index}
-                          delay={100 * index}
+                          delay={250 * index}
                           isVertical={this.props.isVertical}
                           percentage={value.percentage}/>
                       ))}
