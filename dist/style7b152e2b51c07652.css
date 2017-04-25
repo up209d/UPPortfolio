@@ -6137,12 +6137,17 @@ a {
 
 .app-contact {
   overflow: hidden;
-  background: #111;
+  background-color: #111;
   /* fallback for old browsers */
-  background: -webkit-radial-gradient(#222, #111);
+  background-color: -webkit-radial-gradient(#222, #111);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: radial-gradient(#222, #111);
+  background-color: radial-gradient(#222, #111);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: url(355c3640f6b9988de6d9a3a79b1eb504.jpg);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  background-attachment: fixed;
   padding-bottom: 300px;
   border-bottom: none; }
   .app-contact canvas {
@@ -6158,8 +6163,8 @@ a {
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-flow: row nowrap;
-            flex-flow: row nowrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -6413,7 +6418,7 @@ a {
 
 .app-sideNav {
   position: fixed;
-  top: 10%;
+  top: 12%;
   right: 0;
   z-index: 9999; }
   .app-sideNav ul {
