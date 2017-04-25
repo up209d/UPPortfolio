@@ -6135,12 +6135,66 @@ a {
   transition: opacity 0.5s linear;
   padding-top: 720px; }
 
+.app-contact {
+  overflow: hidden;
+  background: #111;
+  /* fallback for old browsers */
+  background: -webkit-radial-gradient(#222, #111);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: radial-gradient(#222, #111);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding-bottom: 300px;
+  border-bottom: none; }
+  .app-contact canvas {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .app-contact h1 {
+    padding-bottom: 40px;
+    color: white; }
+  .app-contact ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row nowrap;
+            flex-flow: row nowrap;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -ms-flex-line-pack: distribute;
+        align-content: space-around;
+    -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+            align-items: baseline; }
+    .app-contact ul li {
+      margin: 0px 20px;
+      color: white;
+      font-weight: 300; }
+      .app-contact ul li img {
+        vertical-align: middle;
+        margin-right: 5px; }
+      .app-contact ul li a {
+        color: white; }
+        .app-contact ul li a::after {
+          display: block;
+          width: 0%;
+          content: ' ';
+          border-bottom: 0.5px dotted #E50000;
+          -webkit-transition: width 0.3s ease-out;
+          transition: width 0.3s ease-out; }
+        .app-contact ul li a:hover {
+          color: #E50000; }
+          .app-contact ul li a:hover::after {
+            width: 100%; }
+
 .app-footer {
   font-size: 14px;
   text-align: center;
-  padding-bottom: 25px; }
+  padding-bottom: 0px; }
   .app-footer p {
-    padding-top: 50px; }
+    padding-top: 20px; }
 
 .app-resume__content li {
   margin-bottom: 30px; }
@@ -6181,6 +6235,8 @@ a {
     z-index: -1; }
   .app-banner .app-avatar-bg {
     position: absolute;
+    top: 0;
+    left: 0;
     z-index: -1;
     cursor: pointer; }
   .app-banner .app-drops {
@@ -6201,56 +6257,57 @@ a {
     display: block;
     width: 100%;
     height: 0; }
-  .app-banner .app-banner-content {
-    margin-top: 75px; }
-    .app-banner .app-banner-content h1 {
-      text-transform: uppercase;
-      font-size: 1.75rem;
-      letter-spacing: 5px; }
-      .app-banner .app-banner-content h1 span {
-        font-weight: 100;
-        -webkit-transition: all 0.3s ease-out;
-        transition: all 0.3s ease-out;
-        cursor: pointer; }
-        .app-banner .app-banner-content h1 span:hover {
-          background-color: black;
-          color: white; }
-    .app-banner .app-banner-content .content-greeting {
-      margin-top: 80px;
-      font-size: 1.75rem; }
-    .app-banner .app-banner-content .content-design {
-      font-size: 2.25rem;
+  .app-banner .app-banner-content h1 {
+    text-transform: uppercase;
+    font-size: 1.75rem;
+    letter-spacing: 5px; }
+    .app-banner .app-banner-content h1 span {
       font-weight: 100;
-      margin-top: 220px; }
-    .app-banner .app-banner-content .content-linebreak {
-      border-top: 0.5px solid black;
+      -webkit-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+      cursor: pointer; }
+      .app-banner .app-banner-content h1 span:hover {
+        background-color: black;
+        color: white; }
+  .app-banner .app-banner-content .content-greeting {
+    margin-top: 80px;
+    font-size: 1.75rem; }
+  .app-banner .app-banner-content .content-design {
+    font-size: 2.25rem;
+    font-weight: 100; }
+  .app-banner .app-banner-content .content-linebreak {
+    border-top: 0.5px solid black;
+    display: inline-block;
+    min-width: 300px; }
+  .app-banner .app-banner-content .content-develop {
+    margin-top: 20px;
+    font-size: 2.5rem;
+    text-align: center; }
+    .app-banner .app-banner-content .content-develop span {
+      font-weight: bold;
+      letter-spacing: 5px;
+      padding: 0px 5px;
+      text-transform: uppercase;
       display: inline-block;
-      min-width: 300px; }
-    .app-banner .app-banner-content .content-develop {
-      margin-top: 20px;
-      font-size: 2.5rem;
-      text-align: center; }
-      .app-banner .app-banner-content .content-develop span {
-        font-weight: bold;
-        letter-spacing: 5px;
-        padding: 0px 5px;
-        text-transform: uppercase;
-        display: inline-block;
-        background-color: #E50000;
-        color: white;
-        -webkit-transition: all 0.3s ease-out;
-        transition: all 0.3s ease-out; }
-        .app-banner .app-banner-content .content-develop span:hover {
-          background-color: #000; }
-    .app-banner .app-banner-content .content-frontend {
-      position: absolute;
-      width: 100%;
-      color: #E50000;
-      font-weight: 900;
-      font-size: 3.75rem;
-      top: 180px;
-      left: 0;
-      z-index: -1; }
+      background-color: #E50000;
+      color: white;
+      -webkit-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out; }
+      .app-banner .app-banner-content .content-develop span:hover {
+        background-color: #000; }
+  .app-banner .app-banner-content .content-frontend {
+    margin-top: 40px;
+    text-align: center;
+    color: #E50000;
+    font-weight: 900;
+    font-size: 3.75rem; }
+
+.content-design {
+  margin-top: 40px; }
+
+@media print, screen and (min-width: 40em) {
+  .content-design {
+    margin-top: 220px; } }
 
 .app-navigation {
   font-size: 12px;
