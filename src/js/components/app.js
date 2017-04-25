@@ -127,13 +127,17 @@ export default class App extends React.Component {
         </div>
         <div className="app-block app-contact">
           <h1>CONTACT ME</h1>
-          <ul>
-            <li><a href="#">Github</a></li>
-            <li>|</li>
-            <li><a href="#">up209d@gmail.com</a></li>
-            <li>|</li>
-            <li><a href="#">+61 451 87 2009</a></li>
-          </ul>
+          <div className="row">
+            <div className="small-12">
+              <ul>
+                <li><a href="#">Github</a></li>
+                <li>|</li>
+                <li><a href="#">up209d@gmail.com</a></li>
+                <li>|</li>
+                <li><a href="#">+61 451 87 2009</a></li>
+              </ul>
+            </div>
+          </div>
           <canvas id="FooterCanvas" />
         </div>
         <div className="app-block app-footer">

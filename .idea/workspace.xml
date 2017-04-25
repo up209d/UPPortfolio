@@ -2,31 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6aa143d4-a920-4b7e-9968-a6c0b527151a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bash.exe.stackdump" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/appBundle44d5c467f94392d9aaab.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/style601394f00ac1b108.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/vendorBundler44d5c467f94392d9aaab.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/images/mail.svg" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/appBundlefdccd8754c9f8e6550e6.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/style0f195bc0c3947bae.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/vendorBundlerfdccd8754c9f8e6550e6.js" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/1a173977ec6d660dfd7ad696b17af177.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/appBundle352f3d1bd86c1af8fd8b.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/style4d8f74c5f370207e.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dist/vendorBundler352f3d1bd86c1af8fd8b.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/355c3640f6b9988de6d9a3a79b1eb504.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/appBundle605d7e4c459725e7ec3c.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/style7b152e2b51c07652.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/vendorBundler605d7e4c459725e7ec3c.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/bg_train.jpg" afterPath="$PROJECT_DIR$/src/assets/images/bg_train.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/bg_train_resized.jpg" afterPath="$PROJECT_DIR$/src/assets/images/bg_train_resized.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/index.html" afterPath="$PROJECT_DIR$/dist/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/report.html" afterPath="$PROJECT_DIR$/dist/report.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/avatar.svg" afterPath="$PROJECT_DIR$/src/assets/images/avatar.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/images/github.svg" afterPath="$PROJECT_DIR$/src/assets/images/github.svg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/app.js" afterPath="$PROJECT_DIR$/src/js/components/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/Avatar.js" afterPath="$PROJECT_DIR$/src/js/components/commons/Avatar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/Banner.js" afterPath="$PROJECT_DIR$/src/js/components/commons/Banner.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/BarChartSVG.js" afterPath="$PROJECT_DIR$/src/js/components/commons/BarChartSVG.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/Navigation.js" afterPath="$PROJECT_DIR$/src/js/components/commons/Navigation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/PixiSpringDrop.js" afterPath="$PROJECT_DIR$/src/js/components/commons/PixiSpringDrop.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/SideNav.js" afterPath="$PROJECT_DIR$/src/js/components/commons/SideNav.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js" afterPath="$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/js/index.js" afterPath="$PROJECT_DIR$/src/js/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scss/app.scss" afterPath="$PROJECT_DIR$/src/scss/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scss/components/_Banner.scss" afterPath="$PROJECT_DIR$/src/scss/components/_Banner.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scss/components/_Navigation.scss" afterPath="$PROJECT_DIR$/src/scss/components/_Navigation.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scss/components/_SideNav.scss" afterPath="$PROJECT_DIR$/src/scss/components/_SideNav.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/scss/layout/_content.scss" afterPath="$PROJECT_DIR$/src/scss/layout/_content.scss" />
     </list>
@@ -51,7 +40,7 @@
           <file leaf-file-name="app.scss" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/scss/app.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="499">
+                <state relative-caret-position="754">
                   <caret line="45" column="29" lean-forward="false" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
                   <folding />
                 </state>
@@ -61,8 +50,8 @@
           <file leaf-file-name="_SideNav.scss" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/scss/components/_SideNav.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="396">
-                  <caret line="47" column="12" lean-forward="false" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
+                <state relative-caret-position="-119">
+                  <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
                   <folding />
                 </state>
               </provider>
@@ -93,8 +82,8 @@
           <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/js/components/app.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="440">
-                  <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
+                <state relative-caret-position="405">
+                  <caret line="125" column="27" lean-forward="false" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -102,11 +91,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Avatar.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Avatar.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/js/components/commons/Avatar.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="120" column="9" lean-forward="false" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
+                <state relative-caret-position="-20">
+                  <caret line="122" column="7" lean-forward="false" selection-start-line="122" selection-start-column="7" selection-end-line="122" selection-end-column="7" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                     <element signature="e#458#520#0" expanded="true" />
@@ -119,18 +108,18 @@
           <file leaf-file-name="Navigation.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/js/components/commons/Navigation.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="184">
+                <state relative-caret-position="847">
                   <caret line="95" column="55" lean-forward="false" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="55" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="_content.scss" pinned="false" current-in-tab="false">
+          <file leaf-file-name="_content.scss" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/scss/layout/_content.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="124">
-                  <caret line="34" column="40" lean-forward="false" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
+                <state relative-caret-position="136">
+                  <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
                   <folding />
                 </state>
               </provider>
@@ -153,8 +142,8 @@
           <file leaf-file-name="ToggleInViewPort.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="459">
-                  <caret line="61" column="9" lean-forward="false" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
+                <state relative-caret-position="391">
+                  <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
                   <folding />
                 </state>
               </provider>
@@ -353,7 +342,6 @@
         <option value="$PROJECT_DIR$/webpack.config.build.js" />
         <option value="$PROJECT_DIR$/src/scss/components/_Navigation.scss" />
         <option value="$PROJECT_DIR$/src/scss/app.scss" />
-        <option value="$PROJECT_DIR$/src/scss/components/_SideNav.scss" />
         <option value="$PROJECT_DIR$/src/js/components/commons/SideNav.js" />
         <option value="$PROJECT_DIR$/src/scss/components/_Banner.scss" />
         <option value="$PROJECT_DIR$/src/js/components/commons/Navigation.js" />
@@ -361,10 +349,11 @@
         <option value="$PROJECT_DIR$/src/js/components/commons/BarChartSVG.js" />
         <option value="$PROJECT_DIR$/src/js/components/commons/Banner.js" />
         <option value="$PROJECT_DIR$/src/js/components/commons/PixiSpringDrop.js" />
-        <option value="$PROJECT_DIR$/src/scss/layout/_content.scss" />
-        <option value="$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js" />
-        <option value="$PROJECT_DIR$/src/js/components/app.js" />
         <option value="$PROJECT_DIR$/src/js/components/commons/Avatar.js" />
+        <option value="$PROJECT_DIR$/src/js/components/app.js" />
+        <option value="$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js" />
+        <option value="$PROJECT_DIR$/src/scss/components/_SideNav.scss" />
+        <option value="$PROJECT_DIR$/src/scss/layout/_content.scss" />
       </list>
     </option>
   </component>
@@ -380,8 +369,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1410" />
-    <option name="y" value="558" />
+    <option name="x" value="1284" />
+    <option name="y" value="571" />
     <option name="width" value="2364" />
     <option name="height" value="1247" />
   </component>
@@ -752,7 +741,7 @@
       <workItem from="1492425997189" duration="1935000" />
       <workItem from="1492591602523" duration="11502000" />
       <workItem from="1492692314526" duration="100344000" />
-      <workItem from="1493105524221" duration="11182000" />
+      <workItem from="1493105524221" duration="13386000" />
     </task>
     <task id="LOCAL-00001" summary="Add DropCircle Text Spring Motion">
       <created>1490487902793</created>
@@ -859,11 +848,18 @@
       <option name="project" value="LOCAL" />
       <updated>1492945804353</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Contact - Footer - Fix Responsive Banner">
+      <created>1493139643014</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1493139643014</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="623747000" />
+    <option name="totallyTimeSpent" value="625951000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -875,14 +871,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1410" y="558" width="2364" height="1247" extended-state="0" />
+    <frame x="1284" y="571" width="2364" height="1247" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.113929495" sideWeight="0.4946565" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.113929495" sideWeight="0.48929664" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32943144" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25107297" sideWeight="0.50092083" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18474264" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1429342" sideWeight="0.5053435" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.113929495" sideWeight="0.5107034" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973032" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889705" sideWeight="0.4990792" order="9" side_tool="false" content_ui="tabs" />
@@ -928,7 +924,8 @@
     <MESSAGE value="PIXI Renderer Instead of Native Canvas" />
     <MESSAGE value="Fix Chrome MouseWheel strangeness !" />
     <MESSAGE value="Avatar Color Jumping &amp; SVG Content" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avatar Color Jumping &amp; SVG Content" />
+    <MESSAGE value="Contact - Footer - Fix Responsive Banner" />
+    <option name="LAST_COMMIT_MESSAGE" value="Contact - Footer - Fix Responsive Banner" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1072,6 +1069,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1086,6 +1086,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
           <caret line="20" column="9" lean-forward="false" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1185,6 +1186,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1202,14 +1204,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-374">
           <caret line="23" column="18" lean-forward="false" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/commons/Navigation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="95" column="55" lean-forward="false" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -1238,42 +1232,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/app.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="45" column="29" lean-forward="false" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/components/_SideNav.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="47" column="12" lean-forward="false" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/scss/base/_reset.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="499">
           <caret line="105" column="0" lean-forward="false" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/components/_Banner.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1360">
-          <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/scss/layout/_content.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="34" column="40" lean-forward="false" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -1298,33 +1260,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="102" column="24" lean-forward="false" selection-start-line="102" selection-start-column="24" selection-end-line="102" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="61" column="9" lean-forward="false" selection-start-line="61" selection-start-column="9" selection-end-line="61" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/components/commons/Avatar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="120" column="9" lean-forward="false" selection-start-line="120" selection-start-column="9" selection-end-line="120" selection-end-column="9" />
+        <state relative-caret-position="-20">
+          <caret line="122" column="7" lean-forward="false" selection-start-line="122" selection-start-column="7" selection-end-line="122" selection-end-column="7" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="e#458#520#0" expanded="true" />
             <marker date="1493139273237" expanded="true" signature="4552:4626" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="125" column="27" lean-forward="false" selection-start-line="125" selection-start-column="27" selection-end-line="125" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scss/app.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="754">
+          <caret line="45" column="29" lean-forward="false" selection-start-line="45" selection-start-column="29" selection-end-line="45" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/commons/Navigation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="847">
+          <caret line="95" column="55" lean-forward="false" selection-start-line="95" selection-start-column="55" selection-end-line="95" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scss/components/_SideNav.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scss/components/_Banner.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1360">
+          <caret line="22" column="11" lean-forward="false" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/components/commons/ToggleInViewPort.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="27" column="43" lean-forward="false" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/scss/layout/_content.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="41" column="22" lean-forward="false" selection-start-line="41" selection-start-column="22" selection-end-line="41" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -30,9 +30,14 @@
 .app-contact {
 
   overflow: hidden;
-  background: #111;  /* fallback for old browsers */
-  background: -webkit-radial-gradient(#222, #111);  /* Chrome 10-25, Safari 5.1-6 */
-  background: radial-gradient(#222, #111); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #111;  /* fallback for old browsers */
+  background-color: -webkit-radial-gradient(#222, #111);  /* Chrome 10-25, Safari 5.1-6 */
+  background-color: radial-gradient(#222, #111); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: url("#{$assetsPath}/bg_train_resized.jpg");
+  background-size: cover;
+  background-position: center;
+  //background-blend-mode: multiply;
+  background-attachment: fixed;
 
   padding-bottom: 300px;
   border-bottom: none;
@@ -49,7 +54,7 @@
   }
   ul {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: center;
     align-content: space-around;
     align-items: baseline;
