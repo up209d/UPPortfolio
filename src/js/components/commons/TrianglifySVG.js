@@ -62,41 +62,44 @@ class TrianglifySVG extends React.Component {
   }
 
   animateSVG() {
-    // console.log(this.polys);
-    // No Animation in phone
-    if (!this.props.UI.handheld) {
-      // console.log(vertexSets);
-      this.vertexSets.forEach((vertexSet,index)=>{
-        if (Math.random()>0.5) {
-          let duration = Math.random()*6+6;
-          let offsetX = Math.random()*400-200;
-          let offsetY = Math.random()*400-200;
-          //Tween an array
+    // Only run in Chrome
+    if (window.chrome) {
+      // console.log(this.polys);
+      // No Animation in phone
+      if (!this.props.UI.handheld) {
+        // console.log(vertexSets);
+        this.vertexSets.forEach((vertexSet,index)=>{
+          if (Math.random()>0.5) {
+            let duration = Math.random()*6+6;
+            let offsetX = Math.random()*400-200;
+            let offsetY = Math.random()*400-200;
+            //Tween an array
+            TweenMax.killTweensOf(vertexSet);
+            TweenMax.to(vertexSet,duration,{
+              x: "+="+offsetX,
+              y: "+="+offsetY,
+              ease: Power1.easeInOut,
+              repeat:-1,
+              yoyo: true,
+              immediateRender: true
+            });
+          }
+        });
+      } else {
+        this.vertexSets.forEach((vertexSet,index)=>{
+          let duration = Math.random()*5+3;
+          let offsetX = Math.random()*100-50;
+          let offsetY = Math.random()*100-50;
           TweenMax.killTweensOf(vertexSet);
           TweenMax.to(vertexSet,duration,{
+            delay: 5,
             x: "+="+offsetX,
             y: "+="+offsetY,
             ease: Power1.easeInOut,
-            repeat:-1,
-            yoyo: true,
             immediateRender: true
-          });
-        }
-      });
-    } else {
-      this.vertexSets.forEach((vertexSet,index)=>{
-        let duration = Math.random()*5+3;
-        let offsetX = Math.random()*100-50;
-        let offsetY = Math.random()*100-50;
-        TweenMax.killTweensOf(vertexSet);
-        TweenMax.to(vertexSet,duration,{
-          delay: 5,
-          x: "+="+offsetX,
-          y: "+="+offsetY,
-          ease: Power1.easeInOut,
-          immediateRender: true
-        }); // Delay 1s then start animation
-      });
+          }); // Delay 1s then start animation
+        });
+      }
     }
   }
 

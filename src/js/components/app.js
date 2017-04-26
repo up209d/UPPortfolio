@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionUI from '../actions/actionUI';
-import { createSelector } from 'reselect'
+import utils from '../utils';
+import styled from 'styled-components';
 
 import Banner from './commons/Banner';
 import Avatar from './commons/Avatar';
@@ -15,7 +16,10 @@ import ToggleInViewPort from './commons/ToggleInViewPort';
 import { Row, Column } from 'react-foundation';
 
 const mapStateToProps = (state) => {
-  return {UI: state.UI}
+  return {
+    UI: state.UI,
+    Interactive: state.Interactive
+  }
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -143,7 +147,92 @@ export default class App extends React.Component {
         <div className="app-block app-footer">
           <p>Copyright U.P 2017. All rights reserved.</p>
         </div>
+        <FakeScrollbar TimeOut={250}/>
       </div>
     )
   }
 }
+
+// Chrome Only Fake Scroll Bar
+
+const FakeScrollbarStyled = styled.div`
+  ${props => {
+    if (window.chrome) {
+      return `
+        width: 6px;
+        
+        div {
+          width: 6px
+        }
+        
+        &::-webkit-scrollbar {
+         width: 6px;
+        }
+      
+        &::-webkit-scrollbar-track {
+         background-color: rgba(0,0,0,0.05);
+         border-radius: 3px;
+        }
+      
+        &::-webkit-scrollbar-thumb {
+         background-color: rgba(99,99,99,0.5);
+         border-radius: 3px;
+        }
+      `
+    }
+  }}
+`;
+
+class FakeScrollbar extends React.Component{
+  constructor(props,context) {
+    super(props);
+    this.state = {
+      isShow: false
+    };
+    this.onWindowScrolling = this.onWindowScrolling.bind(this);
+    this.debounceDisappear = utils.fDebounce(this.debounceDisappear.bind(this),this.props.TimeOut);
+  }
+
+  debounceDisappear() {
+    this.setState({
+      isShow: false
+    });
+  }
+
+  onWindowScrolling() {
+    this.DOM.scrollTop = window.scrollY;
+    if (!this.state.isShow) {
+      this.setState({
+        isShow: true
+      });
+    }
+    this.debounceDisappear();
+  }
+
+  componentDidMount() {
+    this.DOM = ReactDOM.findDOMNode(this);
+    window.addEventListener('scroll',this.onWindowScrolling);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll',this.onWindowScrolling);
+  }
+
+  render() {
+    return (
+        <FakeScrollbarStyled className="app-scrollbar" style={{
+          height: document.body.clientHeight,
+          opacity: this.state.isShow ? 1 : 0
+        }}>
+          <div className="app-scrollbar__core" style={{
+            height: document.documentElement.scrollHeight
+          }}>
+          </div>
+        </FakeScrollbarStyled>
+      ) || null;
+  }
+}
+
+FakeScrollbar.defaultProps = {
+  TimeOut: 150
+};

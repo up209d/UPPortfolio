@@ -30,9 +30,6 @@
 .app-contact {
 
   overflow: hidden;
-  background-color: #111;  /* fallback for old browsers */
-  background-color: -webkit-radial-gradient(#222, #111);  /* Chrome 10-25, Safari 5.1-6 */
-  background-color: radial-gradient(#222, #111); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-image: url("#{$assetsPath}/bg_train_resized.jpg");
   background-size: cover;
   background-position: center;
@@ -101,5 +98,31 @@
   padding-bottom: 0px;
   p {
     padding-top: 20px;
+  }
+  border:0;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  .app-scrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 999999;
+    pointer-events: none;
+    transition: opacity 0.25s ease-out;
+    //background-color: red;
+    //
+    //div {
+    //  background-color: red;
+    //}
+
+  }
+}
+
+@supports (-ms-ime-align:auto) {
+  .app-scrollbar {
+    display: none;
   }
 }

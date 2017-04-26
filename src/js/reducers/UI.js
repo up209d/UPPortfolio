@@ -9,6 +9,7 @@ const prefix = 'Redux UI Reducer: ';
 const UI = (state = {
   width: window.innerWidth || 0,
   height: window.innerHeight || 0,
+  browser: utils.browserDetection,
   handheld: utils.browserDetection.isHandHeld() || (window.innerWidth<=640),
   mouseX: 0,
   mouseY: 0,

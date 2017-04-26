@@ -20,18 +20,17 @@ export default class Banner extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+
+  }
+
   render() {
-    console.log('Rendering');
+    // console.log('Rendering');
     return (
       <div ref="banner" className="app-block app-banner">
         {/*<DistortContentByMouse options={{zoom: 1.2,reverseDirection: true,duration:1}}/>*/}
         <Navigation/>
         <div className="app-banner-mid">
-          {!this.props.UI.handheld && <PixiSpringDrop className="app-drops" options={{
-            timeOut: 5000,
-            width: this.props.UI.width,
-            height: 720
-          }}/>}
           <BannerContent {...this.props}/>
         </div>
         <TrianglifySVG UI={{handheld: this.props.UI.handheld}} ref="bannerTrianglify"
@@ -107,9 +106,8 @@ class DistortContentByMouse extends React.PureComponent {
   render() {
     return (
       <div ref={skew => this.skew = skew} className="app-skew" style={{
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
+        minWidth:'100%',
+        minHeight:'100%',
         transform: this.state.transform,
         transition: `transform ${this.state.duration}s linear`
       }}>
@@ -126,10 +124,17 @@ DistortContentByMouse.defaultProps = {
 const BannerContent = (props) => (
   <div className="app-banner-content">
     {!props.UI.handheld &&
+      <PixiSpringDrop className="app-drops" options={{
+        timeOut: 5000,
+        width: props.UI.width,
+        height: 720
+      }}/>
+    }
+    {!props.UI.handheld &&
     <DistortContentByMouse UI={{handheld: props.UI.handheld}}>
       <Row>
         <Column className="text-center mt-75" small={12} centerOnSmall>
-          <Motion defaultStyle={{value: -500}} style={{value: spring(0, presets.wobbly)}}>
+          <Motion defaultStyle={{value: -500}} style={{value: spring(0)}}>
             {item => {
               return (
                 <TitleString className="content-greeting" style={{transform: `translateY(${item.value}px)`}}
@@ -137,18 +142,18 @@ const BannerContent = (props) => (
               )
             }}
           </Motion>
-          <Motion defaultStyle={{value: -window.innerWidth}} style={{value: spring(0, presets.wobbly)}}>
+          <Motion defaultStyle={{value: -window.innerWidth}} style={{value: spring(0)}}>
             {item => (
               <TitleString className="content-design" style={{transform: `translateX(${item.value}px)`}}
                            title={`Designer`}/>
             )}
           </Motion>
-          <Motion defaultStyle={{value: 0}} style={{value: spring(1, presets.wobbly)}}>
+          <Motion defaultStyle={{value: 0}} style={{value: spring(1)}}>
             {item => (
               <div className="content-linebreak" style={{transform: `scaleX(${item.value})`}}></div>
             )}
           </Motion>
-          <Motion defaultStyle={{value: window.innerWidth}} style={{value: spring(0, presets.wobbly)}}>
+          <Motion defaultStyle={{value: window.innerWidth}} style={{value: spring(0)}}>
             {item => (
               <ResponsiveTitleString className="content-develop" style={{transform: `translateX(${item.value}px)`}}
                                      title={`[Developer]`} UI={props.UI}/>

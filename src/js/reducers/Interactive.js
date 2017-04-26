@@ -28,6 +28,11 @@ const Interactive = (
         isMouseMoving: false,
         isTouching: true
       };
+    case types.ON_SCROLLING:
+      return {
+        scrollX: action.scrollX,
+        scrollY: action.scrollY,
+      };
     default:
       return state;
   }

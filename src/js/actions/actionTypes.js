@@ -1,4 +1,5 @@
 export const ON_RESIZE_WINDOW = 'ON_RESIZE_WINDOW';
+export const ON_SCROLLING = 'ON_SCROLLING';
 export const ON_MOUSE_MOVE = 'ON_MOUSE_MOVE';
 export const ON_TOUCH_MOVE = 'ON_TOUCH_MOVE';
 export const TOGGLE_BANNER = 'TOGGLE_BANNER';

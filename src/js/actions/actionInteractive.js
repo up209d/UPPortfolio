@@ -16,3 +16,11 @@ export function onTouchMove(e) {
     type: types.ON_TOUCH_MOVE
   }
 }
+
+export function onScrolling() {
+  return {
+    scrollX: window.scrollX,
+    scrollY: window.scrollY,
+    type: types.ON_SCROLLING
+  }
+}

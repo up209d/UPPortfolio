@@ -36,19 +36,20 @@ if (window) {
 // so the scrolling window event make timeout stucking,
 // we have to overwrite that
   const handleWheelWebkit = function(e){
-    let y = {value:window.scrollY};
-    let amount = -e.wheelDeltaY || e.deltaY || 0;
-    amount = (amount > 0 && amount < 150) ? 150 : amount;
-    amount = (amount < 0 && amount > -150) ? -150 : amount;
-    TweenMax.to(y,Math.abs(amount)/500,{
-      value: amount == 0 ? "+=0" : amount > 0 ? "+="+Math.abs(e.deltaY) : "-="+Math.abs(e.deltaY),
-      ease: Power1.easeOut,
-      onUpdate: function(){
-        window.scrollTo(0,y.value);
-      }
-    });
-    e.preventDefault();
-  }
+    // console.log(e);
+    // let y = {value:window.scrollY};
+    // let amount = -e.wheelDeltaY || e.deltaY || 0;
+    // amount = (amount > 0 && amount < 150) ? 150 : amount;
+    // amount = (amount < 0 && amount > -150) ? -150 : amount;
+    // TweenMax.to(y,Math.abs(amount)/500,{
+    //   value: amount == 0 ? "+=0" : amount > 0 ? "+="+Math.abs(e.deltaY) : "-="+Math.abs(e.deltaY),
+    //   ease: Power1.easeOut,
+    //   onUpdate: function(){
+    //     window.scrollTo(0,y.value);
+    //   }
+    // });
+    // e.preventDefault();
+  };
   window.addEventListener('mousewheel',handleWheelWebkit);
 
   window.requestAnimationFrame = window.requestAnimationFrame
@@ -58,12 +59,15 @@ if (window) {
     || function(f){return setTimeout(f, 1000/30)};
 
   window.addEventListener('resize',utils.fDebounce(store.dispatch.bind(this,{type: 'ON_RESIZE_WINDOW'}),250));
-  window.addEventListener('mousemove',(e)=>{
-    store.dispatch(actionInteractive.onMouseMove(e));
-  });
-  window.addEventListener('touchmove',(e)=>{
-    store.dispatch(actionInteractive.onTouchMove(e));
-  });
+  // window.addEventListener('scroll',(e)=>{
+  //   store.dispatch(actionInteractive.onScrolling(e));
+  // });
+  // window.addEventListener('mousemove',(e)=>{
+  //   store.dispatch(actionInteractive.onMouseMove(e));
+  // });
+  // window.addEventListener('touchmove',(e)=>{
+  //   store.dispatch(actionInteractive.onTouchMove(e));
+  // });
 }
 
 if (process.env.NODE_ENV !== 'production') {
