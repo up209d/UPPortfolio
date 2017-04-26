@@ -5195,7 +5195,7 @@ a.thumbnail {
 .row::before, .row::after {
   content: none; }
 
-::-webkit-scrollbar {
+html::-webkit-scrollbar, body::-webkit-scrollbar {
   display: none; }
 
 /* Scrollbar Styling */
@@ -6137,12 +6137,6 @@ a {
 
 .app-contact {
   overflow: hidden;
-  background-color: #111;
-  /* fallback for old browsers */
-  background-color: -webkit-radial-gradient(#222, #111);
-  /* Chrome 10-25, Safari 5.1-6 */
-  background-color: radial-gradient(#222, #111);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-image: url(1a173977ec6d660dfd7ad696b17af177.jpg);
   background-size: cover;
   background-position: center;
@@ -6196,9 +6190,26 @@ a {
 .app-footer {
   font-size: 14px;
   text-align: center;
-  padding-bottom: 0px; }
+  padding-bottom: 0px;
+  border: 0; }
   .app-footer p {
     padding-top: 20px; }
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .app-scrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 999999;
+    pointer-events: none;
+    -webkit-transition: opacity 0.25s ease-out;
+    transition: opacity 0.25s ease-out; } }
+
+@supports (-ms-ime-align: auto) {
+  .app-scrollbar {
+    display: none; } }
 
 .app-resume__content li {
   margin-bottom: 30px; }
