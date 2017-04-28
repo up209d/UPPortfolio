@@ -27,6 +27,25 @@
   padding-top:720px;
 }
 
+.app-resume {
+  .app-resume__content {
+
+  }
+}
+
+.app-works {
+  ul {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    li {
+      text-align: center;
+      margin: 0px 50px;
+    }
+  }
+}
+
 .app-contact {
 
   overflow: hidden;

@@ -12,6 +12,7 @@ import Avatar from './commons/Avatar';
 import SideNav from './commons/SideNav';
 import BarChartSVG from './commons/BarChartSVG';
 import ToggleInViewPort from './commons/ToggleInViewPort';
+import SnapSVGImage from './commons/SnapSVGImage';
 
 import { Row, Column } from 'react-foundation';
 
@@ -79,7 +80,7 @@ export default class App extends React.Component {
               <p className="text-center">I have years of experience in web industry. I like to work in this area, where i can balance between design and coding. There is nothing more interesting than what you made in static visual images turning into live, by the art of math and logic underneath the coding lines.</p>
             </Column>
           </Row>
-          <Row>
+          <Row className="app-resume__content">
             <Column small={12} centerOnSmall>
               <Row>
                 <Column className="app-resume__image text-center medium-text-right" small={12} medium={4} offsetOnMedium={2}>
@@ -128,13 +129,37 @@ export default class App extends React.Component {
         </ToggleInViewPort>
         <div className="app-block app-works">
           <h1>MY WORKS</h1>
+          <Row>
+            <Column small={12}>
+              <ul>
+                <li>
+                  <a href="https://github.com/up209d/">
+                    <SnapSVGImage src={require('Images/github.svg')}/>
+                    Github
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.behance.net/up209d">
+                    <SnapSVGImage src={require('Images/behance.svg')}/>
+                    Behance
+                  </a>
+                </li>
+                <li>
+                  <a href="https://500px.com/up209d">
+                    <SnapSVGImage src={require('Images/500px.svg')}/>
+                    500px
+                  </a>
+                </li>
+              </ul>
+            </Column>
+          </Row>
         </div>
         <div className="app-block app-contact">
           <h1>CONTACT ME</h1>
           <div className="row">
             <div className="small-12">
               <ul>
-                <li><a href="#">Github</a></li>
+                <li><a href="https://au.linkedin.com/in/duc-duong-158015142">My Linkedin</a></li>
                 <li>|</li>
                 <li><a href="#">up209d@gmail.com</a></li>
                 <li>|</li>

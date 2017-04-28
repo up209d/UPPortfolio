@@ -20,7 +20,7 @@ module.exports = {
       'react','react-dom','react-motion','react-foundation',
       'redux','react-router','react-router-redux','history',
       'styled-components','webfontloader','mobile-detect',
-      'trianglify','pixi.js','gsap'
+      'trianglify','pixi.js','gsap','snapsvg'
     ]
   },
   plugins: [

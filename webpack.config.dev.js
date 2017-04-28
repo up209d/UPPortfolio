@@ -22,8 +22,8 @@ module.exports = {
     vendorBundler: [
       'react','react-dom','react-motion','react-foundation',
       'redux','react-router','react-router-redux','history',
-      'webfontloader','mobile-detect',
-      'trianglify','pixi.js','gsap'
+      'styled-components','webfontloader','mobile-detect',
+      'trianglify','pixi.js','gsap','snapsvg'
     ]
   },
   plugins: [
