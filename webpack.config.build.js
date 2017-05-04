@@ -11,6 +11,7 @@ var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlug
 process.env.NODE_ENV = 'production';
 
 module.exports = {
+  devtool: 'cheap-module-source-map',
   externals: {},
   entry: {
     appBundle: [
@@ -88,7 +89,7 @@ module.exports = {
         test: /\.(css|scss)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: ['css-loader?sourceMap&importLoaders=1','postcss-loader', "sass-loader?sourceMap"]
+          use: ['css-loader?importLoaders=1','postcss-loader', "sass-loader"]
         }),
         exclude: [/node_modules/]
       },

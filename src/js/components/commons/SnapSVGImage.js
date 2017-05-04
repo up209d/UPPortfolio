@@ -46,8 +46,9 @@ class SnapSVGImage extends React.Component{
   componentDidMount() {
     this.DOM = ReactDOM.findDOMNode(this);
     this.Snap = Snap(this.DOM);
-    Snap.load(this.props.src,(svg)=>{
-      this.Snap.append(svg);
+
+    if (this.props.src.substr(0,4) == 'data') {
+      this.Snap.append(Snap.parse(atob(this.props.src.split(",")[1])));
       this.SVG = this.Snap.select('svg').node;
 
       // Reset Width Height
@@ -63,11 +64,31 @@ class SnapSVGImage extends React.Component{
           });
         }
       }
-
       this.SVG.addEventListener('mouseenter',this.onMouseEnter);
       this.SVG.addEventListener('mouseleave',this.onMouseLeave);
 
-    });
+    } else {
+      Snap.load(this.props.src,(svg)=>{
+        this.Snap.append(svg);
+        this.SVG = this.Snap.select('svg').node;
+
+        // Reset Width Height
+        this.SVG.removeAttribute('height');
+        this.SVG.setAttribute('width',this.props.width);
+
+        if (this.props.color) {
+          let result = this.SVG.querySelectorAll('path');
+          if (result.length) {
+            result = Array.prototype.slice.call(result);
+            result.map((item)=>{
+              item.setAttribute('fill',this.props.color);
+            });
+          }
+        }
+        this.SVG.addEventListener('mouseenter',this.onMouseEnter);
+        this.SVG.addEventListener('mouseleave',this.onMouseLeave);
+      });
+    }
   }
 
   componentWillUnmount() {

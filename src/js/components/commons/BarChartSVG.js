@@ -187,8 +187,8 @@ class BarGroup extends React.Component {
               let color = `rgba(${~~item.colorR},${~~item.colorG},${~~item.colorB},${item.alpha})`;
               return (
                 <g onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-                  <text style={{fontWeight: item.fontWeight}} fill={`rgba(0,0,0,${1})`} x={0} y={this.props.height+20} transform={this.props.isVertical ? `rotate(-90,10,${this.props.height-15})` : `rotate(0,0,0)`}>{this.props.name}</text>
-                  <rect width={this.props.width} height={this.props.height} fill={color}/>
+                  <text style={{fontWeight: item.fontWeight}} fill={`rgba(0,0,0,${item.textOpacity})`} textAnchor={this.props.isVertical ? "start" : "middle"} x={this.props.isVertical ? 0 : this.props.width/2} y={this.props.height+20} transform={this.props.isVertical ? `rotate(-90,10,${this.props.height-15})` : `rotate(0,0,0)`}>{this.props.name}</text>
+                  {/*<rect width={this.props.width} height={this.props.height} fill={color}/>*/}
                   <path d={`M${
                     // Move to first point X Pos
                     0

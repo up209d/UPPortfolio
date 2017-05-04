@@ -138,7 +138,7 @@ const BannerContent = (props) => (
             {item => {
               return (
                 <TitleString className="content-greeting" style={{transform: `translateY(${item.value}px)`}}
-                             title="Hi there! I am U.P"/>
+                             title="It's DUC aka U.P"/>
               )
             }}
           </Motion>
@@ -165,7 +165,7 @@ const BannerContent = (props) => (
     }
     { props.UI.handheld && <Row>
       <Column className="text-center mt-75" small={12} centerOnSmall>
-        <TitleString className="content-greeting" title="Hi there! I am U.P"/>
+        <TitleString className="content-greeting" title="It's DUC aka U.P"/>
         <TitleString className="content-frontend" title={`Front-end`}/>
         <TitleString className="content-design" title={`Designer`}/>
         <div className="content-linebreak"></div>

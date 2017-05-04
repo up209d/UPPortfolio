@@ -7,21 +7,34 @@ class Navigation extends React.PureComponent {
     super(props);
   }
 
+  scrollTo(e) {
+    let y = {
+      value: window.scrollY
+    };
+    TweenMax.to(y,1,{
+      value: e,
+      ease: Power3.easeOut,
+      onUpdate: function() {
+        window.scrollTo(0,y.value);
+      }
+    });
+  }
+
   render() {
     return (
       <div className="app-navigation">
         <Row className="show-for-medium">
           <Column small={12} medium={10} large={8} centerOnSmall>
             <ul className="app-navigation-menu">
-              <li><a href="#">About</a></li>
-              <li><a href="#">My Skills</a></li>
+              <li><a href="#" onClick={()=>this.scrollTo(700)}>About</a></li>
+              <li><a href="#" onClick={()=>this.scrollTo(1800)}>My Skills</a></li>
               <li className="app-logo">
-                <a href="#">
+                <a href="#" onClick={(e)=>e.preventDefault()}>
                   <img src={require('Images/damg.svg')} alt="DAMGLOGO"/>
                 </a>
               </li>
-              <li><a href="#">My Work</a></li>
-              <li><a href="#">Contact Me</a></li>
+              <li><a href="#" onClick={()=>this.scrollTo(2500)}>My Work</a></li>
+              <li><a href="#" onClick={()=>this.scrollTo(3000)}>Contact Me</a></li>
             </ul>
           </Column>
         </Row>
@@ -48,6 +61,19 @@ class NavigationHiddenMenu extends React.Component {
     this.state = {
       showMenu: false
     }
+  }
+
+  scrollTo(e) {
+    let y = {
+      value: window.scrollY
+    };
+    TweenMax.to(y,1,{
+      value: e,
+      ease: Power3.easeOut,
+      onUpdate: function() {
+        window.scrollTo(0,y.value);
+      }
+    });
   }
 
   toggleMenu() {
@@ -93,11 +119,11 @@ class NavigationHiddenMenu extends React.Component {
                 <Row>
                   <Column small={12} centerOnSmall>
                     <ul>
-                      <li><a href="#">About Me</a></li>
-                      <li><a href="#">My Skills</a></li>
-                      <li><a href="#">My Work</a></li>
-                      <li><a href="#">Contact Me</a></li>
-                      <li><a href="#" onClick={this.toggleMenu.bind(this)}>[ Close ]</a></li>
+                      <li><a href="#" onClick={()=>this.scrollTo(700)}>About Me</a></li>
+                      <li><a href="#" onClick={()=>this.scrollTo(1800)}>My Skills</a></li>
+                      <li><a href="#" onClick={()=>this.scrollTo(2500)}>My Work</a></li>
+                      <li><a href="#" onClick={()=>this.scrollTo(3000)}>Contact Me</a></li>
+                      <li><a href="#" onClick={()=>this.toggleMenu()}>[ Close ]</a></li>
                     </ul>
                   </Column>
                 </Row>

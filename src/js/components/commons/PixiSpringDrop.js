@@ -74,7 +74,7 @@ class PixiSpringDrop extends React.PureComponent {
 
   changeView(view) {
     if (view) {
-      console.log('Change Canvas View');
+      // console.log('Change Canvas View');
       this.activeCanvas = view;
       this.App.ticker.destroy();
       this.App.stage.destroy({

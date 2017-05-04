@@ -22,8 +22,8 @@ class Utilities {
         isHandHeld: () => {return false}
       };
     }
-
   }
+
   fDebounce(func, wait, immediate) {
     var timeout;
     return function () {
@@ -79,7 +79,6 @@ class Utilities {
     if (to == from) { return to }
     return (((value-from)/(to-from))*(newTo-newFrom))+newFrom;
   }
-
 }
 
 const utils =  new Utilities();

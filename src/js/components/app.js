@@ -34,6 +34,19 @@ export default class App extends React.Component {
     this.onScrolling = this.onScrolling.bind(this);
   }
 
+  scrollTo(e) {
+    let y = {
+      value: window.scrollY
+    };
+    TweenMax.to(y,0.5,{
+      value: e,
+      ease: Power3.easeOut,
+      onUpdate: function() {
+        window.scrollTo(0,y.value);
+      }
+    });
+  }
+
   onScrolling(e) {
     if (window.scrollY <= 750) {
       document.querySelector('.app-resume').style.backgroundColor = `rgba(255,255,255,${
@@ -116,6 +129,7 @@ export default class App extends React.Component {
                       <p><span>CMC Telecom - Infracstructure Online Department</span></p>
                     </li>
                   </ul>
+                  <p><a style={{fontSize:'0.85rem',color:'#E50000'}} href="http://duc.damgteam.com/CV.pdf">Download Resume</a></p>
                 </Column>
               </Row>
             </Column>
@@ -159,11 +173,11 @@ export default class App extends React.Component {
           <div className="row">
             <div className="small-12">
               <ul>
-                <li><a href="https://au.linkedin.com/in/duc-duong-158015142">My Linkedin</a></li>
+                <li><a href="https://au.linkedin.com/in/duc-duong-158015142" target="_blank">My Linkedin</a></li>
                 <li>|</li>
-                <li><a href="#">up209d@gmail.com</a></li>
+                <li><a href="mailto:up209d@gmail.com" target="_blank">up209d@gmail.com</a></li>
                 <li>|</li>
-                <li><a href="#">+61 451 87 2009</a></li>
+                <li><a href="tel:+61451872009" target="_blank">+61 451 87 2009</a></li>
               </ul>
             </div>
           </div>
