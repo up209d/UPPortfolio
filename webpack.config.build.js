@@ -1,6 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
+var CompressionPlugin = require('compression-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // For Build we need seperate our css file by this plugin
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -53,6 +55,13 @@ module.exports = {
       sourceMap: false,
       // exclude: [/node_modules/,/bower_components/]
     }),
+    new CompressionPlugin({
+      test: /(\.js$|\.css$|\.html$|\.svg$|\.json$)/
+    }),
+    new CopyWebpackPlugin([
+      { from: './.htaccess', to: './[name].[ext]' },
+      { from: './src/assets/documents/*.*', to: './[name].[ext]'}
+    ]),
     // Stat size is actual size before minified
     // Parse size is after be minified
     // gzip size is compression state size
@@ -69,7 +78,8 @@ module.exports = {
       path.resolve(__dirname + '/src/js/vendor')
     ],
     alias: {
-      Images: path.resolve(__dirname+'/src/assets/images/')
+      Images: path.resolve(__dirname+'/src/assets/images/'),
+      Documents: path.resolve(__dirname+'/src/assets/documents/')
     }
   },
   module: {
@@ -94,7 +104,7 @@ module.exports = {
         exclude: [/node_modules/]
       },
       {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        test: /(\.eot(\?v=\d+\.\d+\.\d+)?$|\.pdf$)/,
         use: 'file-loader',
         exclude: [/node_modules/]
       },

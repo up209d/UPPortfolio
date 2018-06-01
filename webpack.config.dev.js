@@ -3,6 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 // var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var host = require("./host.config");
 var hostLocalAccess = "http://" + host.hostName + ":" + host.hostPort;
@@ -30,11 +31,6 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new HTMLWebpackPlugin({
-      filename: 'index.html',
-      favicon: './src/assets/images/favicon.ico',
-      template: './src/index.html'
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
@@ -45,11 +41,15 @@ module.exports = {
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'vendorBundler',
     // }),
-    // new HTMLWebpackPlugin({
-    //   filename: 'index.html',
-    //   favicon: './src/assets/images/favicon.ico',
-    //   template: './src/index.html'
-    // }),
+    new HTMLWebpackPlugin({
+      filename: 'index.html',
+      favicon: './src/assets/images/favicon.ico',
+      template: './src/index.html'
+    }),
+    new CopyWebpackPlugin([
+      { from: './.htaccess', to: './[name].[ext]' },
+      { from: './src/assets/documents/*.*', to: './[name].[ext]'}
+    ]),
     // new BundleAnalyzerPlugin({
     //   // Can be `server`, `static` or `disabled`.
     //   // In `server` mode analyzer will start HTTP server to show bundle report.
@@ -85,7 +85,8 @@ module.exports = {
       path.resolve(__dirname + '/src/js/vendor')
     ],
     alias: {
-      Images: path.resolve(__dirname+'/src/assets/images/')
+      Images: path.resolve(__dirname+'/src/assets/images/'),
+      Documents: path.resolve(__dirname+'/src/assets/documents/')
     }
   },
   module: {
@@ -110,7 +111,7 @@ module.exports = {
         exclude: [/node_modules/]
       },
       {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        test: /(\.eot(\?v=\d+\.\d+\.\d+)?$|\.pdf$)/,
         use: 'file-loader',
         exclude: [/node_modules/]
       },
@@ -176,5 +177,4 @@ module.exports = {
     publicPath: hostNetworkAccess + '/',
     filename: '[name].js'
   }
-
 };

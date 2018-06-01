@@ -31,13 +31,13 @@ app.use(webpackDevMiddleware(compiler, {
 
 app.use(webpackHotMiddleware(compiler));
 
-// If we meet the readFileSystem error, that s because of webpack html plugin
-// It failed to cache a index.html file, so we should run webpack build first to test
-// It will trigger Html webpack plugin to cache
-app.use('*', function (req, res, next) {
-  var filename = path.join(compiler.outputPath,'index.html');
-  // console.log(compiler.outputFileSystem);
-  compiler.outputFileSystem.readFile(filename, function(err, result){
+// If we meet the readFileSystem error, that because of html webpack plugin
+// failed to make index.html file, it cannot run the parse since some webpack compiling error
+// by your code in src, so check some require function in your src code to see whether
+// webpack is failed to require any file path
+app.use(function (req, res, next) {
+  let filename = path.join(compiler.outputPath,'index.html');
+  compiler.outputFileSystem.readFile(filename, 'utf-8', function(err, result){
     if (err) {
       return next(err);
     }

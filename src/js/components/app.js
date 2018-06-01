@@ -124,12 +124,12 @@ export default class App extends React.Component {
                       <p><span>WeCan Grp. Technological Solution & Communication</span></p>
                     </li>
                     <li>
-                      <h3>Web/UI Designer</h3>
+                      <h3>Web/UI Developer</h3>
                       <p>Full Time</p>
                       <p><span>CMC Telecom - Infracstructure Online Department</span></p>
                     </li>
                   </ul>
-                  <p><a style={{fontSize:'0.85rem',color:'#E50000'}} href="http://duc.damgteam.com/CV.pdf">Download Resume</a></p>
+                  <p><a style={{fontSize:'0.85rem',color:'#E50000'}} href={'CV.pdf'}>Download Resume</a></p>
                 </Column>
               </Row>
             </Column>
