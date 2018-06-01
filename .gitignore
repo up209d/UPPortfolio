@@ -18,3 +18,5 @@ $RECYCLE.BIN/
 bin/
 bower_components/
 node_modules/
+
+.idea
