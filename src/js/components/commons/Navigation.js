@@ -27,7 +27,7 @@ class Navigation extends React.PureComponent {
           <Column small={12} medium={10} large={8} centerOnSmall>
             <ul className="app-navigation-menu">
               <li><a href="#" onClick={()=>this.scrollTo(700)}>About</a></li>
-              <li><a href="#" onClick={()=>this.scrollTo(1800)}>My Skills</a></li>
+              <li><a href="#" onClick={()=>this.scrollTo(1950)}>My Skills</a></li>
               <li className="app-logo">
                 <a href="#" onClick={(e)=>e.preventDefault()}>
                   <img src={require('Images/damg.svg')} alt="DAMGLOGO"/>
