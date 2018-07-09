@@ -109,24 +109,24 @@ export default class App extends React.Component {
                       <p><span>Monash University</span></p>
                     </li>
                     <li>
-                      <h3>Bachelor of Computer Science</h3>
+                      <h3>Bachelor of Computer Sciences</h3>
                       <p>Information Technology</p>
-                      <p><span>Vietnam - National Economic University</span></p>
-                    </li>
-                    <li>
-                      <h3>Diploma of Design</h3>
-                      <p>Digital Animation & Motion Graphics</p>
-                      <p><span>FPT Omega School Of Design</span></p>
+                      <p><span>Vietnam - National Economics University</span></p>
                     </li>
                     <li>
                       <h3>Web Developer</h3>
-                      <p>Full Time / Part Time</p>
+                      <p>Freelancer</p>
                       <p><span>WeCan Grp. Technological Solution & Communication</span></p>
                     </li>
                     <li>
                       <h3>Web/UI Developer</h3>
                       <p>Full Time</p>
                       <p><span>CMC Telecom - Infracstructure Online Department</span></p>
+                    </li>
+                    <li>
+                      <h3>Front-end Developer</h3>
+                      <p>Full Time</p>
+                      <p><span>DataArts Pty Ltd.</span></p>
                     </li>
                   </ul>
                   <p><a style={{fontSize:'0.85rem',color:'#E50000'}} href={'CV.pdf'}>Download Resume</a></p>

@@ -20,47 +20,47 @@ class BarChartSVG extends React.Component {
         },
         {
           name: "CSS3",
-          percentage: 75
+          percentage: 79
         },
         {
-          name: "JS / ES6",
-          percentage: 70
+          name: "JS / NodeJs",
+          percentage: 69
         },
         {
           name: "Webpack",
-          percentage: 68
+          percentage: 79
         },
         {
           name: "React",
-          percentage: 65
+          percentage: 80
         },
         {
-          name: "Redux",
-          percentage: 58
+          name: "AngularJs",
+          percentage: 90
         },
         {
-          name: "PHP",
+          name: "D3",
           percentage: 64
         },
         {
-          name: "Wordpress",
+          name: "ThreeJs",
           percentage: 68
         },
         {
-          name: "Photoshop",
+          name: "PHP",
           percentage: 80
+        },
+        {
+          name: "Wordpress",
+          percentage: 69
+        },
+        {
+          name: "Photoshop",
+          percentage: 63
         },
         {
           name: "Illustrator",
           percentage: 69
-        },
-        {
-          name: "Sketch",
-          percentage: 60
-        },
-        {
-          name: "After Effect",
-          percentage: 55
         }
       ],
       isShow: true,
