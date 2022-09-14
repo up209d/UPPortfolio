@@ -11,4 +11,9 @@ Basically, I utilized a sort of popular frameworks, libraries, plugins such as
     
 In fact, it's just a project for researching purpose.
 
+To push distribution to gh-pages
+```
+git subtree push --prefix dist origin gh-pages
+```
+
 Live at: https://up209d.github.io/UPPortfolio
