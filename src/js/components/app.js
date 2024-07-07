@@ -147,19 +147,19 @@ export default class App extends React.Component {
             <Column small={12}>
               <ul>
                 <li>
-                  <a href="https://github.com/up209d/">
+                  <a href="#">
                     <SnapSVGImage src={require('Images/github.svg')}/>
                     Github
                   </a>
                 </li>
                 <li>
-                  <a href="https://www.behance.net/up209d">
+                  <a href="#">
                     <SnapSVGImage src={require('Images/behance.svg')}/>
                     Behance
                   </a>
                 </li>
                 <li>
-                  <a href="https://500px.com/up209d">
+                  <a href="#">
                     <SnapSVGImage src={require('Images/500px.svg')}/>
                     500px
                   </a>
@@ -175,9 +175,9 @@ export default class App extends React.Component {
               <ul>
                 <li><a href="https://au.linkedin.com/in/duc-duong-158015142" target="_blank">My Linkedin</a></li>
                 <li>|</li>
-                <li><a href="mailto:up209d@gmail.com" target="_blank">up209d@gmail.com</a></li>
+                <li><a href="mailto:#" target="_blank">#</a></li>
                 <li>|</li>
-                <li><a href="tel:+61451872009" target="_blank">+61 451 87 2009</a></li>
+                <li><a href="tel:#" target="_blank">+61 451 87 2009</a></li>
               </ul>
             </div>
           </div>
