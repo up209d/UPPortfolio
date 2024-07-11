@@ -173,11 +173,11 @@ export default class App extends React.Component {
           <div className="row">
             <div className="small-12">
               <ul>
-                <li><a href="https://au.linkedin.com/in/duc-duong-158015142" target="_blank">My Linkedin</a></li>
+                <li><a href="#" target="_blank">#</a></li>
                 <li>|</li>
                 <li><a href="mailto:#" target="_blank">#</a></li>
                 <li>|</li>
-                <li><a href="tel:#" target="_blank">+61 451 87 2009</a></li>
+                <li><a href="tel:#" target="_blank">#</a></li>
               </ul>
             </div>
           </div>
